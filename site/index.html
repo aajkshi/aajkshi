@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JE心怡美顏館｜無痛清粉刺・問題肌膚專門店</title>
+  <meta name="description" content="JE心怡美顏館｜台灣獨創無痛清粉刺、問題肌處理、熱蠟除毛、美業教學。" />
+  <meta property="og:title" content="JE心怡美顏館｜林季儀老師" />
+  <meta property="og:description" content="無話術/明碼實價/一對一/單次計費不包卡" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <div class="brand">JE心怡美顏館 / 林季儀老師</div>
+      <div class="menu">
+        <button data-tab="home">首頁</button>
+        <button data-tab="services">服務</button>
+        <button data-tab="cases">案例</button>
+        <button data-tab="shop">商城</button>
+        <button data-tab="cart">購物車</button>
+        <button data-tab="checkout">結帳</button>
+        <button data-tab="teaching">教學</button>
+        <a href="./admin.html">後台</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="page-home" data-page>
+    <div class="hero">
+      <div class="container hero-grid">
+        <article>
+          <span class="badge">台灣獨創技術</span>
+          <h1>台灣獨創 無痛清粉刺｜問題肌膚專門店</h1>
+          <p class="subtitle">無話術 / 明碼實價 / 一對一 / 單次計費不包卡</p>
+          <p class="muted">專注黑頭粉刺、痘痘、毛孔、敏弱肌，提供客製化療程與術後衛教。</p>
+          <div class="cta">
+            <button class="btn primary" id="btnLine">立即預約（LINE）</button>
+            <button class="btn dark" data-tab="shop">立即購物</button>
+            <button class="btn" data-tab="teaching">教學課程</button>
+          </div>
+        </article>
+        <article class="card">
+          <h3>品牌亮點</h3>
+          <ul>
+            <li>JE 無痛清粉刺淨痘純手工技術</li>
+            <li>問題肌分型：9種粉刺 / 10種痘痘</li>
+            <li>可加購藻針 / 外泌體 / 泥膜</li>
+            <li>高雄 / 台東雙門市，一對一服務</li>
+            <li>二日菁英班 / 四日創業班技術培訓</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container grid g3">
+        <article class="card stat"><strong>20萬+</strong><span class="muted">YouTube 訂閱</span></article>
+        <article class="card stat"><strong>2.6億+</strong><span class="muted">累積觀看</span></article>
+        <article class="card stat"><strong>20年+</strong><span class="muted">品牌經驗</span></article>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container grid g3">
+        <article class="card"><h3>MVP 資料概況</h3><p>服務項目：<b id="homeServiceCount"></b></p><p>案例數：<b id="homeCaseCount"></b></p><p>商品數：<b id="homeProductCount"></b></p></article>
+        <article class="card"><h3>客戶好評</h3><p>「粉刺改善很有感、過程溫和！」</p></article>
+        <article class="card"><h3>FAQ 快速入口</h3><button class="btn" data-tab="faq">查看常見問題</button></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="page-services" data-page class="section hidden">
+    <div class="container">
+      <h2>服務項目</h2><p class="lead">依分類瀏覽：無痛清粉刺 / 問題肌 / 晶亮喚采 / 特別療程 / 熱蠟除毛。</p>
+      <div class="toolbar"><select id="filterService"><option value="all">全部分類</option><option>無痛清粉刺</option><option>問題肌處理</option><option>晶亮喚采療程</option><option>特別療程</option><option>熱蠟除毛</option></select></div>
+      <div id="servicesList" class="grid g3"></div>
+    </div>
+  </section>
+
+  <section id="page-cases" data-page class="section hidden">
+    <div class="container">
+      <h2>案例 Before / After</h2><p class="lead">可依部位、膚況、門市篩選。</p>
+      <div class="toolbar">
+        <select id="filterCaseBody"><option value="all">全部部位</option><option>鼻頭</option><option>人中</option><option>耳朵</option></select>
+        <select id="filterCaseSkin"><option value="all">全部膚況</option><option>黑頭</option><option>丘疹</option><option>毛孔堵塞</option></select>
+        <select id="filterCaseStore"><option value="all">全部門市</option><option>高雄</option><option>台東</option></select>
+      </div>
+      <div id="casesList" class="grid g2"></div>
+    </div>
+  </section>
+
+  <section id="page-shop" data-page class="section hidden">
+    <div class="container">
+      <h2>線上商城</h2><p class="lead">商品分類：正貨 / 沙貨 / 院線品。</p>
+      <div class="toolbar"><select id="filterShop"><option value="all">全部分類</option><option>正貨</option><option>沙貨</option><option>院線品</option></select></div>
+      <div id="shopList" class="grid g3"></div>
+    </div>
+  </section>
+
+  <section id="page-cart" data-page class="section hidden">
+    <div class="container">
+      <h2>購物車</h2><p class="lead">滿 NT$3000 免運，未滿酌收 NT$100。</p>
+      <div id="cartList" class="grid g2"></div>
+      <div class="card"><div class="kv"><strong>總計</strong><strong id="cartSum">NT$ 0</strong></div><button class="btn primary" id="gotoCheckout">前往結帳</button></div>
+    </div>
+  </section>
+
+  <section id="page-checkout" data-page class="section hidden">
+    <div class="container">
+      <h2>結帳（匯款/轉帳）</h2>
+      <form id="checkoutForm" class="grid g2">
+        <article class="card"><h3>收件資料</h3><div class="grid"><input name="name" required placeholder="姓名"><input name="phone" required placeholder="電話"><input name="email" placeholder="Email"><input name="address" required placeholder="地址"><textarea name="note" placeholder="備註"></textarea><input name="coupon" placeholder="折扣碼（預留）"></div></article>
+        <article class="card"><h3>付款資訊</h3><p>銀行代碼：822（中國信託）</p><p>帳號：1234-5678-9012</p><p>戶名：林季儀</p><p class="muted">送出後成立訂單，狀態預設「待付款」。</p><button class="btn dark" type="submit">送出訂單</button></article>
+      </form>
+    </div>
+  </section>
+
+  <section id="page-order-success" data-page class="section hidden">
+    <div class="container"><h2>訂單成立</h2><div id="orderSuccess" class="card"></div></div>
+  </section>
+
+  <section id="page-teaching" data-page class="section hidden">
+    <div class="container">
+      <h2>教學課程</h2><p class="lead">二日菁英班 / 四日創業班，學後可回學與群組問答。</p>
+      <div class="grid g2">
+        <article class="card"><h3>課綱重點</h3><ul><li>皮膚結構與問題肌判讀</li><li>9種粉刺 / 10種痘痘處理</li><li>無痛清粉刺實作</li><li>藻針 / 外泌體 / MTS 整合</li><li>門店經營與定價</li></ul></article>
+        <article class="card"><h3>適合對象</h3><p>想轉職美業、升級問題肌處理能力者。</p><button class="btn primary" onclick="window.open('https://lin.ee','_blank')">諮詢課程</button></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="page-stores" data-page class="section hidden">
+    <div class="container">
+      <h2>門市資訊</h2><p class="lead">高雄 / 台東</p>
+      <div id="stores" class="grid g2"></div>
+    </div>
+  </section>
+
+  <section id="page-faq" data-page class="section hidden">
+    <div class="container">
+      <h2>FAQ</h2><p class="lead">付款、預約、術後、敏感肌常見問題。</p>
+      <div id="faq" class="grid g2"></div>
+    </div>
+  </section>
+
+  <footer class="footer container">© JE心怡美顏館 / 林季儀老師</footer>
+
+  <div class="mobile-bar">
+    <button onclick="window.open('https://lin.ee','_blank')">LINE客服</button>
+    <button data-tab="shop">立即購物</button>
+    <a href="#" onclick="document.querySelector('[data-tab=services]').click();return false;">立即預約</a>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
