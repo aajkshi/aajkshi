@@ -1,0 +1,14 @@
+export async function notifyLineNewOrder(message: string) {
+  const token = process.env.LINE_OA_CHANNEL_ACCESS_TOKEN;
+  const to = process.env.LINE_OA_TO_USER_ID;
+  if (!token || !to) {
+    console.warn('LINE OA env not set. Message:', message);
+    return;
+  }
+
+  await fetch('https://api.line.me/v2/bot/message/push', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    body: JSON.stringify({ to, messages: [{ type: 'text', text: message }] })
+  });
+}
