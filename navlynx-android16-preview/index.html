@@ -18,7 +18,7 @@
   <div class="loading" id="loading">
     <div class="dot"></div>
     <b>正在載入 NAVLYNX 預覽頁面</b>
-    <span>請稍候，系統正在套用最新版面。</span>
+    <span>請稍候，系統正在套用最新版面修正。</span>
     <div class="error" id="error">
       <p>預覽載入失敗，請重新整理頁面。</p>
       <a href="https://www.navlynx.com.tw/index.asp">返回 NAVLYNX 官網</a>
@@ -27,13 +27,15 @@
   <script>
     (async function(){
       const source = 'https://raw.githubusercontent.com/aajkshi/aajkshi/74504a2a6cf4ae1f8a3e066544789e6d69e997fa/navlynx-android16-preview/index.html';
-      const mellingImage = 'data:image/webp;base64,UklGRlYPAABXRUJQVlA4IEoPAABQPACdASrIAKcAPqFInUqmJCKhqldK4MAUCU3bq9O1f1OBm139KW3a56l9M/Vrsw74fP0B/aR2VOyn5m6gTvu0IwK/uPODgw/D08+9gj8yf8b1b+0D3o/W/sN/rx/2Oxd6Kv7XHdORZGWz5a+/0ELBUfV9+KkPab6ZqnmTk+X8Yf4WghNKLQ3Qf4LLR53xiMt+8JwTKmGllenPexiSRB8N9y+W6Hayn1kRbQ0Y65KBcTheulzPLLwA4j7Fv2fOCLvtPzC9lRxim9u/2VmhP+AmP6EU9jj4peSD3Ymc4G+GWKW8P6UhoNjFyDYMWWWbNBzOC/g1x5Wgl0a3HoCyPtXRa/qzSMoRA4XKAWNfXenXuNLLL8COXDNdwZ3CdBgXLFewbD7QZ5zXdOpVKn29c1jB64nH8YF2Ayby5UnBR8GzdIBf52lgYHXws5hFaq4HHfVPd4SimqrFTHfOfh9d/mU0l7SJOEJ4ocjZ7CzMcSQ9y6iuLVEYjkfjgpcJ24T1pDeEt8s/oAYQlW6bgQgvVAIDgeLWW8ibGnqw8lW9Nq61CQpJesMX/rEBs/xW4UdA6e+93qocdToV1FmK3AbYrCZXmAmX0HL5lhb0h87K5rBEoluYeBV12k04u1/735cKtKPhon0ItGzzh4qyAAD++raF+i2mfLAsa+W0RZSDSC9IgkYHJizSOs+Q9/APInr3uHDmUg6eI6CHn0t7rExyUDHxbb8iKMlYEtMENt+IfKmJ9lZ+dnhOcjFq9ZJfEyr5kauAqTq9nrJ3tpaGf+QGd7n1TSgcCLCuSJrfDrqF8VRjKBiV3kReOWiCaB74fl4YfgRLlzld1x2v1FEuDs3EaxTpRNq0fmRxihJC0D2uvDYgr7vOO4OJ9UK1b03HvKVsLnnT4GpRdX0lYMolCxvYuzcsy0iiRGGOybMDI7fVW/haRHZw3IUa/+lUn8cUMjfFux8yR92OF/c4mhEiTG2bQmbPb5BbI6oQOk10qmkxN0wB5kR/vHS0CBG7YvWb/2kA+YrUGmNt/9A0DOyaDjc/OqOiv9mywxSsk8JcaTkfpAlp9XdIZekDe975MVteNS+C7coMS0mVHAnFpzoWRAhwDjk8NUSDSOLmFy5Y6q1mBQXpLGV/tkZvwDXANHw8JpCiVL7yvUubXcXLMepNZ5ZQuqp+/+bo4Bh3eWIvj3QEXhjbmg0P/CPbxWFw0cPv86ivyQn5pU/Hb2h6QwWIGkYC9HTstAQh34FJnexe5lnZpbCenOpm/5jqs51FPIYWcKsGyvWEe7eVkaaHPzbS7KmqE5LwR61YuOK9SLZAaj/OpvY1aYYkaGQ8MWwPb+new5B1AQJXeWj8Z5Nx8OEIdupbqX1q4J6M4bvTxqenCtTwNot6tXHpm76A937nGLQIasT8rLKjmxZrMQr3lRPgA22TJ3gFchEzvkyFQRQKd3+9BuUsQqjO7oaNsXiDiWDqnKciwmI+leDWNPpVd6iA9NQbMfmuP7g0RZhFv2zKZ2fhDumKw7b9cnwtZUBm6FbDhcnPs26u/5b998jRqW3mykQS6uHJ2m0lIuuxxEFlPJ3liGpwQytBiEYCjfP68Ul4dAsaugIc29tULbfeMRUS0+tt2aXomrwvea125YbYYGdF/5W96SPsKoYMWTMl3l2SESEwSOLfkcZr7FUdTe56s6Qs/nCr8GVFaJqx7g3Ydm4TVNHwpykt2uqZIaq+DEWvlugJa+uKDMsJDQWww4vYj5ZpBew48zx5c1/eP4SnGl6bfl3AN6Dpab1AQl+yMydOBsYuMqsh/qGmOb2zwM0zdcREKgI6huasjs4+LNcDLCm8WyI7YYaPbk+aiFiile4NiERjHW3FYtdUje11juV7lXHbyOE0ab1T8Wf91/LOGb8AFCk0tktJFLy1Kfr+vBGhkZ5vUssqguU5wszR8vvEc6ofOvgaqO5I6hBM1xZMBvJV9aHPCO3iBnI2OaVB5A7HBGi65Q8oZH2BqH/9HrXtSArwZ4fn3JFtfNncmqQq9TG4N33Ir503xOqHycPYhzrqac5jWPl1dk5CQX509ElX5glthILu3rJs8/FS83U2mOubpwnT6nLm7KOqewGfioLZ/Fi05CBJ3BpCXEG6QdB+9AoUGpkZQt1NDj2karROdedu0Z+8p+UN9PIneZ+SVqwZsp0Qcvqh0S3FDj7RTS+48KUg1kOhXFpfzHxMWduvmH9N+Tj7Cgx3aBZmOEYFICF+lK+d6o304ncPLtvzjBdR7AGSVoNiVttsnc9Dkye404dh+Qk6MP32rCpUoJy5AJsSgXcvnuxiPyimlKxQNT3xUVbIC3jYSUcFZvPNfUzFqgxwiH7dCU8OmTXoij7cTZvp2VyJRFDvYCBBGJ+GDEXCt6dHnRPDn3ZspQrw98fE6PPzNBTFysT+FN6/sfc5Fhr+4gPILhXWv2If7T4XfkXZPpjuf2T4uXPHnxEaH4u8sPVs/4rfr7fDz5t5Df1zEL9Obxiq3MokfFKzv/4xafPsaECMjmqFYsX4md+zjQ4vWf4ALf/q/reJvyT9fw/fXtFef6djsdq5YBHJZy/hZcB9ThMFqLxK9f/vfgbBNLbY5W3CLMuLTPdZdBdVVIj1N9PLLihB5XDLrXLCx19I7MJwfJax/soiNYORjuFPN1w87vHIkqJcBPp1LqzSTYHwYd7F/6vx9fsp9j6uDTThWAkBMJ3i+HXXPIxAel6mLNF3xpi3av1ip4du25+wP++a97bwYEQbvKVtYXQDQhHdO9k6s7+DPyqFqfFlbxT+uNbB00SaqqLOHCv37ltraDrVvzO5FNBhBJ3oYONIyBpqGnQacu0qS29OUmczKmb42xfNo7nOWD+wnueoMFeKwIcpfsn1FDtSC3pwfYJPvJtecexGUrJfW+nhUfFGzAbLKwryr2RXDcZucw5ePfrqTAGhsBv6NJKVEDxyZiS9ls9xJCXVE5vfVd2rtE/AZ4CyhD2GnjEvm0SzdvuVBwhGh4spsfu2+6AoKntyi1S3RlsMQmbS46KZfu7ZVKcKL74urZcgw0rljOrhds0qXImfGjGYVaPT1HnZKMMrnlt22S2K7wmrsMZjMUHb858XnxO57YWUQqpB32NHWmNwGs/rXi+IcoFWoovgOFs+CRsUetmL5nBWbnqjaLKk/k8MQq6BG1HEUeW1XcqqCEvPcQ5Xf+o57TIVY7LO+17S+kqXi6kD9l01BwtRjetkfP1+XUlBM6fm7TEYB3TOW13Jv5R8RBp81odZSyQJS9WPhYkDTEiHmo84GGpWMnDItZkANz43dOeSpHVp1GXkF/eUuv0zLe/7ofugN+7i64pLqe+0fxdn5WhMr1kRx/ZT2rQoxyt/INToHuiDrE7ot15arnUs/ZUOELhX10AZh0jkTFr8it69g1+Vzq13rmLCspu5uuxc8EYtX9oFi6BODneYAsHtExSqk8HzMwtuWE5YmAH0LYB3D7ItPqyolXfDvfxtFqwvRN9mUlD9a32pdVsNBwLGx7sOCs66d2axJmq6ktr8cqkLbc7dOqViqLgHyp5yXBezTNEMa2TtIXjoZkd4ZZaDWRtBAefHKKLuzUvNEPohe+lTWKlbNtkNJOR6Fyu9gG32PXS1OS69VrQcrG7pYHOaCrsydg+pxNPZBOw1v5jY6Zgd/88gipsLd5Km0+Es2p/WJygB9BvjzD06uN3OVoc0kbh8zWZqRLWh55l787f81LRkMMBW4Kc5CAN4tB5d3oNmM3Z2bOAA88fvFYYyPdaMAjq8ub1FWrpGT6XMPqFAtdCUr/qsu3TDbkIBiJFzkuvylYQ1MpXLG3eYcC14nMDcikRlNMHDbrwwEDqKCokXDSjEKHK8gknBKtazA/5bngbNx72gt14Rei4mySKMvXDSvbFY7canlciS9n/T7RD/aqP2BfP/SO3EI9E8X9bO6A6xQhT8lR38X2nGAq5UgpVf3l43dLxfDjeuNnL6AmUq8ClowLCeY8TpqGF/HFTsBEgfjmOEstYvuP8XdAvtxGviezw3Y5fwub3RpHKD7ginLp+M2YW6xMmAqWCULX27YPd4mzt95ylTvmhXpz0JJQ9Vu0vyvcm7Xdd3W7HHBWu/EdC1qaWRDk22ywcD9tX9VRTy2plhyfMlhnp8e3KFVcQLH2AvYKZq/H+z2DTE7aaQ77+CrziAu3X4/iM5gVoNAyTF7rgzH4cTdlzM1RaonfoJRzjNfKT8PFAFhX+fa51mgdAMcQabfhWk4Cgzkm7LES009fhLsWIpquk2Qs34YDehDPzo8tFfcSjPw//DDt2aBFgAY4WFPDVkt/j/BYqoVu4LC5lW9S9qUrDD/Z9cyLLaRnhCkAxh6yMiowTFiIcGu+rzoXMIPBanaSAnn2MusKojV4AJnm1BMj7pBLkHfm7EfI49osU3A0JV+HilvylrV3nkxlgcLsnIjagVY4SDnF+gPyLDfI0mzuOo86+icErgnacq0+AUFLpUe/VI1HIrkNUnBVuLPuepnvukP/SwGeLsoxoMuIky3KScooJWKqeTkckmyA6yJHDIlc4B0UimI2jSQ9PObUppvmb6Gzql3/UdPGKLxMCPjMSU1oZHXjnaWS5w8eXKTmTvBg0k8ceCyEAJi86TfhWgvPRPgBjQHgx45SDIlaZCW8Xoh3zPDHd0Y07pPnnG2ABg3cYq8maz7D52XKXD89fspHbvnjnGH77lk4Vnxolk2kydm5pM5yXo9rmbdFF685WU6iOEh2taH4veSKpv/3cRZN+/hoZT+Ioqdxhw2lxgPr8hVF0loXnfKQcY9aCAZrbpIruiqv+PUA4+QHOEuTeGMvSvlI/IRVVD16F3wJFs2UUlBKFKRQLpTOemHmqKH8wP9tIw55hgzF/uqTtM93JIDjk5uhq7HVCgpfcurbst+aHK2YL79VIiu2eYaZJE/YkpGMqz65/CTdY7EkJRZu6T9vmAvha/rb+BGkykAnchYXBh6Ehr119ncM8Ur815hPux2t3wgLzokuP9GqA5CKNgEZfTp0Ueh/r8r5XuFRCFaJwyGjqts04FGMK53tHsMXBEZ5Wyni+a6pk6cUdTtSDPnQ9ir0cuJXqJsYKnmiFNKnfa47TU18gOKsw9SNfzRaMt7vAhwpNbLRf9wxMU/jD7ujR/DMh3AruOo0JXc93yFqj5NRCs5FxhxVb45zjT1UiPF0pXPa8MPlB8RssABRK1IJtgN1zoAAAAAAAAAA==';
+      const mellingImage = 'assets/melling.svg?v=191575dd';
       try{
         const response = await fetch(source, {cache:'no-store'});
         if(!response.ok) throw new Error('HTTP '+response.status);
-        let html = await response.text();
+        const original = await response.text();
+        const doc = new DOMParser().parseFromString(original, 'text/html');
 
-        html = html.replace('</style>', `
+        const style = doc.createElement('style');
+        style.textContent = `
           .choice:not(.blue){color:var(--ink)}
           .choice:not(.blue) h3{color:#102039}
           .choice:not(.blue) .ticks li{color:#405168}
@@ -41,6 +43,7 @@
           .choice:not(.blue) p{color:#66788b}
           .choice,.plan,.model,.step,.warning{min-width:0}
           .visual .one{width:84%;right:8%;top:3%}
+          .prep{position:static!important;top:auto!important}
           .download-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
           .download-card{display:flex;flex-direction:column;min-height:210px;padding:24px;border:1px solid var(--line);border-radius:20px;background:#fff;box-shadow:var(--shadow)}
           .download-card small{font-weight:900;color:#1687ff;letter-spacing:.08em}
@@ -49,57 +52,95 @@
           .download-card .btn{margin-top:auto}
           .latest-box{margin-top:18px;padding:27px;border-radius:22px;background:linear-gradient(135deg,#0b2340,#0d5ba7 58%,#118bd2);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:24px}
           .latest-box h3{margin:0 0 5px;font-size:24px}.latest-box p{margin:0;color:#c9e1f4}
+          .bmw-note{margin-top:22px;padding:22px 24px;border:1px solid #cfe3f5;border-radius:18px;background:#f4f9fd;box-shadow:0 14px 34px rgba(6,49,87,.08)}
+          .bmw-note-head{display:flex;align-items:center;gap:10px;margin-bottom:7px;color:#0b63a8;font-weight:900}
+          .bmw-note-dot{width:9px;height:9px;border-radius:50%;background:#e92c2c;box-shadow:0 0 0 5px rgba(233,44,44,.10)}
+          .bmw-note p{margin:0 0 14px;color:#4c6175}
+          .bmw-mode{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:13px 15px;border-radius:13px;background:#fff;border:1px solid #d7e5f0}
+          .bmw-mode strong{color:#12243d}.bmw-mode code{padding:5px 9px;border-radius:8px;background:#eaf4ff;color:#096bc2;font-size:15px;font-weight:900}
+          .red-light{display:inline-flex;align-items:center;gap:7px;color:#4c6175}.red-light i{width:11px;height:11px;border-radius:50%;background:#e92c2c;box-shadow:0 0 0 4px rgba(233,44,44,.12)}
+          .bmw-note a{display:inline-flex;margin-top:13px;color:#0676d7;font-weight:900}
           @media(max-width:900px){body{padding-bottom:86px}.mobile-bar{border-top:1px solid rgba(255,255,255,.10)}.download-grid{grid-template-columns:repeat(2,1fr)}}
-          @media(max-width:580px){.visual .one{width:86%;right:7%;top:2%}.download-grid{grid-template-columns:1fr}.latest-box{align-items:flex-start;flex-direction:column}.latest-box .btn{width:100%}}
-        </style>`);
+          @media(max-width:580px){.visual .one{width:86%;right:7%;top:2%}.download-grid{grid-template-columns:1fr}.latest-box{align-items:flex-start;flex-direction:column}.latest-box .btn{width:100%}.bmw-mode{align-items:flex-start;flex-direction:column;gap:8px}}
+        `;
+        doc.head.appendChild(style);
 
-        html = html.replace('class="plan featured"','class="plan"');
-        html = html.replaceAll('Touch_pro-1.png','Touch_pro.png');
-        html = html.replaceAll('3至7','3 至 7');
-        html = html.replaceAll('10至15','10 至 15');
-        html = html.replaceAll('20至30','20 至 30');
+        doc.querySelector('.plan.featured')?.classList.remove('featured');
+        doc.querySelectorAll('img[src*="Touch_pro-1.png"]').forEach(img => img.src = img.src.replace('Touch_pro-1.png','Touch_pro.png'));
 
-        html = html.replace('aria-label="ApplePie ONE 與 Melling 產品圖"','aria-label="ApplePie ONE 產品圖"');
-        html = html.replace(/<img class="melling"[^>]*>/,'');
-        html = html.replaceAll('https://www.navlynx.com.tw/images/pro_MG.png',mellingImage);
+        const heroVisual = doc.querySelector('.visual');
+        if(heroVisual) heroVisual.setAttribute('aria-label','ApplePie ONE 產品圖');
+        doc.querySelector('.visual .melling')?.remove();
+        doc.querySelector('.hero-note')?.remove();
 
-        html = html.replace('<div class="hero-note"><span>升級前請先備份資料</span><span>確認產品型號</span><span>更新過程保持穩定供電</span></div>','');
-        html = html.replace('<p>目前提供以下五款機型升級。Melling 與 Melling-G 外觀完全相同，因此整合顯示。</p>','');
-        html = html.replace('<p class="model-note">※ 實際升級方式仍須依產品型號、序號、硬體批次及目前系統版本確認。</p>','');
-        html = html.replace('<p>後續各機型會建立各自分頁，並導入對應的 Google 雲端硬碟下載連結。</p>','');
-        html = html.replaceAll('先備份個人資料','備份個人資料');
-        html = html.replaceAll('先升級至 Android 16 指定版本，再更新最新韌體','先升級至 Android 16 指定版本，再更新到最新韌體');
+        const mellingCardImage = [...doc.querySelectorAll('.model img')].find(img => (img.alt || '').includes('Melling'));
+        if(mellingCardImage) mellingCardImage.src = mellingImage;
 
-        html = html.replace('<a href="#self">自行升級</a>','<a href="#downloads">首次升級下載</a>');
-        html = html.replace('<a class="btn primary" href="#self">查看自行升級教學</a>','<a class="btn primary" href="#downloads">首次升級下載</a>');
-        html = html.replace('<a class="btn primary" href="#self">查看 mini Ultra II 範例</a>','<a class="btn primary" href="#downloads">進入首次升級下載</a>');
+        const removeExactParagraph = (text) => {
+          [...doc.querySelectorAll('p')].filter(p => p.textContent.trim() === text).forEach(p => p.remove());
+        };
+        removeExactParagraph('目前提供以下五款機型升級。Melling 與 Melling-G 外觀完全相同，因此整合顯示。');
+        removeExactParagraph('※ 實際升級方式仍須依產品型號、序號、硬體批次及目前系統版本確認。');
+        removeExactParagraph('後續各機型會建立各自分頁，並導入對應的 Google 雲端硬碟下載連結。');
 
-        const downloadSection = `
-          <section id="downloads">
-            <div class="wrap">
-              <div class="section-head">
-                <div class="kicker">FIRST ANDROID 16 UPGRADE</div>
-                <h2>首次升級 Android 16 下載專區</h2>
-                <p>請依照您的 ApplePie 機型，下載對應的 Android 16 指定版本。不同機型的檔案請勿混用。</p>
-              </div>
-              <div class="download-grid">
-                <article class="download-card"><small>ANDROID 16</small><h3>ApplePie ONE</h3><p>首次升級 Android 16 指定版本</p><a class="btn primary" href="https://drive.google.com/drive/folders/11abZ4MpHONdx1gK_z1eEfdAWEHTy2_mi?usp=drive_link" target="_blank" rel="noopener">前往下載</a></article>
-                <article class="download-card"><small>ANDROID 16</small><h3>ApplePie Touch</h3><p>首次升級 Android 16 指定版本</p><a class="btn primary" href="https://drive.google.com/drive/folders/1T5LIQH-WMlWCCyztKkGnt5S6KiH51MHk?usp=drive_link" target="_blank" rel="noopener">前往下載</a></article>
-                <article class="download-card"><small>ANDROID 16</small><h3>ApplePie mini Ultra II</h3><p>首次升級 Android 16 指定版本</p><a class="btn primary" href="https://drive.google.com/drive/folders/10ftWBlYjTytoOWk_ZxGz11CMXJql8pRk?usp=drive_link" target="_blank" rel="noopener">前往下載</a></article>
-                <article class="download-card"><small>ANDROID 16</small><h3>ApplePie Melling／Melling-G</h3><p>首次升級 Android 16 指定版本</p><a class="btn primary" href="https://drive.google.com/drive/folders/1kBohVCC0wrtqiwx3Nq8we56KSWQpG9KI?usp=drive_link" target="_blank" rel="noopener">前往下載</a></article>
-              </div>
-              <div class="latest-box">
-                <div><h3>後續 Android 16 韌體更新</h3><p>完成首次 Android 16 升級後，請前往 NAVLYNX 韌體下載頁，更新到最新韌體。</p></div>
-                <a class="btn primary" href="https://www.navlynx.com.tw/download.asp" target="_blank" rel="noopener">前往最新韌體下載</a>
-              </div>
+        const replaceText = (from, to) => {
+          const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT);
+          const nodes = [];
+          while(walker.nextNode()) nodes.push(walker.currentNode);
+          nodes.forEach(node => { if(node.nodeValue.includes(from)) node.nodeValue = node.nodeValue.replaceAll(from,to); });
+        };
+        replaceText('3至7','3 至 7');
+        replaceText('10至15','10 至 15');
+        replaceText('20至30','20 至 30');
+        replaceText('先備份個人資料','備份個人資料');
+        replaceText('先升級至 Android 16 指定版本，再更新最新韌體','先升級至 Android 16 指定版本，再更新到最新韌體');
+        replaceText('包含台灣本島來回運費','包含台灣來回運費');
+
+        const setLink = (selector, href, text) => {
+          const el = doc.querySelector(selector);
+          if(el){ el.href = href; if(text) el.textContent = text; }
+        };
+        setLink('.nav a[href="#self"]','#downloads','首次升級下載');
+        setLink('.actions .btn.primary','#downloads','首次升級下載');
+        setLink('.choice.blue .btn','#downloads','進入首次升級下載');
+        setLink('.mobile-bar a[href="#self"]','#downloads','首次升級下載');
+
+        const downloads = doc.createElement('section');
+        downloads.id = 'downloads';
+        downloads.innerHTML = `
+          <div class="wrap">
+            <div class="section-head">
+              <div class="kicker">FIRST ANDROID 16 UPGRADE</div>
+              <h2>首次升級 Android 16 下載專區</h2>
+              <p>請依照您的 ApplePie 機型，下載對應的 Android 16 指定版本。不同機型的檔案請勿混用。</p>
             </div>
-          </section>`;
-        html = html.replace('<section id="self">',downloadSection+'<section id="self">');
+            <div class="download-grid">
+              <article class="download-card"><small>ANDROID 16</small><h3>ApplePie ONE</h3><p>首次升級 Android 16 指定版本</p><a class="btn primary" href="https://drive.google.com/drive/folders/11abZ4MpHONdx1gK_z1eEfdAWEHTy2_mi?usp=drive_link" target="_blank" rel="noopener">前往下載</a></article>
+              <article class="download-card"><small>ANDROID 16</small><h3>ApplePie Touch</h3><p>首次升級 Android 16 指定版本</p><a class="btn primary" href="https://drive.google.com/drive/folders/1T5LIQH-WMlWCCyztKkGnt5S6KiH51MHk?usp=drive_link" target="_blank" rel="noopener">前往下載</a></article>
+              <article class="download-card"><small>ANDROID 16</small><h3>ApplePie mini Ultra II</h3><p>首次升級 Android 16 指定版本</p><a class="btn primary" href="https://drive.google.com/drive/folders/10ftWBlYjTytoOWk_ZxGz11CMXJql8pRk?usp=drive_link" target="_blank" rel="noopener">前往下載</a></article>
+              <article class="download-card"><small>ANDROID 16</small><h3>ApplePie Melling／Melling-G</h3><p>首次升級 Android 16 指定版本</p><a class="btn primary" href="https://drive.google.com/drive/folders/1kBohVCC0wrtqiwx3Nq8we56KSWQpG9KI?usp=drive_link" target="_blank" rel="noopener">前往下載</a></article>
+            </div>
+            <div class="latest-box">
+              <div><h3>後續 Android 16 韌體更新</h3><p>完成首次 Android 16 升級後，請前往 NAVLYNX 韌體下載頁，更新到最新韌體。</p></div>
+              <a class="btn primary" href="https://www.navlynx.com.tw/download.asp" target="_blank" rel="noopener">前往最新韌體下載</a>
+            </div>
+          </div>`;
+        doc.querySelector('#self')?.before(downloads);
 
-        html = html.replace('<a class="btn ghost disabled" href="#" onclick="alert(\'mini Ultra II 韌體下載連結尚未開放\');return false">韌體連結待開放</a>','<a class="btn primary" href="https://drive.google.com/drive/folders/10ftWBlYjTytoOWk_ZxGz11CMXJql8pRk?usp=drive_link" target="_blank" rel="noopener">下載 mini Ultra II 首次升級檔</a>');
+        doc.querySelector('.prep .btn')?.remove();
+
+        const bmwNote = doc.createElement('div');
+        bmwNote.className = 'bmw-note';
+        bmwNote.innerHTML = `
+          <div class="bmw-note-head"><span class="bmw-note-dot"></span><span>BMW 車款連線提醒</span></div>
+          <p>若您的車款使用 BMW ID6 或 OS9 車載系統，完成 Android 16 更新後若不易連接，請切換為「無線 CarPlay（BMW 相容模式）」。</p>
+          <div class="bmw-mode"><strong>輸入代碼</strong><code>#135177</code><span class="red-light"><i></i>氛圍燈：紅色</span></div>
+          <a href="https://www.navlynx.com.tw/teaching_in_a11-P1.asp" target="_blank" rel="noopener">查看 ApplePie 連接模式切換教學 →</a>`;
+        const selfWrap = doc.querySelector('#self .wrap');
+        if(selfWrap) selfWrap.appendChild(bmwNote);
 
         document.open();
-        document.write(html);
+        document.write('<!doctype html>'+doc.documentElement.outerHTML);
         document.close();
       }catch(error){
         console.error(error);
