@@ -33,24 +33,38 @@
         let html = await response.text();
 
         html = html.replace('</style>', `
-          /* 修正：深色區塊中的白色卡片需使用深色文字 */
           .choice:not(.blue){color:var(--ink)}
           .choice:not(.blue) h3{color:#102039}
           .choice:not(.blue) .ticks li{color:#405168}
           .choice:not(.blue) .choice-label{color:#1687ff}
           .choice:not(.blue) p{color:#66788b}
           .choice,.plan,.model,.step,.warning{min-width:0}
+          .visual .one{width:84%;right:8%;top:3%}
           @media(max-width:900px){body{padding-bottom:86px}.mobile-bar{border-top:1px solid rgba(255,255,255,.10)}}
+          @media(max-width:580px){.visual .one{width:86%;right:7%;top:2%}}
         </style>`);
 
         /* 方案一、方案二皆為平行選項，不預設醒目選取 */
         html = html.replace('class="plan featured"','class="plan"');
 
-        /* 統一官網正式 Touch 圖與文字間距 */
+        /* 使用官網正式 Touch 圖與統一文字間距 */
         html = html.replaceAll('Touch_pro-1.png','Touch_pro.png');
         html = html.replaceAll('3至7','3 至 7');
         html = html.replaceAll('10至15','10 至 15');
         html = html.replaceAll('20至30','20 至 30');
+
+        /* 首頁只保留 ApplePie ONE */
+        html = html.replace('aria-label="ApplePie ONE 與 Melling 產品圖"','aria-label="ApplePie ONE 產品圖"');
+        html = html.replace(/<img class="melling"[^>]*>/,'');
+
+        /* 移除指定說明文字 */
+        html = html.replace('<div class="hero-note"><span>升級前請先備份資料</span><span>確認產品型號</span><span>更新過程保持穩定供電</span></div>','');
+        html = html.replace('<p>目前提供以下五款機型升級。Melling 與 Melling-G 外觀完全相同，因此整合顯示。</p>','');
+        html = html.replace('<p class="model-note">※ 實際升級方式仍須依產品型號、序號、硬體批次及目前系統版本確認。</p>','');
+        html = html.replace('<p>後續各機型會建立各自分頁，並導入對應的 Google 雲端硬碟下載連結。</p>','');
+
+        /* 修正升級順序用字 */
+        html = html.replaceAll('先升級至 Android 16 指定版本，再更新最新韌體','先升級至 Android 16 指定版本，再更新到最新韌體');
 
         document.open();
         document.write(html);
