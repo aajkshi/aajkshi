@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#050b14">
+  <title>NAVLYNX Android 16 升級專區｜飛鼠韌體整合預覽</title>
+  <style>
+    html,body{width:100%;height:100%;margin:0;background:#050b14;overflow:hidden}
+    iframe{display:block;width:100%;height:100%;border:0;background:#050b14}
+    .loading{position:fixed;inset:0;z-index:3;display:grid;place-items:center;background:#050b14;color:#eaf5ff;font-family:"Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;transition:opacity .25s ease}
+    .loading.hide{opacity:0;pointer-events:none}
+    .loading-box{width:min(430px,calc(100% - 40px));padding:27px;border:1px solid rgba(72,197,255,.22);border-radius:20px;background:#0b192b;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.35)}
+    .spinner{width:34px;height:34px;margin:0 auto 15px;border:3px solid rgba(255,255,255,.18);border-top-color:#31c8ff;border-radius:50%;animation:spin .8s linear infinite}
+    .loading b{display:block;font-size:18px}.loading span{display:block;margin-top:5px;color:#9db3c8;font-size:14px}@keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <div class="loading" id="loading"><div class="loading-box"><div class="spinner"></div><b>正在載入最新版預覽</b><span>加入 Android 16 背景與飛鼠韌體升級專區</span></div></div>
+  <iframe id="previewV5" src="preview-v4.html?v=20260905-11" title="NAVLYNX Android 16 升級專區預覽"></iframe>
+  <script>
+    const previewV5 = document.getElementById('previewV5');
+    const loading = document.getElementById('loading');
+    let applied = false;
+
+    function getSiteDocument(){
+      try{
+        const v4Doc = previewV5.contentDocument || previewV5.contentWindow.document;
+        const v3Frame = v4Doc && v4Doc.getElementById('previewV4');
+        const v3Doc = v3Frame && (v3Frame.contentDocument || v3Frame.contentWindow.document);
+        const v2Frame = v3Doc && v3Doc.getElementById('preview');
+        const v2Doc = v2Frame && (v2Frame.contentDocument || v2Frame.contentWindow.document);
+        const siteFrame = v2Doc && v2Doc.getElementById('site');
+        return siteFrame && (siteFrame.contentDocument || siteFrame.contentWindow.document);
+      }catch(error){
+        return null;
+      }
+    }
+
+    function applyMouseFirmwareUpdates(){
+      if(applied) return true;
+      const doc = getSiteDocument();
+      if(!doc || !doc.body) return false;
+
+      const hero = doc.querySelector('.hero');
+      const models = doc.querySelector('#models');
+      const downloads = doc.querySelector('#downloads');
+      const selfSection = doc.querySelector('#self');
+      const mailSection = doc.querySelector('#mail');
+      const noticeSection = doc.querySelector('#notice');
+      const roadmap = doc.querySelector('.a16-roadmap');
+      const modalTriggers = [...doc.querySelectorAll('.a16-guide-trigger')];
+      if(!hero || !models || !downloads || !selfSection || !mailSection || !noticeSection || !roadmap || modalTriggers.length < 4) return false;
+
+      if(!hero.querySelector('.a16-hero-decor')){
+        const decor = doc.createElement('div');
+        decor.className = 'a16-hero-decor';
+        decor.setAttribute('aria-hidden','true');
+        decor.innerHTML = `
+          <span class="a16-bg-number">16</span>
+          <span class="a16-bg-label a16-label-one">ANDROID 16</span>
+          <span class="a16-bg-label a16-label-two">SYSTEM UPGRADE</span>
+          <span class="a16-bg-ring a16-ring-one"></span>
+          <span class="a16-bg-ring a16-ring-two"></span>
+          <span class="a16-bot"><i></i><i></i><b></b><b></b></span>`;
+        hero.appendChild(decor);
+      }
+
+      if(!doc.querySelector('.a16-mouse-alert')){
+        const alert = doc.createElement('div');
+        alert.className = 'a16-mouse-alert';
+        alert.innerHTML = `
+          <div class="wrap a16-mouse-alert-inner">
+            <div><span class="a16-alert-badge">飛鼠用戶必看</span><strong>請先升級飛鼠韌體，再升級 Android 16</strong><p>升級 Android 16 後，未更新韌體的 NAVLYNX 飛鼠將無法正常使用。沒有使用飛鼠的用戶可略過。</p></div>
+            <a href="#mouse-firmware">先看飛鼠升級教學</a>
+          </div>`;
+        hero.insertAdjacentElement('afterend', alert);
+      }
+
+      roadmap.innerHTML = `
+        <a class="a16-roadmap-item a16-roadmap-mouse" href="#mouse-firmware"><small>有使用飛鼠者｜前置作業</small><strong>先升級飛鼠韌體</strong></a>
+        <div class="a16-roadmap-arrow" aria-hidden="true">→</div>
+        <div class="a16-roadmap-item"><small>第一階段</small><strong>安裝指定過渡版本</strong></div>
+        <div class="a16-roadmap-arrow" aria-hidden="true">→</div>
+        <div class="a16-roadmap-item"><small>第二階段</small><strong>更新至 Android 16 最新韌體</strong></div>
+        <p>有使用飛鼠者，請先完成飛鼠韌體升級；Android 16 的兩個階段也都完成後，才算升級完成。</p>`;
+
+      if(!doc.querySelector('#mouse-firmware')){
+        const mouseSection = doc.createElement('section');
+        mouseSection.id = 'mouse-firmware';
+        mouseSection.className = 'a16-mouse-section';
+        mouseSection.innerHTML = `
+          <div class="a16-mouse-watermark" aria-hidden="true">16</div>
+          <div class="wrap a16-mouse-wrap">
+            <div class="section-head a16-mouse-head">
+              <div class="kicker">REMOTE FIRMWARE UPDATE</div>
+              <div class="a16-required-pill">Android 16 升級前必做</div>
+              <h2>先升級飛鼠韌體<br>再升級 Android 16</h2>
+              <p>有使用 NAVLYNX 飛鼠的用戶，請務必先完成飛鼠韌體升級。升級 Android 16 後，舊版飛鼠韌體將無法正常使用。</p>
+            </div>
+            <div class="a16-mouse-critical">
+              <span>重要順序</span>
+              <strong>飛鼠韌體升級</strong><i>→</i><strong>Android 16 過渡版本</strong><i>→</i><strong>Android 16 最新韌體</strong>
+            </div>
+            <div class="a16-mouse-grid">
+              <div class="a16-video-card">
+                <div class="a16-video-ratio">
+                  <iframe src="https://www.youtube-nocookie.com/embed/b_8Xvcvy9G4?rel=0" title="NAVLYNX 飛鼠韌體升級教學" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="a16-video-copy">
+                  <small>NAVLYNX 小學堂</small>
+                  <h3>NAVLYNX 飛鼠韌體怎麼升級？</h3>
+                  <p>從配對、安裝 APK、複製韌體檔，到重新配對完成確認，影片帶您完整操作一次。</p>
+                  <a href="https://youtu.be/b_8Xvcvy9G4?si=LtB5yzR5HJkTGu-6" target="_blank" rel="noopener">前往 YouTube 觀看完整教學</a>
+                </div>
+              </div>
+              <div class="a16-mouse-info">
+                <div class="a16-mouse-panel">
+                  <h3>開始前先準備</h3>
+                  <ul>
+                    <li>已下載「飛鼠韌體檔」與「APK 安裝程式」的記憶卡</li>
+                    <li>NAVLYNX ApplePie 主機</li>
+                    <li>NAVLYNX 飛鼠遙控器</li>
+                    <li>SIM 卡針，ApplePie mini 系列免卡針</li>
+                  </ul>
+                  <button type="button" class="a16-file-pending" aria-disabled="true">飛鼠韌體檔與 APK 下載連結待補</button>
+                </div>
+                <div class="a16-mouse-panel a16-chapters">
+                  <h3>影片章節</h3>
+                  <div class="a16-chapter-list">
+                    <a href="https://youtu.be/b_8Xvcvy9G4?t=0" target="_blank" rel="noopener"><b>00:00</b><span>前言＋準備材料</span></a>
+                    <a href="https://youtu.be/b_8Xvcvy9G4?t=19" target="_blank" rel="noopener"><b>00:19</b><span>STEP 1｜遙控器（飛鼠）配對</span></a>
+                    <a href="https://youtu.be/b_8Xvcvy9G4?t=39" target="_blank" rel="noopener"><b>00:39</b><span>STEP 2｜插入記憶卡</span></a>
+                    <a href="https://youtu.be/b_8Xvcvy9G4?t=52" target="_blank" rel="noopener"><b>00:52</b><span>STEP 3｜安裝 APK 程式</span></a>
+                    <a href="https://youtu.be/b_8Xvcvy9G4?t=69" target="_blank" rel="noopener"><b>01:09</b><span>STEP 4｜複製韌體檔至「下載」資料夾</span></a>
+                    <a href="https://youtu.be/b_8Xvcvy9G4?t=90" target="_blank" rel="noopener"><b>01:30</b><span>STEP 5｜執行韌體升級</span></a>
+                    <a href="https://youtu.be/b_8Xvcvy9G4?t=141" target="_blank" rel="noopener"><b>02:21</b><span>STEP 6｜等待升級完成</span></a>
+                    <a href="https://youtu.be/b_8Xvcvy9G4?t=168" target="_blank" rel="noopener"><b>02:48</b><span>STEP 7｜重新配對＋完成確認</span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="a16-mouse-bluetooth-warning">
+              <div class="a16-bluetooth-icon" aria-hidden="true">B</div>
+              <div><strong>升級過程切勿移動飛鼠或中斷傳輸</strong><p>飛鼠韌體透過藍牙傳輸。進度開始後，請將飛鼠放在主機附近並等待跑到 100%。升級完成後，飛鼠會暫時無法操作，請至設定中「移除 NAVLYNX REMOTE」，再重新配對一次。</p></div>
+            </div>
+          </div>`;
+        downloads.insertAdjacentElement('beforebegin', mouseSection);
+      }
+
+      const nav = doc.querySelector('.nav');
+      if(nav && !nav.querySelector('a[href="#mouse-firmware"]')){
+        const link = doc.createElement('a');
+        link.href = '#mouse-firmware';
+        link.textContent = '飛鼠韌體';
+        const downloadsLink = nav.querySelector('a[href="#downloads"]');
+        nav.insertBefore(link, downloadsLink || nav.firstChild);
+      }
+
+      modalTriggers.forEach((trigger) => {
+        if(trigger.dataset.mouseReminderBound) return;
+        trigger.dataset.mouseReminderBound = '1';
+        trigger.addEventListener('click', () => {
+          setTimeout(() => {
+            const content = doc.querySelector('.a16-modal-content');
+            if(!content || content.querySelector('.a16-modal-mouse-note')) return;
+            const note = doc.createElement('div');
+            note.className = 'a16-modal-mouse-note';
+            note.innerHTML = '<strong>有使用 NAVLYNX 飛鼠？</strong><p>進行 Android 16 升級前，請先完成飛鼠韌體升級，否則升級後飛鼠將無法正常使用。</p><a href="#mouse-firmware">先查看飛鼠韌體升級教學</a>';
+            content.insertAdjacentElement('afterbegin', note);
+            const noteLink = note.querySelector('a');
+            noteLink.addEventListener('click', (event) => {
+              event.preventDefault();
+              doc.querySelector('.a16-modal-close')?.click();
+              setTimeout(() => doc.querySelector('#mouse-firmware')?.scrollIntoView({behavior:'smooth'}), 220);
+            });
+          }, 0);
+        });
+      });
+
+      const inlinePhase = selfSection.querySelector('.a16-inline-phase');
+      if(inlinePhase && !inlinePhase.querySelector('.a16-inline-mouse-note')){
+        const note = doc.createElement('a');
+        note.className = 'a16-inline-mouse-note';
+        note.href = '#mouse-firmware';
+        note.innerHTML = '<strong>有使用飛鼠者，請先完成飛鼠韌體升級</strong><span>完成後再開始下方 Android 16 兩階段流程。</span>';
+        inlinePhase.insertAdjacentElement('beforebegin', note);
+      }
+
+      if(!mailSection.querySelector('.a16-mail-mouse-note')){
+        const mailHead = mailSection.querySelector('.section-head');
+        const mailNote = doc.createElement('div');
+        mailNote.className = 'a16-mail-mouse-note';
+        mailNote.innerHTML = '<div class="a16-mail-mouse-icon" aria-hidden="true">⌁</div><div><strong>有 NAVLYNX 飛鼠，請與 ApplePie 主機一併寄回</strong><p>總公司會同步處理飛鼠韌體並完成配對確認；沒有飛鼠的用戶，只需寄送 ApplePie 主機。</p></div>';
+        mailHead?.insertAdjacentElement('afterend', mailNote);
+      }
+
+      const mailSteps = [...mailSection.querySelectorAll('.mail-step')];
+      if(mailSteps[2]) mailSteps[2].innerHTML = '<b>03 寄送主機</b>依客服提供的寄送資訊妥善包裝；如有 NAVLYNX 飛鼠，請一併寄回。';
+
+      [...noticeSection.querySelectorAll('.warning')].forEach((warning) => {
+        const title = warning.querySelector('h3');
+        const text = warning.querySelector('p');
+        if(title && title.textContent.includes('移除 SIM 卡與記憶卡')){
+          if(text) text.textContent = '寄送前請移除 SIM 卡、記憶卡與線材；如有 NAVLYNX 飛鼠，請將飛鼠與主機一併寄回。';
+        }
+      });
+
+      const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT);
+      const textNodes = [];
+      while(walker.nextNode()) textNodes.push(walker.currentNode);
+      textNodes.forEach((node) => {
+        if(node.nodeValue.includes('請勿附上線材、飛鼠或其他配件')) node.nodeValue = node.nodeValue.replace('請勿附上線材、飛鼠或其他配件','請勿附上線材；如有 NAVLYNX 飛鼠，請一併寄回');
+        if(node.nodeValue.includes('寄送時只需 ApplePie 主機本體')) node.nodeValue = node.nodeValue.replace('寄送時只需 ApplePie 主機本體','寄送時請寄 ApplePie 主機；如有 NAVLYNX 飛鼠，請一併寄回');
+      });
+
+      const style = doc.createElement('style');
+      style.textContent = `
+        .hero{isolation:isolate}
+        .hero>.wrap,.hero .hero-grid{position:relative;z-index:2}
+        .a16-hero-decor{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+        .a16-bg-number{position:absolute;right:-1.5%;top:4%;font-size:clamp(250px,35vw,540px);font-weight:950;line-height:.8;letter-spacing:-.1em;color:transparent;-webkit-text-stroke:2px rgba(77,199,255,.10);transform:rotate(-5deg)}
+        .a16-bg-label{position:absolute;padding:5px 10px;border:1px solid rgba(100,216,255,.12);border-radius:999px;color:rgba(146,229,255,.22);font-size:10px;font-weight:900;letter-spacing:.2em}
+        .a16-label-one{left:8%;top:20%;transform:rotate(-8deg)}
+        .a16-label-two{right:9%;bottom:16%;transform:rotate(7deg)}
+        .a16-bg-ring{position:absolute;border:1px solid rgba(61,203,255,.11);border-radius:50%}
+        .a16-ring-one{width:220px;height:220px;left:-80px;bottom:7%}
+        .a16-ring-two{width:120px;height:120px;left:21%;bottom:8%;border-style:dashed}
+        .a16-bot{position:absolute;right:8%;top:15%;width:94px;height:56px;border:2px solid rgba(140,255,128,.09);border-radius:54px 54px 13px 13px;border-bottom:0}
+        .a16-bot:before,.a16-bot:after{content:"";position:absolute;top:-20px;width:2px;height:25px;background:rgba(140,255,128,.10);transform-origin:bottom}
+        .a16-bot:before{left:24px;transform:rotate(-28deg)}.a16-bot:after{right:24px;transform:rotate(28deg)}
+        .a16-bot i{position:absolute;top:25px;width:5px;height:5px;border-radius:50%;background:rgba(140,255,128,.13)}
+        .a16-bot i:first-child{left:27px}.a16-bot i:nth-child(2){right:27px}.a16-bot b{display:none}
+
+        .a16-mouse-alert{position:relative;z-index:5;color:#432c08;background:linear-gradient(90deg,#ffe1a3,#fff0cb 54%,#ffe4a9);border-block:1px solid #edc36a}
+        .a16-mouse-alert-inner{min-height:86px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:14px}
+        .a16-mouse-alert-inner>div{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:5px 13px}
+        .a16-alert-badge{grid-row:1/3;display:inline-flex;padding:5px 9px;border-radius:8px;background:#402c0c;color:#fff3d3;font-size:11px;font-weight:900;white-space:nowrap}
+        .a16-mouse-alert strong{font-size:17px;line-height:1.35}
+        .a16-mouse-alert p{grid-column:2;margin:0;color:#715526;font-size:13px;line-height:1.55}
+        .a16-mouse-alert a{flex:0 0 auto;padding:9px 15px;border-radius:999px;background:#243b5c;color:#fff;font-size:12px;font-weight:900;white-space:nowrap}
+
+        .a16-roadmap{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr)!important}
+        .a16-roadmap-mouse{border-radius:12px;padding:8px 10px;margin:-8px -10px;background:#fff5dd;border:1px solid #f1d08b}
+        .a16-roadmap-mouse small{color:#a55b00!important}.a16-roadmap-mouse strong{color:#68400a!important}
+
+        .a16-mouse-section{position:relative;overflow:hidden;padding:84px 0;background:radial-gradient(circle at 90% 18%,rgba(25,154,255,.17),transparent 27%),linear-gradient(145deg,#06101d,#0b1b31 58%,#092544);color:#fff}
+        .a16-mouse-watermark{position:absolute;right:-3%;bottom:-9%;font-size:clamp(310px,39vw,620px);font-weight:950;line-height:.75;color:transparent;-webkit-text-stroke:2px rgba(67,201,255,.055);letter-spacing:-.12em;pointer-events:none}
+        .a16-mouse-wrap{position:relative;z-index:2}
+        .a16-mouse-head{position:relative;max-width:850px;margin-bottom:25px}
+        .a16-mouse-head .kicker{color:#66dcff}
+        .a16-mouse-head h2{margin-top:14px;color:#fff}
+        .a16-mouse-head p{max-width:760px;color:#b6c8d9;font-size:16px}
+        .a16-required-pill{display:inline-flex;margin-top:13px;padding:5px 10px;border:1px solid rgba(255,197,84,.35);border-radius:999px;background:rgba(255,181,55,.11);color:#ffd889;font-size:11px;font-weight:900;letter-spacing:.06em}
+        .a16-mouse-critical{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:9px 13px;margin:0 0 25px;padding:14px 18px;border:1px solid rgba(255,201,101,.22);border-radius:15px;background:rgba(255,190,72,.08);color:#e5eff8;font-size:13px}
+        .a16-mouse-critical span{padding:4px 8px;border-radius:7px;background:#ffbd4a;color:#3d2908;font-size:10px;font-weight:900}.a16-mouse-critical strong{font-size:14px}.a16-mouse-critical i{color:#72dcff;font-style:normal;font-weight:900}
+        .a16-mouse-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(350px,.92fr);gap:22px;align-items:start}
+        .a16-video-card,.a16-mouse-panel{overflow:hidden;border:1px solid rgba(255,255,255,.11);border-radius:22px;background:rgba(255,255,255,.055);box-shadow:0 24px 65px rgba(0,0,0,.22)}
+        .a16-video-ratio{position:relative;aspect-ratio:16/9;background:#02070d}
+        .a16-video-ratio iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+        .a16-video-copy{padding:22px 23px 24px}.a16-video-copy small{color:#64ddff;font-weight:900;letter-spacing:.12em}.a16-video-copy h3{margin:6px 0 6px;font-size:23px;line-height:1.35}.a16-video-copy p{margin:0;color:#aebed0;font-size:14px}.a16-video-copy a{display:inline-flex;margin-top:16px;color:#70ddff;font-size:13px;font-weight:900}
+        .a16-mouse-info{display:grid;gap:16px}.a16-mouse-panel{padding:22px 23px}.a16-mouse-panel h3{margin:0 0 13px;font-size:18px}.a16-mouse-panel ul{margin:0;padding-left:21px;color:#bccddd;font-size:14px}.a16-mouse-panel li{margin:7px 0}
+        .a16-file-pending{width:100%;min-height:42px;margin-top:16px;border:1px dashed rgba(120,218,255,.28);border-radius:11px;background:rgba(64,179,255,.07);color:#8dcde7;font:inherit;font-size:12px;font-weight:900;cursor:not-allowed}
+        .a16-chapter-list{display:grid;grid-template-columns:1fr 1fr;gap:7px}.a16-chapter-list a{display:grid;grid-template-columns:45px minmax(0,1fr);gap:8px;padding:9px 10px;border-radius:10px;background:rgba(255,255,255,.045);color:#c2d2e1;font-size:12px;line-height:1.45}.a16-chapter-list a:hover{background:rgba(67,190,255,.12)}.a16-chapter-list b{color:#69dbff}.a16-chapter-list span{min-width:0}
+        .a16-mouse-bluetooth-warning{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;align-items:center;margin-top:21px;padding:20px 22px;border:1px solid rgba(255,202,92,.25);border-left:5px solid #ffba43;border-radius:17px;background:rgba(255,184,55,.09)}
+        .a16-bluetooth-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:14px;background:#ffbd4a;color:#362306;font-size:20px;font-weight:950}.a16-mouse-bluetooth-warning strong{color:#ffe0a3;font-size:16px}.a16-mouse-bluetooth-warning p{margin:4px 0 0;color:#c7d5e1;font-size:13px;line-height:1.7}
+
+        .a16-inline-mouse-note{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:13px;padding:15px 17px;border:1px solid #efcc85;border-radius:14px;background:#fff5dc;color:#67420b}
+        .a16-inline-mouse-note strong{font-size:14px}.a16-inline-mouse-note span{color:#805f2a;font-size:12px;text-align:right}
+        .a16-modal-mouse-note{margin-bottom:15px;padding:14px 15px;border:1px solid #f1d08e;border-left:5px solid #f3a927;border-radius:13px;background:#fff6e1;color:#62400d}
+        .a16-modal-mouse-note strong{display:block;color:#945300;font-size:15px}.a16-modal-mouse-note p{margin:3px 0 8px;color:#735323;font-size:13px;line-height:1.65}.a16-modal-mouse-note a{color:#0877d8;font-size:12px;font-weight:900;text-decoration:underline;text-underline-offset:3px}
+
+        .a16-mail-mouse-note{display:grid;grid-template-columns:54px minmax(0,1fr);gap:17px;align-items:center;margin:-7px 0 26px;padding:20px 22px;border:1px solid #d8e7f3;border-left:5px solid #1687ff;border-radius:17px;background:#f4f9fd;box-shadow:0 12px 34px rgba(7,49,91,.07)}
+        .a16-mail-mouse-icon{width:50px;height:50px;display:grid;place-items:center;border-radius:15px;background:linear-gradient(135deg,#1478ff,#31c9ff);color:#fff;font-size:27px;font-weight:900}.a16-mail-mouse-note strong{display:block;color:#17314e;font-size:17px}.a16-mail-mouse-note p{margin:3px 0 0;color:#5a6e82;font-size:13px}
+
+        @media(max-width:1000px){
+          .a16-mouse-grid{grid-template-columns:1fr}
+          .a16-mouse-info{grid-template-columns:1fr 1fr}
+          .a16-chapter-list{grid-template-columns:1fr}
+        }
+        @media(max-width:900px){
+          .a16-bg-number{right:-7%;top:11%;font-size:clamp(240px,54vw,430px)}
+          .a16-bot{right:4%;top:12%;opacity:.7}
+          .a16-roadmap{grid-template-columns:1fr!important;gap:9px!important}
+          .a16-roadmap-arrow{justify-self:center;line-height:1;transform:rotate(90deg);font-size:24px}
+          .a16-roadmap-mouse{margin:0;padding:11px 12px}
+          .a16-mouse-alert-inner{align-items:flex-start;flex-direction:column;gap:11px}.a16-mouse-alert-inner>div{grid-template-columns:auto 1fr}.a16-mouse-alert a{margin-left:0}
+        }
+        @media(max-width:650px){
+          .a16-mouse-section{padding:64px 0}
+          .a16-mouse-head h2 br{display:none}
+          .a16-mouse-critical{justify-content:flex-start;align-items:flex-start;flex-direction:column}.a16-mouse-critical i{transform:rotate(90deg);margin-left:20px}
+          .a16-mouse-info{grid-template-columns:1fr}
+          .a16-video-copy,.a16-mouse-panel{padding:18px}
+          .a16-video-copy h3{font-size:20px}
+          .a16-mouse-bluetooth-warning{grid-template-columns:1fr;padding:17px}.a16-bluetooth-icon{width:42px;height:42px}
+          .a16-inline-mouse-note{align-items:flex-start;flex-direction:column;gap:3px}.a16-inline-mouse-note span{text-align:left}
+          .a16-mail-mouse-note{grid-template-columns:43px minmax(0,1fr);gap:12px;padding:17px 15px}.a16-mail-mouse-icon{width:42px;height:42px;border-radius:12px}.a16-mail-mouse-note strong{font-size:15px}
+          .a16-mouse-alert-inner>div{display:flex;align-items:flex-start;flex-direction:column;gap:4px}.a16-mouse-alert p{font-size:12px}.a16-mouse-alert a{width:100%;text-align:center}
+          .a16-bg-number{top:16%;right:-12%;font-size:250px}.a16-label-two,.a16-bot{display:none}
+        }
+      `;
+      doc.head.appendChild(style);
+
+      applied = true;
+      loading.classList.add('hide');
+      return true;
+    }
+
+    previewV5.addEventListener('load', () => {
+      let attempts = 0;
+      const timer = setInterval(() => {
+        attempts += 1;
+        if(applyMouseFirmwareUpdates() || attempts > 360){
+          clearInterval(timer);
+          loading.classList.add('hide');
+        }
+      },100);
+    });
+  </script>
+</body>
+</html>
