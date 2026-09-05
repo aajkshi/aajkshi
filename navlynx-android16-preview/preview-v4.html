@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#050b14">
+  <title>NAVLYNX Android 16 升級專區｜完整流程預覽</title>
+  <style>
+    html,body{width:100%;height:100%;margin:0;background:#050b14;overflow:hidden}
+    iframe{display:block;width:100%;height:100%;border:0;background:#050b14}
+    .loading{position:fixed;inset:0;z-index:3;display:grid;place-items:center;background:#050b14;color:#eaf5ff;font-family:"Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;transition:opacity .25s ease}
+    .loading.hide{opacity:0;pointer-events:none}
+    .loading-box{width:min(420px,calc(100% - 40px));padding:27px;border:1px solid rgba(72,197,255,.22);border-radius:20px;background:#0b192b;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.35)}
+    .spinner{width:34px;height:34px;margin:0 auto 15px;border:3px solid rgba(255,255,255,.18);border-top-color:#31c8ff;border-radius:50%;animation:spin .8s linear infinite}
+    .loading b{display:block;font-size:18px}.loading span{display:block;margin-top:5px;color:#9db3c8;font-size:14px}@keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <div class="loading" id="loading"><div class="loading-box"><div class="spinner"></div><b>正在載入完整流程預覽</b><span>補齊 mini Ultra II 兩階段範例並整理閱讀動線</span></div></div>
+  <iframe id="previewV4" src="preview-v3.html?v=20260905-8" title="NAVLYNX Android 16 升級專區預覽"></iframe>
+  <script>
+    const previewV4 = document.getElementById('previewV4');
+    const loading = document.getElementById('loading');
+    let applied = false;
+
+    function getSiteDocument(){
+      try{
+        const v3Doc = previewV4.contentDocument || previewV4.contentWindow.document;
+        const v2Frame = v3Doc && v3Doc.getElementById('preview');
+        const v2Doc = v2Frame && (v2Frame.contentDocument || v2Frame.contentWindow.document);
+        const siteFrame = v2Doc && v2Doc.getElementById('site');
+        return siteFrame && (siteFrame.contentDocument || siteFrame.contentWindow.document);
+      }catch(error){
+        return null;
+      }
+    }
+
+    function applyReadingFlowUpdates(){
+      if(applied) return true;
+      const doc = getSiteDocument();
+      if(!doc || !doc.body) return false;
+
+      const downloads = doc.querySelector('#downloads');
+      const selfSection = doc.querySelector('#self');
+      const mailSection = doc.querySelector('#mail');
+      const cards = [...doc.querySelectorAll('.download-card')];
+      const modalTriggers = [...doc.querySelectorAll('.a16-guide-trigger')];
+      if(!downloads || !selfSection || !mailSection || cards.length < 4 || modalTriggers.length < 4) return false;
+
+      // 1. 下載專區：先看懂兩階段，再選機型下載。
+      const downloadHead = downloads.querySelector('.section-head');
+      if(downloadHead && !downloads.querySelector('.a16-roadmap')){
+        const roadmap = doc.createElement('div');
+        roadmap.className = 'a16-roadmap';
+        roadmap.setAttribute('aria-label','Android 16 首次升級兩階段流程');
+        roadmap.innerHTML = `
+          <div class="a16-roadmap-item"><small>第一階段</small><strong>安裝指定過渡版本</strong></div>
+          <div class="a16-roadmap-arrow" aria-hidden="true">→</div>
+          <div class="a16-roadmap-item"><small>第二階段</small><strong>更新至 Android 16 最新韌體</strong></div>
+          <p>兩個階段都完成，才算完成 Android 16 升級。</p>`;
+        downloadHead.insertAdjacentElement('afterend', roadmap);
+      }
+
+      cards.forEach((card) => {
+        const description = card.querySelector('p');
+        const downloadButton = card.querySelector('a.btn');
+        if(description) description.textContent = '第一階段｜下載 Android 16 指定過渡版本';
+        if(downloadButton) downloadButton.textContent = '下載過渡版本';
+      });
+
+      const latestBox = downloads.querySelector('.latest-box');
+      if(latestBox){
+        const title = latestBox.querySelector('h3');
+        const text = latestBox.querySelector('p');
+        const button = latestBox.querySelector('a');
+        if(title) title.textContent = '第二階段｜更新至 Android 16 最新韌體';
+        if(text) text.textContent = '完成過渡版本後，請務必繼續更新至最新韌體。兩個階段都完成，才算完成 Android 16 升級。';
+        if(button) button.textContent = '前往 Android 16 最新韌體';
+      }
+
+      // 2. 自行升級方式摘要：直接說明必須完成兩階段。
+      const selfChoiceList = doc.querySelector('.choice.blue .ticks');
+      if(selfChoiceList){
+        selfChoiceList.innerHTML = `
+          <li>不分保固內、保固外</li>
+          <li>依機型下載指定過渡版本</li>
+          <li>完成後再更新至 Android 16 最新韌體</li>
+          <li>無須寄送主機，不產生運費</li>`;
+      }
+
+      const mailChoice = doc.querySelector('.choice:not(.blue) .ticks');
+      if(mailChoice){
+        mailChoice.innerHTML = `
+          <li>先填寫寄回升級申請表</li>
+          <li>等待客服核對資料</li>
+          <li>收到客服寄送資訊後再寄出</li>
+          <li>收到主機後約 3 至 7 個工作天處理</li>`;
+      }
+
+      // 3. 補齊 mini Ultra II 頁面內的兩階段完整範例。
+      const selfHead = selfSection.querySelector('.section-head');
+      if(selfHead){
+        const title = selfHead.querySelector('h2');
+        const text = selfHead.querySelector('p');
+        if(title) title.textContent = 'mini Ultra II 首次升級完整範例';
+        if(text) text.textContent = '以下以 mini Ultra II 為例，完整示範「指定過渡版本 → Android 16 最新韌體」兩階段流程。其他機型請於上方卡片開啟各自步驟。';
+      }
+
+      const prep = selfSection.querySelector('.prep');
+      const prepList = prep && prep.querySelector('ul');
+      if(prepList){
+        prepList.innerHTML = `
+          <li>準備一台電腦</li>
+          <li>準備一張 Micro SD 記憶卡</li>
+          <li>記憶卡建議使用 32GB 至 64GB（最高支援 256GB）</li>
+          <li>格式化為 FAT32 或 exFAT</li>`;
+      }
+      prep?.querySelector('.notice')?.remove();
+      prep?.querySelector('.blind-flash-note')?.remove();
+
+      const oldSteps = selfSection.querySelector('.steps, .a16-inline-guide');
+      if(oldSteps){
+        oldSteps.className = 'a16-inline-guide';
+        oldSteps.innerHTML = `
+          <div class="a16-inline-phase">
+            <strong>本次首次升級分為兩個階段</strong>
+            <p>先安裝 Android 16 指定過渡版本，再更新至 Android 16 最新韌體。</p>
+            <b>請勿停留在過渡版本，以免發生車機顯示或連線相容性問題。</b>
+          </div>
+          <div class="a16-inline-steps">
+            <article class="a16-inline-step">
+              <span class="a16-inline-number">1</span>
+              <div><h3>下載過渡版本升級檔案</h3><p>使用電腦開啟官方下載連結，下載 <code>APM1688S.zip</code>，並複製至 Micro SD 卡根目錄。檔案請勿解壓縮。</p><a class="a16-inline-link" href="https://drive.google.com/drive/folders/10ftWBlYjTytoOWk_ZxGz11CMXJql8pRk?usp=drive_link" target="_blank" rel="noopener">下載 mini Ultra II 過渡版本</a></div>
+            </article>
+            <article class="a16-inline-step">
+              <span class="a16-inline-number">2</span>
+              <div><h3>插入記憶卡</h3><p>讓 ApplePie mini Ultra II 正常開機並停留在主畫面，再將記憶卡插入主機插槽。</p></div>
+            </article>
+            <article class="a16-inline-step">
+              <span class="a16-inline-number">3</span>
+              <div><h3>確認開始更新</h3><p>畫面顯示是否更新時，確認資訊後點選「更新」。</p></div>
+            </article>
+            <article class="a16-inline-step">
+              <span class="a16-inline-number">4</span>
+              <div><h3>紅燈閃爍後取出記憶卡</h3><p>更新過程中，當電源燈號顯示紅燈閃爍時，將記憶卡取出。</p></div>
+            </article>
+            <article class="a16-inline-step">
+              <span class="a16-inline-number">5</span>
+              <div><h3>等待過渡版本更新完成</h3><p>更新時間約 10 至 15 分鐘。過程中請保持穩定供電，完成後 ApplePie 將自動重新啟動。</p><p class="a16-inline-emphasis">此時僅完成 Android 16 過渡版本，尚未完成全部升級流程，請繼續進行下一步。</p></div>
+            </article>
+            <article class="a16-inline-step a16-inline-required">
+              <span class="a16-inline-number">6</span>
+              <div><div class="a16-inline-required-label">必要步驟｜請勿省略</div><h3>更新至 Android 16 最新韌體</h3><p>完成過渡版本後，請前往 NAVLYNX 最新韌體下載頁，下載 mini Ultra II 對應的 Android 16 最新韌體，並依照相同方式再次更新。</p><strong class="a16-inline-warning">請勿停留在過渡版本。</strong><div class="a16-inline-blind"><strong>過渡版本無畫面時怎麼辦？</strong><p>部分車款可能因過渡版本的相容性問題，暫時無法在車機螢幕顯示 ApplePie 畫面。若遇到無畫面的情況，請勿中斷升級流程，請參考「更新指示燈號盲刷」，依照主機燈號判斷更新狀態，繼續完成最新韌體更新。</p></div><a class="a16-inline-link" href="https://www.navlynx.com.tw/download.asp" target="_blank" rel="noopener">前往 Android 16 最新韌體下載</a></div>
+            </article>
+          </div>`;
+      }
+
+      // 4. 寄回流程：移除重複句與「申請編號」前後不一致。
+      const mailIntro = mailSection.querySelector('.section-head p');
+      if(mailIntro) mailIntro.textContent = '請先填寫表單並取得客服確認，請勿直接寄送主機。';
+
+      const plans = [...mailSection.querySelectorAll('.plan')];
+      if(plans[0]){
+        const list = plans[0].querySelector('ul');
+        if(list) list.innerHTML = '<li>來回運費由申請人負擔</li><li>回程採順豐到付</li>';
+      }
+      if(plans[1]){
+        const list = plans[1].querySelector('ul');
+        if(list) list.innerHTML = '<li>指定貼文按讚、留言並公開分享</li><li>將完成截圖傳至 LINE 審核</li><li>通過後免升級處理費</li><li>來回運費由申請人負擔</li>';
+      }
+
+      const mailSteps = [...mailSection.querySelectorAll('.mail-step')];
+      if(mailSteps[2]) mailSteps[2].innerHTML = '<b>03 寄送主機</b>依客服提供的寄送資訊，妥善包裝後寄出。';
+      if(mailSteps[3]) mailSteps[3].innerHTML = '<b>04 升級寄回</b>收到主機後約 3 至 7 個工作天完成。';
+
+      const ctaText = doc.querySelector('#notice .cta p');
+      if(ctaText) ctaText.textContent = '先送出申請表，客服核對後會提供寄送資訊與注意事項。';
+
+      // 5. 導覽補上操作範例，讓長頁面更容易跳轉。
+      const nav = doc.querySelector('.nav');
+      if(nav && !nav.querySelector('a[href="#self"]')){
+        const exampleLink = doc.createElement('a');
+        exampleLink.href = '#self';
+        exampleLink.textContent = '操作範例';
+        const mailLink = nav.querySelector('a[href="#mail"]');
+        nav.insertBefore(exampleLink, mailLink || null);
+      }
+
+      const style = doc.createElement('style');
+      style.textContent = `
+        #self{background:#edf3f8;border-top:1px solid #dce6ef}
+        #self .section-head{max-width:880px}
+        .a16-roadmap{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:15px;margin:-6px 0 27px;padding:19px 21px;border:1px solid #d6e6f4;border-radius:18px;background:#f8fbfe}
+        .a16-roadmap-item{display:flex;flex-direction:column;gap:2px;min-width:0}
+        .a16-roadmap-item small{color:#0877d8;font-size:11px;font-weight:900;letter-spacing:.09em}
+        .a16-roadmap-item strong{color:#17304e;font-size:17px;line-height:1.4}
+        .a16-roadmap-arrow{color:#1687ff;font-size:30px;font-weight:900}
+        .a16-roadmap>p{grid-column:1/-1;margin:1px 0 0;padding-top:11px;border-top:1px solid #e0e9f1;color:#a13e16;font-size:14px;font-weight:900;text-align:center}
+        .a16-inline-guide{display:grid;gap:14px;min-width:0}
+        .a16-inline-phase{padding:18px 19px;border:1px solid #ffd592;border-left:5px solid #f59e0b;border-radius:16px;background:#fff8e9;color:#654617}
+        .a16-inline-phase strong{display:block;margin-bottom:4px;color:#965600;font-size:18px}
+        .a16-inline-phase p{margin:0 0 5px;color:#705022;font-size:14px}
+        .a16-inline-phase b{display:block;color:#aa4115;font-size:14px}
+        .a16-inline-steps{display:grid;gap:13px}
+        .a16-inline-step{display:grid;grid-template-columns:48px minmax(0,1fr);gap:15px;padding:20px;border:1px solid #dce6ef;border-radius:18px;background:#fff;box-shadow:0 12px 34px rgba(8,35,67,.06)}
+        .a16-inline-number{width:46px;height:46px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,#1478ff,#31c9ff);color:#fff;font-size:18px;font-weight:900}
+        .a16-inline-step h3{margin:0 0 5px;color:#17304e;font-size:18px;line-height:1.4}
+        .a16-inline-step p{margin:0;color:#5d6f82;font-size:14px;line-height:1.75}
+        .a16-inline-step code{display:inline-block;padding:2px 7px;border-radius:7px;background:#e8f4ff;color:#076ec4;font-weight:900;overflow-wrap:anywhere}
+        .a16-inline-emphasis{margin-top:10px!important;padding:10px 12px;border-radius:10px;background:#edf6ff;color:#075f9f!important;font-weight:800}
+        .a16-inline-required{border:2px solid #1687ff;background:linear-gradient(145deg,#f7fbff,#eef8ff)}
+        .a16-inline-required-label{display:inline-flex;margin-bottom:9px;padding:4px 9px;border-radius:999px;background:#0877d8;color:#fff;font-size:11px;font-weight:900}
+        .a16-inline-warning{display:block;margin-top:10px;color:#c23c16;font-size:15px}
+        .a16-inline-blind{margin-top:13px;padding:13px 14px;border-left:4px solid #f59e0b;border-radius:10px;background:#fff8ea}
+        .a16-inline-blind>strong{display:block;margin-bottom:4px;color:#8d5200;font-size:14px}
+        .a16-inline-blind p{color:#694e25;font-size:13px}
+        .a16-inline-link{display:inline-flex;align-items:center;justify-content:center;min-height:42px;margin-top:13px;padding:0 15px;border-radius:10px;background:linear-gradient(135deg,#1478ff,#27c2ff);color:#fff;font-size:13px;font-weight:900;box-shadow:0 9px 22px rgba(22,135,255,.2)}
+        .a16-inline-link:hover{transform:translateY(-1px)}
+        .download-card p{min-height:49px}
+        @media(max-width:1100px){.nav{gap:17px;font-size:13px}}
+        @media(max-width:900px){
+          .a16-roadmap{margin-top:-4px}
+          .a16-inline-guide{min-width:0}
+        }
+        @media(max-width:600px){
+          .a16-roadmap{grid-template-columns:1fr;gap:9px;padding:16px}
+          .a16-roadmap-arrow{justify-self:center;line-height:1;transform:rotate(90deg);font-size:25px}
+          .a16-roadmap>p{padding-top:10px;text-align:left}
+          .a16-roadmap-item strong{font-size:15px}
+          .a16-inline-phase{padding:15px 14px}
+          .a16-inline-phase strong{font-size:16px}
+          .a16-inline-step{grid-template-columns:39px minmax(0,1fr);gap:11px;padding:15px 13px;border-radius:14px}
+          .a16-inline-number{width:38px;height:38px;border-radius:11px;font-size:15px}
+          .a16-inline-step h3{font-size:16px}
+          .a16-inline-step p{font-size:13px;line-height:1.7}
+          .a16-inline-link{width:100%;text-align:center}
+          .download-card p{min-height:auto}
+        }
+      `;
+      doc.head.appendChild(style);
+
+      applied = true;
+      loading.classList.add('hide');
+      return true;
+    }
+
+    previewV4.addEventListener('load', () => {
+      let attempts = 0;
+      const timer = setInterval(() => {
+        attempts += 1;
+        if(applyReadingFlowUpdates() || attempts > 300){
+          clearInterval(timer);
+          loading.classList.add('hide');
+        }
+      },100);
+    });
+  </script>
+</body>
+</html>
