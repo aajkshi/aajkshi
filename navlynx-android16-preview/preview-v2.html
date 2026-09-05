@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#050b14">
+  <title>NAVLYNX Android 16 升級專區｜更新預覽</title>
+  <style>
+    html,body{width:100%;height:100%;margin:0;background:#050b14;overflow:hidden}
+    iframe{display:block;width:100%;height:100%;border:0;background:#050b14}
+    .loading{position:fixed;inset:0;z-index:3;display:grid;place-items:center;background:#050b14;color:#eaf5ff;font-family:"Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;transition:opacity .25s ease}
+    .loading.hide{opacity:0;pointer-events:none}
+    .loading-box{width:min(390px,calc(100% - 40px));padding:26px;border:1px solid rgba(72,197,255,.22);border-radius:20px;background:#0b192b;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.35)}
+    .spinner{width:34px;height:34px;margin:0 auto 15px;border:3px solid rgba(255,255,255,.18);border-top-color:#31c8ff;border-radius:50%;animation:spin .8s linear infinite}
+    .loading b{display:block;font-size:18px}.loading span{display:block;margin-top:5px;color:#9db3c8;font-size:14px}@keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <div class="loading" id="loading"><div class="loading-box"><div class="spinner"></div><b>正在載入更新版預覽</b><span>套用最新文字與注意事項</span></div></div>
+  <iframe id="site" src="index.html?v=20260905-2" title="NAVLYNX Android 16 升級專區預覽"></iframe>
+  <script>
+    const frame = document.getElementById('site');
+    const loading = document.getElementById('loading');
+    let applied = false;
+
+    function applyUpdates(){
+      if(applied) return true;
+      let doc;
+      try{ doc = frame.contentDocument || frame.contentWindow.document; }catch(e){ return false; }
+      if(!doc || !doc.body) return false;
+
+      const mailIntro = doc.querySelector('#mail .section-head p');
+      const prepList = doc.querySelector('#self .prep ul');
+      if(!mailIntro || !prepList) return false;
+
+      mailIntro.textContent = '請先填寫表單並取得客服確認，請勿直接寄送主機。';
+
+      prepList.innerHTML = `
+        <li>準備一台電腦</li>
+        <li>準備一張 Micro SD 記憶卡</li>
+        <li>記憶卡建議使用 32GB 至 64GB（最高支援 256GB）</li>
+        <li>格式化為 FAT32 或 exFAT</li>
+        <li>首次升級至 Android 16 指定過渡版本後，需再次更新至 Android 16 最新韌體，請勿停留在過渡版本。</li>
+        <li>升級至 Android 16 過渡版本後，部分車款可能因過渡版本的相容性問題，導致車機螢幕無法顯示畫面。</li>`;
+
+      let blindNote = doc.querySelector('.blind-flash-note');
+      if(!blindNote){
+        blindNote = doc.createElement('div');
+        blindNote.className = 'blind-flash-note';
+        prepList.insertAdjacentElement('afterend', blindNote);
+      }
+      blindNote.innerHTML = '若遇到此情況，請參考 <strong>更新指示燈號盲刷</strong>，在沒有畫面的情況下，依照主機燈號判斷更新狀態，完成後續的最新韌體更新。';
+
+      const style = doc.createElement('style');
+      style.textContent = `
+        .prep ul{margin-bottom:16px}
+        .prep li{margin-bottom:8px}
+        .blind-flash-note{margin-top:14px;padding:15px 16px;border-left:4px solid #ffb547;border-radius:10px;background:rgba(255,181,71,.12);color:#ffe4b3;font-size:14px;line-height:1.75}
+        .blind-flash-note strong{color:#fff}
+      `;
+      doc.head.appendChild(style);
+
+      applied = true;
+      loading.classList.add('hide');
+      return true;
+    }
+
+    frame.addEventListener('load',()=>{
+      let count=0;
+      const timer=setInterval(()=>{
+        count++;
+        if(applyUpdates() || count>150){
+          clearInterval(timer);
+          if(count>150) loading.classList.add('hide');
+        }
+      },100);
+    });
+  </script>
+</body>
+</html>
