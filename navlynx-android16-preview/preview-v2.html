@@ -17,8 +17,8 @@
   </style>
 </head>
 <body>
-  <div class="loading" id="loading"><div class="loading-box"><div class="spinner"></div><b>正在載入更新版預覽</b><span>套用最新文字與注意事項</span></div></div>
-  <iframe id="site" src="index.html?v=20260905-2" title="NAVLYNX Android 16 升級專區預覽"></iframe>
+  <div class="loading" id="loading"><div class="loading-box"><div class="spinner"></div><b>正在載入更新版預覽</b><span>套用最新文字與更新步驟彈窗</span></div></div>
+  <iframe id="site" src="index.html?v=20260905-3" title="NAVLYNX Android 16 升級專區預覽"></iframe>
   <script>
     const frame = document.getElementById('site');
     const loading = document.getElementById('loading');
@@ -32,7 +32,8 @@
 
       const mailIntro = doc.querySelector('#mail .section-head p');
       const prepList = doc.querySelector('#self .prep ul');
-      if(!mailIntro || !prepList) return false;
+      const downloadCards = [...doc.querySelectorAll('.download-card')];
+      if(!mailIntro || !prepList || downloadCards.length < 4) return false;
 
       mailIntro.textContent = '請先填寫表單並取得客服確認，請勿直接寄送主機。';
 
@@ -52,12 +53,169 @@
       }
       blindNote.innerHTML = '若遇到此情況，請參考 <strong>更新指示燈號盲刷</strong>，在沒有畫面的情況下，依照主機燈號判斷更新狀態，完成後續的最新韌體更新。';
 
+      const guides = {
+        'ApplePie ONE': {
+          title: 'ApplePie ONE 韌體更新步驟',
+          file: 'APM1288BM.zip',
+          product: 'ApplePie ONE'
+        },
+        'ApplePie Touch': {
+          title: 'ApplePie Touch 韌體更新步驟',
+          file: 'APM1288TOUCH.zip',
+          product: 'ApplePie Touch'
+        },
+        'ApplePie mini Ultra II': {
+          title: 'ApplePie mini Ultra II 韌體更新步驟',
+          file: 'APM1688S.zip',
+          product: 'ApplePie mini Ultra II'
+        },
+        'ApplePie Melling／Melling-G': {
+          title: 'ApplePie Melling／Melling-G 韌體更新步驟',
+          file: 'APM1288BM.zip',
+          product: 'ApplePie Melling 或 Melling-G'
+        }
+      };
+
+      const guideHTML = (guide) => `
+        <div class="firmware-guide-steps">
+          <section class="firmware-guide-step">
+            <h4><span>1</span>下載升級檔案</h4>
+            <p>使用電腦開啟官方下載連結，下載 <code>${guide.file}</code>，並複製至 Micro SD 卡根目錄。檔案請勿解壓縮。</p>
+          </section>
+          <section class="firmware-guide-step">
+            <h4><span>2</span>插入記憶卡</h4>
+            <p>讓 ${guide.product} 正常開機並停留在主畫面，再將記憶卡插入主機插槽。</p>
+          </section>
+          <section class="firmware-guide-step">
+            <h4><span>3</span>確認開始更新</h4>
+            <p>畫面顯示是否更新時，確認資訊後點選「更新」。</p>
+          </section>
+          <section class="firmware-guide-step">
+            <h4><span>4</span>紅燈閃爍後取出記憶卡</h4>
+            <p>更新過程中，當電源燈號顯示紅燈閃爍時，將記憶卡取出。</p>
+          </section>
+          <section class="firmware-guide-step">
+            <h4><span>5</span>等待重新啟動</h4>
+            <p>更新時間約 10 至 15 分鐘。過程中請保持穩定供電，完成後會自動重新啟動，進入主畫面即完成本次韌體更新。</p>
+          </section>
+        </div>`;
+
+      const modal = doc.createElement('div');
+      modal.className = 'firmware-modal';
+      modal.hidden = true;
+      modal.setAttribute('aria-hidden','true');
+      modal.innerHTML = `
+        <div class="firmware-modal-panel" role="dialog" aria-modal="true" aria-labelledby="firmware-modal-title" tabindex="-1">
+          <button type="button" class="firmware-modal-close" aria-label="關閉更新步驟">×</button>
+          <div class="firmware-modal-kicker">FIRMWARE UPDATE GUIDE</div>
+          <h3 id="firmware-modal-title"></h3>
+          <div class="firmware-modal-content"></div>
+        </div>`;
+      doc.body.appendChild(modal);
+
+      const modalPanel = modal.querySelector('.firmware-modal-panel');
+      const modalTitle = modal.querySelector('#firmware-modal-title');
+      const modalContent = modal.querySelector('.firmware-modal-content');
+      const closeButton = modal.querySelector('.firmware-modal-close');
+      let lastTrigger = null;
+
+      function openModal(guide, trigger){
+        lastTrigger = trigger;
+        modalTitle.textContent = guide.title;
+        modalContent.innerHTML = guideHTML(guide);
+        modal.hidden = false;
+        modal.setAttribute('aria-hidden','false');
+        doc.documentElement.classList.add('modal-open');
+        doc.body.classList.add('modal-open');
+        requestAnimationFrame(() => {
+          modal.classList.add('is-open');
+          modalPanel.focus();
+        });
+      }
+
+      function closeModal(){
+        if(modal.hidden) return;
+        modal.classList.remove('is-open');
+        doc.documentElement.classList.remove('modal-open');
+        doc.body.classList.remove('modal-open');
+        setTimeout(() => {
+          modal.hidden = true;
+          modal.setAttribute('aria-hidden','true');
+          modalContent.innerHTML = '';
+          if(lastTrigger) lastTrigger.focus();
+        },180);
+      }
+
+      downloadCards.forEach((card) => {
+        const name = card.querySelector('h3')?.textContent.trim();
+        const guide = guides[name];
+        if(!guide || card.querySelector('.firmware-guide-trigger')) return;
+        const trigger = doc.createElement('button');
+        trigger.type = 'button';
+        trigger.className = 'firmware-guide-trigger';
+        trigger.textContent = '查看韌體更新步驟';
+        trigger.setAttribute('aria-haspopup','dialog');
+        trigger.addEventListener('click', () => openModal(guide, trigger));
+        card.appendChild(trigger);
+      });
+
+      closeButton.addEventListener('click', closeModal);
+      modal.addEventListener('click', (event) => {
+        if(event.target === modal) closeModal();
+      });
+      doc.addEventListener('keydown', (event) => {
+        if(event.key === 'Escape' && !modal.hidden) closeModal();
+      });
+
       const style = doc.createElement('style');
       style.textContent = `
         .prep ul{margin-bottom:16px}
         .prep li{margin-bottom:8px}
         .blind-flash-note{margin-top:14px;padding:15px 16px;border-left:4px solid #ffb547;border-radius:10px;background:rgba(255,181,71,.12);color:#ffe4b3;font-size:14px;line-height:1.75}
         .blind-flash-note strong{color:#fff}
+
+        .firmware-guide-trigger{display:inline-flex;align-items:center;justify-content:center;align-self:center;margin-top:12px;padding:3px 4px;border:0;background:transparent;color:#0877d8;font:inherit;font-size:13px;font-weight:900;line-height:1.5;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+        .firmware-guide-trigger:hover{color:#045da9}
+        .firmware-guide-trigger:focus-visible{outline:3px solid rgba(22,135,255,.28);outline-offset:4px;border-radius:5px}
+        html.modal-open,body.modal-open{overflow:hidden!important;touch-action:none}
+        .firmware-modal[hidden]{display:none!important}
+        .firmware-modal{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:24px;background:rgba(2,8,18,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .18s ease}
+        .firmware-modal.is-open{opacity:1}
+        .firmware-modal-panel{position:relative;width:min(720px,100%);max-height:calc(100vh - 48px);max-height:calc(100dvh - 48px);overflow:auto;overscroll-behavior:contain;padding:34px 34px 30px;border:1px solid #d7e3ef;border-radius:24px;background:#fff;color:#14233a;box-shadow:0 30px 90px rgba(0,0,0,.38);transform:translateY(12px) scale(.985);transition:transform .18s ease;-webkit-overflow-scrolling:touch}
+        .firmware-modal.is-open .firmware-modal-panel{transform:translateY(0) scale(1)}
+        .firmware-modal-panel:focus{outline:none}
+        .firmware-modal-close{position:sticky;float:right;top:0;z-index:2;width:42px;height:42px;margin:-13px -13px 0 16px;border:1px solid #dbe4ed;border-radius:50%;background:#fff;color:#26384d;font-size:30px;font-weight:300;line-height:1;cursor:pointer;box-shadow:0 8px 24px rgba(10,35,65,.13)}
+        .firmware-modal-close:hover{background:#edf6ff;color:#0877d8}
+        .firmware-modal-close:focus-visible{outline:3px solid rgba(22,135,255,.3);outline-offset:3px}
+        .firmware-modal-kicker{margin-bottom:6px;color:#0877d8;font-size:11px;font-weight:900;letter-spacing:.13em}
+        .firmware-modal h3{margin:0;padding-right:45px;font-size:clamp(23px,4vw,31px);line-height:1.25;letter-spacing:-.025em;color:#11243d}
+        .firmware-modal-content{clear:both;margin-top:24px}
+        .firmware-guide-steps{display:grid;gap:12px}
+        .firmware-guide-step{padding:17px 18px;border:1px solid #e0e8f0;border-radius:15px;background:#f8fbfe}
+        .firmware-guide-step h4{display:flex;align-items:center;gap:10px;margin:0 0 7px;color:#142a46;font-size:16px;line-height:1.4}
+        .firmware-guide-step h4 span{flex:0 0 auto;width:27px;height:27px;display:grid;place-items:center;border-radius:8px;background:linear-gradient(135deg,#1478ff,#31c9ff);color:#fff;font-size:13px;font-weight:900}
+        .firmware-guide-step p{margin:0;color:#53657a;font-size:14px;line-height:1.75}
+        .firmware-guide-step code{display:inline-block;padding:2px 7px;border-radius:7px;background:#e5f2ff;color:#066dc3;font-size:.95em;font-weight:900;overflow-wrap:anywhere}
+
+        @media (max-width:900px){
+          .firmware-modal{padding:18px}
+          .firmware-modal-panel{max-height:calc(100vh - 36px);max-height:calc(100dvh - 36px);padding:30px 27px 26px}
+        }
+        @media (max-width:600px){
+          .firmware-guide-trigger{width:100%;min-height:38px;margin-top:9px;font-size:12px}
+          .firmware-modal{padding:10px;align-items:end}
+          .firmware-modal-panel{width:100%;max-height:calc(100vh - 20px);max-height:calc(100dvh - 20px);padding:25px 17px 20px;border-radius:20px}
+          .firmware-modal-close{width:40px;height:40px;margin:-9px -7px 0 10px;font-size:27px}
+          .firmware-modal h3{padding-right:38px;font-size:22px}
+          .firmware-modal-content{margin-top:19px}
+          .firmware-guide-steps{gap:9px}
+          .firmware-guide-step{padding:14px 13px;border-radius:13px}
+          .firmware-guide-step h4{font-size:15px;gap:8px}
+          .firmware-guide-step p{font-size:13px;line-height:1.7}
+        }
+        @media (prefers-reduced-motion:reduce){
+          .firmware-modal,.firmware-modal-panel{transition:none}
+        }
       `;
       doc.head.appendChild(style);
 
@@ -70,9 +228,9 @@
       let count=0;
       const timer=setInterval(()=>{
         count++;
-        if(applyUpdates() || count>150){
+        if(applyUpdates() || count>180){
           clearInterval(timer);
-          if(count>150) loading.classList.add('hide');
+          if(count>180) loading.classList.add('hide');
         }
       },100);
     });
