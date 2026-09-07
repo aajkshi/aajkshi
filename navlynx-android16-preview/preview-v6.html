@@ -67,7 +67,7 @@ main{padding:27px 0 40px}.mode-label{font-size:12px;font-weight:700;color:#61758
 <li><strong>等待過渡版本完成</strong>更新時間約 10 至 15 分鐘，完成後主機會自動重新啟動。這時只完成第一階段，請繼續下一步。</li>
 <li><strong>再更新 Android 16 最新韌體</strong>至官網最新韌體下載頁，選擇相同機型的 Android 16 最新韌體，依對應教學再次更新。兩階段完成後，才算完成升級。</li>
 </ol></div></details>
-<details class="accordion"><summary>更新後無畫面，或 BMW 連線不順？</summary><div class="accordion-body"><p><strong>過渡版本無畫面：</strong>部分車款可能暫時無法顯示過渡版本。請參考「更新指示燈號盲刷」教學，依主機燈號完成後續最新韌體更新；不確定燈號或操作時，先聯繫客服確認，請勿任意斷電或更換其他機型檔案。</p><p><strong>BMW ID6／OS9：</strong>完成 Android 16 更新後若不易連接，請切換為「無線 CarPlay（BMW 相容模式）」，代碼 <code class="file">#135177</code>，氛圍燈為<span class="red" aria-hidden="true"></span>紅色。</p><div class="inline-links"><a href="https://www.navlynx.com.tw/teaching_in_a11-P1.asp" target="_blank" rel="noopener">查看連接模式切換教學 ↗</a><a href="https://lin.ee/uqScgidQ" target="_blank" rel="noopener">聯繫 LINE 客服 ↗</a></div></div></details>
+<details class="accordion" id="connection-help"><summary id="connection-help-title">更新後無畫面？</summary><div class="accordion-body"><p><strong>過渡版本無畫面：</strong>部分車款可能暫時無法顯示過渡版本。請參考「更新指示燈號盲刷」教學，依主機燈號完成後續最新韌體更新；不確定燈號或操作時，先聯繫客服確認，請勿任意斷電或更換其他機型檔案。</p><p id="bmw-help" hidden><strong>BMW ID6／OS9：</strong>完成 Android 16 更新後若不易連接，請切換為「無線 CarPlay（BMW 相容模式）」，代碼 <code class="file">#135177</code>，氛圍燈為<span class="red" aria-hidden="true"></span>紅色。</p><div class="inline-links"><a id="bmw-help-link" hidden href="https://www.navlynx.com.tw/teaching_in_a11-P1.asp" target="_blank" rel="noopener">查看連接模式切換教學 ↗</a><a href="https://lin.ee/uqScgidQ" target="_blank" rel="noopener">聯繫 LINE 客服 ↗</a></div></div></details>
 </article>
 </section>
 <section id="panel-mail" role="tabpanel" aria-labelledby="tab-mail" hidden>
@@ -104,6 +104,9 @@ function render(){
  const hash=location.hash.slice(1), key=hash.startsWith('self-')?hash.slice(5):'', model=models[key], mode=hash==='mail'?'mail':'self';
  tabs.forEach(t=>{const active=t.dataset.mode===mode;t.setAttribute('aria-selected',String(active));t.tabIndex=active?0:-1});
  $('panel-self').hidden=mode!=='self';$('panel-mail').hidden=mode!=='mail';$('chooser').hidden=!!model;$('model-guide').hidden=!model;
+ const showBmwHelp=!!model&&(key==='one'||key==='melling');
+ $('connection-help-title').textContent=showBmwHelp?'更新後無畫面，或 BMW 連線不順？':'更新後無畫面？';
+ $('bmw-help').hidden=!showBmwHelp;$('bmw-help-link').hidden=!showBmwHelp;
  if(model){
   $('model-title').textContent=model.name;$('model-file').textContent=model.file;$('guide-file').textContent=model.file;$('guide-product').textContent=model.name;
   $('transition-download').href=model.drive;$('transition-download').setAttribute('aria-label','下載 '+model.name+' 的指定過渡版本');
