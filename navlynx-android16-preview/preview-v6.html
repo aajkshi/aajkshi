@@ -20,11 +20,12 @@ main{padding:27px 0 40px}.mode-label{font-size:12px;font-weight:700;color:#61758
 @media(max-width:900px){.models{gap:11px}.model{padding:12px}.model-photo{height:135px}.model img{max-height:120px}.mode{padding:17px 16px;gap:10px}.mode[aria-selected=true]{padding:16px 15px}.mode strong{font-size:16px}.hero-number{right:20px}.brand span{display:none}.chapters{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:650px){.wrap{width:calc(100% - 32px)}.top .wrap{height:58px}.top nav{gap:14px}.top nav a{font-size:12px}.brand{font-size:21px}.preview{display:none}.hero .wrap{padding:31px 0 33px}.hero p{max-width:275px;font-size:13px}.hero-number{font-size:185px;right:4px;top:0;opacity:.5}h1{font-size:35px;max-width:300px}h1 span{display:block}.eyebrow{font-size:9px;letter-spacing:1.5px}main{padding-top:21px}.modes{gap:10px;margin-bottom:25px}.mode{padding:14px 12px;grid-template-columns:1fr 18px;gap:5px}.mode[aria-selected=true]{padding:13px 11px}.mode-icon{display:none}.mode strong{font-size:15px;line-height:1.4}.mode small{font-size:11px;line-height:1.5;margin-top:6px;min-height:32px}.mode-check{width:16px;height:16px;font-size:9px}.remote{margin-bottom:23px}.remote summary{padding:13px;gap:8px;align-items:flex-start}.remote summary strong{font-size:13px}.remote summary strong:before{display:none}.remote summary span{font-size:11px;padding-top:2px}.remote-body{grid-template-columns:1fr;padding:15px;gap:15px}.remote-extra{grid-column:auto}.remote-actions .btn{width:100%}h2,.guide-head h2{font-size:23px}.section-head{margin-bottom:16px}.section-head p{font-size:13px}.models{grid-template-columns:1fr 1fr;gap:12px}.model{padding:12px}.model-photo{height:136px;margin-bottom:12px}.model img{max-height:126px}.model strong{font-size:14px}.model small{font-size:11px}.guide-head{align-items:flex-start;gap:12px}.guide-head .text-button{flex-shrink:0;font-size:12px}.guide-note{gap:6px;font-size:11px}.phase-line{font-size:13px}.downloads,.fees{grid-template-columns:1fr;gap:12px}.download{padding:20px}.download .btn{width:100%}.download h3{font-size:19px}.file-line{margin-bottom:15px}.fee{padding:19px;display:grid;grid-template-columns:1fr auto;gap:0 10px}.fee small{grid-column:1}.fee h3{grid-column:1;margin:3px 0 0;font-size:16px}.fee .price{grid-column:2;grid-row:1/3;align-self:center;font-size:27px}.fee p{grid-column:1/-1;margin-top:9px}.fee .freight{grid-column:1/-1;justify-self:start;margin-top:10px}.mail-actions .btn{width:100%}.mail-actions{gap:8px}.flow{grid-template-columns:1fr 1fr;gap:6px 16px}.support,footer .wrap{flex-direction:column;gap:10px}.accordion>summary{font-size:14px;padding:14px 16px}.accordion-body{padding:16px}.critical{font-size:12px}.mail-note{font-size:13px}.chooser-note,.latest-link{font-size:12px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+.downloads.single-stage{grid-template-columns:1fr}.downloads.single-stage .download{border-color:#adc9ed;background:#f7fbff}
 </style>
 </head>
 <body>
 <a class="skip" href="#workspace">跳至升級內容</a>
-<header class="top"><div class="wrap"><a href="https://www.navlynx.com.tw/index.asp" class="brand" target="_blank" rel="noopener">NAVLYNX<span>APPLEPIE TAIWAN</span></a><nav aria-label="主要導覽"><span class="preview">PREVIEW 06</span><a href="#self">升級方式</a><a href="https://lin.ee/uqScgidQ" target="_blank" rel="noopener">聯絡客服 ↗</a></nav></div></header>
+<header class="top"><div class="wrap"><a href="https://www.navlynx.com.tw/index.asp" class="brand" target="_blank" rel="noopener">NAVLYNX</a><nav aria-label="主要導覽"><a href="#self">升級方式</a><a href="https://lin.ee/w0Iq3c0" target="_blank" rel="noopener">聯絡客服 ↗</a></nav></div></header>
 <section class="hero" aria-labelledby="page-title"><span class="hero-number" aria-hidden="true">16</span><div class="wrap"><div class="eyebrow"><i class="dot" aria-hidden="true"></i> NAVLYNX APPLEPIE · UPGRADE CENTER</div><h1><span>Android 16</span> 升級專區</h1><p>自行操作，或交給我們。選擇您的方式開始。</p></div></section>
 <main class="wrap" id="workspace">
 <p class="mode-label">您想如何升級？</p>
@@ -53,21 +54,21 @@ main{padding:27px 0 40px}.mode-label{font-size:12px;font-weight:700;color:#61758
 <article id="model-guide" hidden aria-labelledby="model-title">
 <div class="guide-head" id="guide-focus" tabindex="-1"><div><span class="eyelabel">自行升級 · 下載與教學</span><h2 id="model-title"></h2><p>首次升級 Android 16</p></div><a href="#self" class="text-button">← 更換機型</a></div>
 <div class="guide-note"><span>準備電腦＋Micro SD</span><span>建議 32GB 至 64GB</span><span>FAT32／exFAT</span></div>
-<p class="phase-line"><strong>先安裝過渡版本，再更新最新韌體。兩個階段都必須完成。</strong></p>
-<div class="downloads">
-<section class="download"><div class="download-label"><b>1</b> 第一階段</div><h3>安裝指定過渡版本</h3><p><strong>過渡版本日期：<time id="model-date"></time></strong></p><p>請下載所選機型的專用檔案。</p><div class="file-line"><code class="file" id="model-file"></code>　請勿解壓縮</div><a id="transition-download" class="btn" target="_blank" rel="noopener">下載指定過渡版本 ↗</a></section>
-<section class="download"><div class="download-label"><b>2</b> 第二階段</div><h3>更新 Android 16 最新韌體</h3><p>完成過渡版本後，再下載對應機型的最新韌體並更新。請勿停留在過渡版本。</p><a class="btn light" href="https://www.navlynx.com.tw/download.asp" target="_blank" rel="noopener">前往最新韌體下載 ↗</a></section>
+<p class="phase-line"><strong id="upgrade-message">先安裝過渡版本，再更新最新韌體。兩個階段都必須完成。</strong></p>
+<div class="downloads" id="download-cards">
+<section class="download"><div class="download-label" id="upgrade-label"><b>1</b> 第一階段</div><h3 id="upgrade-heading">安裝指定過渡版本</h3><p><strong><span id="version-label">過渡版本日期：</span><time id="model-date"></time></strong></p><p>請下載所選機型的專用檔案。</p><div class="file-line"><code class="file" id="model-file"></code>　請勿解壓縮</div><a id="transition-download" class="btn" target="_blank" rel="noopener">下載指定過渡版本 ↗</a></section>
+<section class="download" id="second-stage"><div class="download-label"><b>2</b> 第二階段</div><h3>更新 Android 16 最新韌體</h3><p>完成過渡版本後，再下載對應機型的最新韌體並更新。請勿停留在過渡版本。</p><a class="btn light" href="https://www.navlynx.com.tw/download.asp" target="_blank" rel="noopener">前往最新韌體下載 ↗</a></section>
 </div>
 <p class="critical">升級會重置主機，請先備份重要資料。更新期間請維持穩定供電；即使檔名相同，不同機型的檔案也不可互用。</p>
 <details class="accordion" id="full-guide"><summary>查看完整升級步驟</summary><div class="accordion-body"><p style="margin-bottom:17px">記憶卡最高支援 256GB，建議使用 32GB 至 64GB，格式為 FAT32 或 exFAT；如需格式化，請先備份記憶卡內容。</p><ol class="instructions">
-<li><strong>下載並複製過渡版本</strong>使用電腦下載 <time id="guide-date"></time> 過渡版本 <code class="file" id="guide-file"></code>，直接放入 Micro SD 卡根目錄，請勿解壓縮，也不要放在其他資料夾內。</li>
+<li><strong id="step-download-title">下載並複製過渡版本</strong>使用電腦下載 <time id="guide-date"></time> <span id="guide-version-label">過渡版本</span> <code class="file" id="guide-file"></code>，直接放入 Micro SD 卡根目錄，請勿解壓縮，也不要放在其他資料夾內。</li>
 <li><strong>主機開機後插卡</strong>讓 <span id="guide-product"></span> 正常開機並停留在主畫面，再將記憶卡插入主機。</li>
 <li><strong>確認開始更新</strong>畫面顯示是否更新時，確認資訊後點選「更新」。</li>
 <li><strong>紅燈閃爍時取出記憶卡</strong>更新過程中，當電源燈號顯示紅燈閃爍時，將記憶卡取出。請勿拔除電源。</li>
-<li><strong>等待過渡版本完成</strong>更新時間約 10 至 15 分鐘，完成後主機會自動重新啟動。這時只完成第一階段，請繼續下一步。</li>
-<li><strong>再更新 Android 16 最新韌體</strong>至官網最新韌體下載頁，選擇相同機型的 Android 16 最新韌體，依對應教學再次更新。兩階段完成後，才算完成升級。</li>
+<li><strong id="step-complete-title">等待過渡版本完成</strong><span id="step-complete-text">更新時間約 10 至 15 分鐘，完成後主機會自動重新啟動。這時只完成第一階段，請繼續下一步。</span></li>
+<li id="second-update-step"><strong>再更新 Android 16 最新韌體</strong>至官網最新韌體下載頁，選擇相同機型的 Android 16 最新韌體，依對應教學再次更新。兩階段完成後，才算完成升級。</li>
 </ol></div></details>
-<details class="accordion" id="connection-help"><summary id="connection-help-title">更新後無畫面？</summary><div class="accordion-body"><p><strong>過渡版本無畫面：</strong>部分車款可能暫時無法顯示過渡版本。請參考「更新指示燈號盲刷」教學，依主機燈號完成後續最新韌體更新；不確定燈號或操作時，先聯繫客服確認，請勿任意斷電或更換其他機型檔案。</p><p id="bmw-help" hidden><strong>BMW ID6／OS9：</strong>完成 Android 16 更新後若不易連接，請切換為「無線 CarPlay（BMW 相容模式）」，代碼 <code class="file">#135177</code>，氛圍燈為<span class="red" aria-hidden="true"></span>紅色。</p><div class="inline-links"><a id="bmw-help-link" hidden href="https://www.navlynx.com.tw/teaching_in_a11-P1.asp" target="_blank" rel="noopener">查看連接模式切換教學 ↗</a><a href="https://lin.ee/uqScgidQ" target="_blank" rel="noopener">聯繫 LINE 客服 ↗</a></div></div></details>
+<details class="accordion" id="connection-help"><summary id="connection-help-title">更新後無畫面？</summary><div class="accordion-body"><p id="no-picture-note"><strong>過渡版本無畫面：</strong>部分車款可能暫時無法顯示過渡版本。請參考「更新指示燈號盲刷」教學，依主機燈號完成後續最新韌體更新；不確定燈號或操作時，先聯繫客服確認，請勿任意斷電或更換其他機型檔案。</p><p id="bmw-help" hidden><strong>BMW ID6／OS9：</strong>完成 Android 16 更新後若不易連接，請切換為「無線 CarPlay（BMW 相容模式）」，代碼 <code class="file">#135177</code>，氛圍燈為<span class="red" aria-hidden="true"></span>紅色。</p><div class="inline-links"><a id="bmw-help-link" hidden href="https://www.navlynx.com.tw/teaching_in_a11-P1.asp" target="_blank" rel="noopener">查看連接模式切換教學 ↗</a><a href="https://lin.ee/w0Iq3c0" target="_blank" rel="noopener">聯繫 LINE 客服 ↗</a></div></div></details>
 </article>
 </section>
 <section id="panel-mail" role="tabpanel" aria-labelledby="tab-mail" hidden>
@@ -78,13 +79,13 @@ main{padding:27px 0 40px}.mode-label{font-size:12px;font-weight:700;color:#61758
 <article class="fee"><small>已過保 · 方案二</small><h3>付費代升級</h3><div class="price"><small>NT$</small> 500</div><p>完成審核與付款後，安排順豐到府收件。</p><span class="freight">已含來回運費與順豐收送</span></article>
 </div>
 <div class="mail-note"><strong>有 NAVLYNX 飛鼠，請與 ApplePie 主機一併寄回。</strong>總公司會一併處理飛鼠韌體與配對。寄出前請備份資料，移除 SIM 卡、記憶卡及線材。</div>
-<div class="mail-actions"><a class="btn" href="https://lin.ee/uqScgidQ" target="_blank" rel="noopener">加入官方 LINE 申請升級 ↗</a><small>加入後請傳送：「我要升級 Android 16」。</small></div>
+<div class="mail-actions"><a class="btn" href="https://lin.ee/w0Iq3c0" target="_blank" rel="noopener">加入官方 LINE 申請升級 ↗</a><small>加入後請傳送：「我要升級 Android 16」。</small></div>
 <p class="mail-support">適用：ONE、Touch、mini Ultra II、Melling、Melling-G。</p>
 <div class="flow" aria-label="寄回升級流程"><div><b>01 加入官方 LINE</b><span>告知「我要升級 Android 16」</span></div><div><b>02 客服提供表單</b><span>依客服傳送的連結填表並上傳資料</span></div><div><b>03 審核後安排寄送</b><span>表單送出後約 3 個工作天核對，確認後依通知寄送</span></div><div><b>04 完成升級寄回</b><span>收件後約 3 至 7 個工作天</span></div></div>
 <details class="accordion"><summary>過保免費任務與運費怎麼計算？</summary><div class="accordion-body"><p><strong>方案一：</strong>在「NAVLYNX TAIWAN FB 粉絲專頁」或「NAVLYNX ApplePie CarPlay AI Box 車載多媒體交流 FB 社團」，選擇近一週內貼文，按讚、留言並公開分享至個人社交媒體或群組，將完成截圖傳至 LINE 審核。留言請以 20 至 30 字以上分享實際心得或建議，請勿只留貼圖、符號或複製他人留言。</p><p><strong>運費：</strong>保固內與過保方案一皆免升級處理費，來回運費自付，回程採順豐到付。過保方案二 NT$500 已包含來回運費，完成審核及付款後，由總公司安排順豐到府收件與寄回；匯款資料由客服提供。</p><div class="inline-links"><a href="https://www.facebook.com/Navlynx/" target="_blank" rel="noopener">前往 Facebook 粉絲專頁 ↗</a></div></div></details>
 <details class="accordion"><summary>需要準備哪些資料？如何包裝寄送？</summary><div class="accordion-body"><p>請準備機型、序號、主機標籤照片與購買憑證或保固卡。官方通路購買而憑證遺失，可提供姓名、電話或訂單編號協助查詢；無法確認購買日期者，以已過保方式處理。</p><p>等客服提供收件資料後，再用防撞材料與紙箱包裝。包裹附紙條註明姓名、電話及「升級 Android 16」，如客服有提供申請編號也請一併註明。自行寄件者，請將物流單號傳至 LINE 留存。</p><p>升級會清除 APP、登入帳號及個人設定，服務不含資料備份或硬體維修。若主機已有異常，請先告知客服。處理時間不含物流、補件及異常檢測。</p></div></details>
 </section>
-<div class="support"><div><strong>不確定機型，或操作中遇到問題？</strong><p>提供主機型號與目前畫面，讓客服協助確認。</p></div><a href="https://lin.ee/uqScgidQ" target="_blank" rel="noopener">聯絡 LINE 客服 @navlynx ↗</a></div>
+<div class="support"><div><strong>不確定機型，或操作中遇到問題？</strong><p>提供主機型號與目前畫面，讓客服協助確認。</p></div><a href="https://lin.ee/w0Iq3c0" target="_blank" rel="noopener">聯絡 LINE 客服 @navlynx ↗</a></div>
 <p class="live" id="status" role="status" aria-live="polite"></p>
 </main>
 <footer><div class="wrap"><span>© NAVLYNX TAIWAN · Android 16 升級專區</span><span>0809-093-032（限市話）／04-3707-7323</span></div></footer>
@@ -94,11 +95,34 @@ main{padding:27px 0 40px}.mode-label{font-size:12px;font-weight:700;color:#61758
 // Same model files and destinations as v5. Never infer interchangeability from equal filenames.
 const models={
 one:{name:'ApplePie ONE',file:'APM1288BM.zip',transitionDate:'2026-04-28',drive:'https://drive.google.com/drive/folders/11abZ4MpHONdx1gK_z1eEfdAWEHTy2_mi?usp=drive_link'},
-touch:{name:'ApplePie Touch',file:'APM1288TOUCH.zip',transitionDate:'2026-05-27',drive:'https://drive.google.com/drive/folders/1T5LIQH-WMlWCCyztKkGnt5S6KiH51MHk?usp=drive_link'},
+touch:{name:'ApplePie Touch',file:'APM1288TOUCH.zip',upgradeMode:'direct',firmwareDate:'2026-05-27',drive:'https://drive.google.com/drive/folders/1T5LIQH-WMlWCCyztKkGnt5S6KiH51MHk?usp=drive_link'},
 ultra:{name:'ApplePie mini Ultra II',file:'APM1688S.zip',transitionDate:'2026-05-07',drive:'https://drive.google.com/drive/folders/10ftWBlYjTytoOWk_ZxGz11CMXJql8pRk?usp=drive_link'},
 melling:{name:'ApplePie Melling／Melling-G',file:'APM1288BM.zip',transitionDate:'2026-04-28',drive:'https://drive.google.com/drive/folders/1kBohVCC0wrtqiwx3Nq8we56KSWQpG9KI?usp=drive_link'}
 };
 const $=id=>document.getElementById(id), tabs=[...document.querySelectorAll('[data-mode]')];
+// Preserve the two-stage help for the other models when switching back from Touch.
+const transitionNoPictureHTML=$('no-picture-note').innerHTML;
+function applyUpgradeMode(model){
+ const direct=model.upgradeMode==='direct';
+ $('download-cards').classList.toggle('single-stage',direct);
+ $('second-stage').hidden=direct;$('second-update-step').hidden=direct;
+ $('upgrade-message').textContent=direct
+  ?'直接安裝 '+model.firmwareDate+' 韌體即可完成 Android 16 升級，無須過渡版本或第二次更新。'
+  :'先安裝過渡版本，再更新最新韌體。兩個階段都必須完成。';
+ $('upgrade-label').innerHTML=direct?'<b>✓</b> 一次更新完成':'<b>1</b> 第一階段';
+ $('upgrade-heading').textContent=direct?'直接升級 Android 16':'安裝指定過渡版本';
+ $('version-label').textContent=direct?'韌體版本日期：':'過渡版本日期：';
+ $('transition-download').textContent=direct?'下載 Touch Android 16 韌體 ↗':'下載指定過渡版本 ↗';
+ $('step-download-title').textContent=direct?'下載並複製韌體':'下載並複製過渡版本';
+ $('guide-version-label').textContent=direct?'Android 16 韌體':'過渡版本';
+ $('step-complete-title').textContent=direct?'等待升級完成':'等待過渡版本完成';
+ $('step-complete-text').textContent=direct
+  ?'更新時間約 10 至 15 分鐘。完成後主機會自動重新啟動，進入 Touch 主畫面即完成 Android 16 升級，不需再次更新。'
+  :'更新時間約 10 至 15 分鐘，完成後主機會自動重新啟動。這時只完成第一階段，請繼續下一步。';
+ if(direct){
+  $('no-picture-note').textContent='若更新後無法顯示畫面，請拍攝目前畫面及主機燈號，聯繫 LINE 客服協助確認。更新進行中請勿任意斷電，也不要反覆刷寫或使用其他機型的檔案。';
+ }else{$('no-picture-note').innerHTML=transitionNoPictureHTML}
+}
 let lastModel='', initial=true;
 function render(){
  const hash=location.hash.slice(1), key=hash.startsWith('self-')?hash.slice(5):'', model=models[key], mode=hash==='mail'?'mail':'self';
@@ -108,9 +132,11 @@ function render(){
  $('connection-help-title').textContent=showBmwHelp?'更新後無畫面，或 BMW 連線不順？':'更新後無畫面？';
  $('bmw-help').hidden=!showBmwHelp;$('bmw-help-link').hidden=!showBmwHelp;
  if(model){
+  applyUpgradeMode(model);
+  const versionDate=model.firmwareDate||model.transitionDate;
   $('model-title').textContent=model.name;$('model-file').textContent=model.file;$('guide-file').textContent=model.file;$('guide-product').textContent=model.name;
-  ['model-date','guide-date'].forEach(id=>{$(id).textContent=model.transitionDate;$(id).dateTime=model.transitionDate});
-  $('transition-download').href=model.drive;$('transition-download').setAttribute('aria-label','下載 '+model.name+' '+model.transitionDate+' 的指定過渡版本');
+  ['model-date','guide-date'].forEach(id=>{$(id).textContent=versionDate;$(id).dateTime=versionDate});
+  $('transition-download').href=model.drive;$('transition-download').setAttribute('aria-label','下載 '+model.name+' '+versionDate+(model.upgradeMode==='direct'?' Android 16 韌體':' 的指定過渡版本'));
   if(lastModel!==key){$('full-guide').open=false;document.querySelectorAll('#model-guide details').forEach(d=>d.open=false)}
   $('status').textContent='目前顯示 '+model.name+' 的升級檔案與教學。';
  }else{$('transition-download').removeAttribute('href');$('status').textContent=mode==='mail'?'目前顯示寄回升級方案。':'請選擇您的 ApplePie 機型。'}
