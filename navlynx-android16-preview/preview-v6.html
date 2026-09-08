@@ -55,12 +55,12 @@ main{padding:27px 0 40px}.mode-label{font-size:12px;font-weight:700;color:#61758
 <div class="guide-note"><span>準備電腦＋Micro SD</span><span>建議 32GB 至 64GB</span><span>FAT32／exFAT</span></div>
 <p class="phase-line"><strong>先安裝過渡版本，再更新最新韌體。兩個階段都必須完成。</strong></p>
 <div class="downloads">
-<section class="download"><div class="download-label"><b>1</b> 第一階段</div><h3>安裝指定過渡版本</h3><p>請下載所選機型的專用檔案。</p><div class="file-line"><code class="file" id="model-file"></code>　請勿解壓縮</div><a id="transition-download" class="btn" target="_blank" rel="noopener">下載指定過渡版本 ↗</a></section>
+<section class="download"><div class="download-label"><b>1</b> 第一階段</div><h3>安裝指定過渡版本</h3><p><strong>過渡版本日期：<time id="model-date"></time></strong></p><p>請下載所選機型的專用檔案。</p><div class="file-line"><code class="file" id="model-file"></code>　請勿解壓縮</div><a id="transition-download" class="btn" target="_blank" rel="noopener">下載指定過渡版本 ↗</a></section>
 <section class="download"><div class="download-label"><b>2</b> 第二階段</div><h3>更新 Android 16 最新韌體</h3><p>完成過渡版本後，再下載對應機型的最新韌體並更新。請勿停留在過渡版本。</p><a class="btn light" href="https://www.navlynx.com.tw/download.asp" target="_blank" rel="noopener">前往最新韌體下載 ↗</a></section>
 </div>
 <p class="critical">升級會重置主機，請先備份重要資料。更新期間請維持穩定供電；即使檔名相同，不同機型的檔案也不可互用。</p>
 <details class="accordion" id="full-guide"><summary>查看完整升級步驟</summary><div class="accordion-body"><p style="margin-bottom:17px">記憶卡最高支援 256GB，建議使用 32GB 至 64GB，格式為 FAT32 或 exFAT；如需格式化，請先備份記憶卡內容。</p><ol class="instructions">
-<li><strong>下載並複製過渡版本</strong>使用電腦下載 <code class="file" id="guide-file"></code>，直接放入 Micro SD 卡根目錄，請勿解壓縮，也不要放在其他資料夾內。</li>
+<li><strong>下載並複製過渡版本</strong>使用電腦下載 <time id="guide-date"></time> 過渡版本 <code class="file" id="guide-file"></code>，直接放入 Micro SD 卡根目錄，請勿解壓縮，也不要放在其他資料夾內。</li>
 <li><strong>主機開機後插卡</strong>讓 <span id="guide-product"></span> 正常開機並停留在主畫面，再將記憶卡插入主機。</li>
 <li><strong>確認開始更新</strong>畫面顯示是否更新時，確認資訊後點選「更新」。</li>
 <li><strong>紅燈閃爍時取出記憶卡</strong>更新過程中，當電源燈號顯示紅燈閃爍時，將記憶卡取出。請勿拔除電源。</li>
@@ -93,10 +93,10 @@ main{padding:27px 0 40px}.mode-label{font-size:12px;font-weight:700;color:#61758
 'use strict';
 // Same model files and destinations as v5. Never infer interchangeability from equal filenames.
 const models={
-one:{name:'ApplePie ONE',file:'APM1288BM.zip',drive:'https://drive.google.com/drive/folders/11abZ4MpHONdx1gK_z1eEfdAWEHTy2_mi?usp=drive_link'},
-touch:{name:'ApplePie Touch',file:'APM1288TOUCH.zip',drive:'https://drive.google.com/drive/folders/1T5LIQH-WMlWCCyztKkGnt5S6KiH51MHk?usp=drive_link'},
-ultra:{name:'ApplePie mini Ultra II',file:'APM1688S.zip',drive:'https://drive.google.com/drive/folders/10ftWBlYjTytoOWk_ZxGz11CMXJql8pRk?usp=drive_link'},
-melling:{name:'ApplePie Melling／Melling-G',file:'APM1288BM.zip',drive:'https://drive.google.com/drive/folders/1kBohVCC0wrtqiwx3Nq8we56KSWQpG9KI?usp=drive_link'}
+one:{name:'ApplePie ONE',file:'APM1288BM.zip',transitionDate:'2026-04-28',drive:'https://drive.google.com/drive/folders/11abZ4MpHONdx1gK_z1eEfdAWEHTy2_mi?usp=drive_link'},
+touch:{name:'ApplePie Touch',file:'APM1288TOUCH.zip',transitionDate:'2026-05-27',drive:'https://drive.google.com/drive/folders/1T5LIQH-WMlWCCyztKkGnt5S6KiH51MHk?usp=drive_link'},
+ultra:{name:'ApplePie mini Ultra II',file:'APM1688S.zip',transitionDate:'2026-05-07',drive:'https://drive.google.com/drive/folders/10ftWBlYjTytoOWk_ZxGz11CMXJql8pRk?usp=drive_link'},
+melling:{name:'ApplePie Melling／Melling-G',file:'APM1288BM.zip',transitionDate:'2026-04-28',drive:'https://drive.google.com/drive/folders/1kBohVCC0wrtqiwx3Nq8we56KSWQpG9KI?usp=drive_link'}
 };
 const $=id=>document.getElementById(id), tabs=[...document.querySelectorAll('[data-mode]')];
 let lastModel='', initial=true;
@@ -109,7 +109,8 @@ function render(){
  $('bmw-help').hidden=!showBmwHelp;$('bmw-help-link').hidden=!showBmwHelp;
  if(model){
   $('model-title').textContent=model.name;$('model-file').textContent=model.file;$('guide-file').textContent=model.file;$('guide-product').textContent=model.name;
-  $('transition-download').href=model.drive;$('transition-download').setAttribute('aria-label','下載 '+model.name+' 的指定過渡版本');
+  ['model-date','guide-date'].forEach(id=>{$(id).textContent=model.transitionDate;$(id).dateTime=model.transitionDate});
+  $('transition-download').href=model.drive;$('transition-download').setAttribute('aria-label','下載 '+model.name+' '+model.transitionDate+' 的指定過渡版本');
   if(lastModel!==key){$('full-guide').open=false;document.querySelectorAll('#model-guide details').forEach(d=>d.open=false)}
   $('status').textContent='目前顯示 '+model.name+' 的升級檔案與教學。';
  }else{$('transition-download').removeAttribute('href');$('status').textContent=mode==='mail'?'目前顯示寄回升級方案。':'請選擇您的 ApplePie 機型。'}
