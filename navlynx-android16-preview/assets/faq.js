@@ -50,7 +50,7 @@
       return decorate(detail, context);
     }
     add('faq-data', '升級 Android 16 會清除資料嗎？',
-      '<p>會。首次升級 Android 16 會將主機重置，原有 APP、登入帳號、下載檔案及個人設定將被清除。<strong>不論自行升級或寄回處理，都請先備份重要資料。</strong></p>', 'all');
+      '<p>會。首次升級 Android 16 會將主機重置，原有 APP、登入帳號、下載檔案及個人設定將被清除。</p>', 'all');
     add('faq-warranty', '已過保也可以自行升級嗎？',
       '<p>可以。符合本次升級機型的產品，不分保固內或保固外，皆可依官網教學自行下載並升級。<strong>自行升級不需完成社群任務，也不用寄送主機。</strong></p>', 'self');
     const phases = add('faq-phases', '需要先安裝過渡版本嗎？', '', 'self');
