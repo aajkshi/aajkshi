@@ -59,7 +59,7 @@
     const connection = byId('connection-help');
     if (connection) decorate(connection, 'self', true);
     add('faq-timeout', '更新超過 30 分鐘仍未完成怎麼辦？',
-      '<p>每次韌體更新約需 10 至 15 分鐘。若超過 30 分鐘仍未完成，<strong>請先保持穩定供電，不要直接拔電源、反覆插卡或重新刷寫。</strong></p><p>請記錄機型、正在更新的版本、已等待時間，並拍下畫面及主機燈號，交由客服確認下一步；不要只憑等待時間判定可以斷電。</p><p>' + customerLink + '</p>', 'self');
+      '<p><strong>請先保持 ApplePie 主機供電，並透過官方 LINE 聯繫客服。</strong></p><p>請提供主機型號、正在更新的韌體版本，並拍攝目前車機畫面與主機燈號的照片或影片，方便客服確認狀況，再引導您進行後續操作。</p><p>' + customerLink + '</p>', 'self');
     add('faq-mail-start', '寄回升級，要先填表還是先加 LINE？',
       '<p><strong>先加入官方 LINE，告知「我要升級 Android 16」。</strong>由客服回覆並提供線上申請表，完成填表與審核後，再依通知寄送主機。尚未取得客服確認前，請勿自行寄出。</p><p>' + customerLink + '</p>', 'mail');
     add('faq-mail-accessories', '寄回升級需要附線材或飛鼠嗎？',
