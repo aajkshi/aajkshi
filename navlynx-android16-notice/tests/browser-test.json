@@ -1,0 +1,24 @@
+[
+  {
+    "width": 1366,
+    "testMode": "offline DOM with in-memory Storage mock; no hosted-origin verification",
+    "simulatedPublish": true,
+    "passwordFieldsAbsent": true,
+    "backendRequests": 0,
+    "noHorizontalOverflow": true,
+    "TouchDirectAndBmwScope": true,
+    "downloadGuard": true,
+    "javascriptErrors": []
+  },
+  {
+    "width": 390,
+    "testMode": "offline DOM with in-memory Storage mock; no hosted-origin verification",
+    "simulatedPublish": true,
+    "passwordFieldsAbsent": true,
+    "backendRequests": 0,
+    "noHorizontalOverflow": true,
+    "TouchDirectAndBmwScope": true,
+    "downloadGuard": true,
+    "javascriptErrors": []
+  }
+]

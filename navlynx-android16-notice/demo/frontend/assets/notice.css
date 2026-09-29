@@ -1,0 +1,18 @@
+/* Compatibility notice. Does not alter the existing v6 upgrade UI. */
+.compat-notice{margin-top:24px;margin-bottom:0;display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:18px;padding:24px;border:1px solid #e9d4a3;border-left:4px solid #c28a2c;border-radius:16px;background:#fff9ed;color:#624619;align-items:start;box-sizing:border-box}
+.compat-notice[data-severity=info]{background:#edf6ff;border-color:#bed8f1;border-left-color:#3977ae;color:#264c70}
+.compat-icon{width:34px;height:34px;border-radius:10px;background:#f3e2b9;display:grid;place-items:center;font-weight:800;font-size:19px}
+.compat-notice[data-severity=info] .compat-icon{background:#d5e9ff}
+.compat-kicker{font-size:11px;letter-spacing:.1em;font-weight:700;margin:0 0 5px!important;color:#8b652b}
+.compat-copy h2{font-size:20px;line-height:1.45;margin:0 0 9px;letter-spacing:0;color:inherit}
+.compat-copy p{font-size:14px;line-height:1.85;white-space:pre-line;overflow-wrap:anywhere;margin:0}
+.compat-brands{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:12px 0;list-style:none}
+.compat-brands li{border:1px solid #e6cca0;border-radius:7px;padding:3px 12px;background:#fff;font-size:14px;font-weight:800;color:#604624}
+.compat-contact{display:inline-flex;align-items:center;min-height:42px;font-size:13px;font-weight:700;padding:8px 12px;border:1px solid #d5bd93;border-radius:9px;background:#fff;color:#6a4a1c;text-decoration:none;white-space:nowrap}
+.compat-date{font-size:11px!important;opacity:.7;margin-top:8px!important}
+.compat-dialog{width:min(580px,calc(100vw - 28px));max-height:90vh;max-height:90dvh;padding:0;border:1px solid #d8e1ec;border-radius:21px;background:#fff;color:#132a42;box-shadow:0 28px 100px #10243d50}
+.compat-dialog::backdrop{background:#081322a6;backdrop-filter:blur(3px)}
+.compat-dialog[open]{display:block}.compat-dialog header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 24px;border-bottom:1px solid #e3e9f0;background:#fff8e9}.compat-dialog header h2{font-size:21px;margin:0;line-height:1.45}.compat-dialog header button{border:0;background:transparent;color:#56677c;font-size:28px;min-width:38px;min-height:38px;cursor:pointer}.compat-dialog-body{padding:24px}
+.compat-dialog-body p{font-size:14px;line-height:1.8;margin:0;white-space:pre-line}.compat-dialog .compat-brands{margin:14px 0}.compat-check{display:flex;align-items:flex-start;gap:10px;margin:22px 0 12px;padding:14px;background:#f3f6fa;border-radius:10px;font-size:14px;line-height:1.75;cursor:pointer}.compat-check input{flex:0 0 auto;width:18px;height:18px;margin:4px 0;accent-color:#086ce5}.compat-dialog-actions{display:grid;gap:10px}.compat-dialog-actions .btn{min-height:46px;font-size:14px}.compat-dialog-actions button:disabled{opacity:.45;cursor:not-allowed}.compat-dialog-error{color:#a23723;font-size:13px!important;margin:12px 0!important}.compat-dialog-body .compat-footnote{font-size:12px;color:#697c8d;margin-top:12px}.compat-current{font-size:11px;display:block;color:#87652b;margin-bottom:7px}
+@media(max-width:900px){.compat-notice{grid-template-columns:34px minmax(0,1fr)}.compat-contact{grid-column:2;justify-self:start}.compat-copy h2{font-size:18px}}
+@media(max-width:650px){.compat-notice{grid-template-columns:1fr;gap:9px;padding:18px;margin-top:16px}.compat-icon{display:none}.compat-contact{grid-column:1}.compat-copy h2{font-size:17px}.compat-copy p{font-size:13px}.compat-brands li{font-size:13px}.compat-dialog header,.compat-dialog-body{padding:18px}.compat-dialog header h2{font-size:19px}}

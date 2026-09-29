@@ -1,0 +1,16 @@
+{
+  servers {
+    timeouts {
+      read_header 10s
+      read_body 20s
+      idle 60s
+    }
+  }
+}
+{$SITE_ADDRESS} {
+  request_body {
+    max_size 16KB
+  }
+  encode zstd gzip
+  reverse_proxy app:8000
+}

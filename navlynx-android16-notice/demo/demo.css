@@ -1,0 +1,2 @@
+.demo-banner{position:relative;z-index:25;background:#eef5ff;border-bottom:1px solid #cbdcf1;padding:9px 16px;text-align:center;font:600 13px/1.6 system-ui,"Microsoft JhengHei",sans-serif;color:#164579}.demo-banner a{color:#075dc4;text-decoration:underline;text-underline-offset:3px}.dashboard{min-height:calc(100vh - 41px)}@media(max-width:650px){.demo-banner{font-size:12px;text-align:left}}
+@media(max-width:800px){.dashboard>.sidebar{position:relative}}

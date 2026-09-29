@@ -1,0 +1,25 @@
+/* FAQ presentation only: keep the existing upgrade page and product assets. */
+.nlx-faq{display:grid;grid-template-columns:minmax(200px,.68fr) minmax(0,1.6fr);gap:58px;margin-top:48px;padding-top:38px;border-top:1px solid var(--line);align-items:start}
+.nlx-faq-heading{padding-top:8px}
+.nlx-faq-heading h2{font-size:clamp(30px,3.4vw,43px);font-weight:800;letter-spacing:-.04em;line-height:1.25}
+.nlx-faq-heading h2:focus{outline:none}
+.nlx-faq-heading p{margin-top:13px;font-size:13px;color:var(--muted);line-height:1.8}
+.nlx-faq-context{display:inline-block;margin-top:17px;font-size:12px;font-weight:700;color:#406789;padding:5px 10px;background:#e8f0f8;border-radius:7px}
+.nlx-faq-list{min-width:0}
+.nlx-faq-item,.nlx-faq-item.accordion{margin:0;background:transparent;border:0;border-bottom:1px solid #cbd6e2;border-radius:0;overflow:visible}
+.nlx-faq-item>summary,.nlx-faq-item.accordion>summary{display:flex;align-items:center;justify-content:space-between;gap:22px;min-height:86px;padding:19px 4px 19px 0;cursor:pointer;list-style:none;color:var(--ink);font-size:18px;font-weight:750;line-height:1.5;border:0}
+.nlx-faq-item>summary::-webkit-details-marker{display:none}
+.nlx-faq-item>summary:after{content:none!important}
+.nlx-faq-icon{display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px;background:#e3f0ff;border-radius:50%;color:#167aff;font:600 25px/1 Arial,sans-serif}
+.nlx-faq-icon:before{content:'+'}
+.nlx-faq-item[open]>summary .nlx-faq-icon:before{content:'−'}
+.nlx-faq-item[open]>summary,.nlx-faq-item.accordion[open]>summary{border:0;color:#086ce5;padding-bottom:13px}
+.nlx-faq-answer,.nlx-faq-item>.accordion-body{padding:0 64px 22px 0;color:var(--muted);font-size:14px;line-height:1.9;overflow-wrap:anywhere}
+.nlx-faq-answer p+p,.nlx-faq-item>.accordion-body p+p{margin-top:10px}
+.nlx-faq-answer strong{color:var(--ink);font-weight:700}
+.nlx-faq-answer a{font-weight:650}
+.nlx-faq-link{border:0;background:none;padding:0;color:var(--blue);font:inherit;font-weight:650;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.top nav .nlx-faq-jump{border:0;background:transparent;padding:0;color:#c9d6e4;font:inherit;font-size:13px;cursor:pointer;white-space:nowrap}
+.top nav .nlx-faq-jump:hover{color:#fff}
+@media(max-width:900px){.nlx-faq{gap:30px;grid-template-columns:minmax(170px,.6fr) minmax(0,1.5fr)}.nlx-faq-item>summary,.nlx-faq-item.accordion>summary{font-size:16px;min-height:78px}.nlx-faq-answer,.nlx-faq-item>.accordion-body{padding-right:30px}}
+@media(max-width:650px){.nlx-faq{grid-template-columns:1fr;gap:15px;margin-top:30px;padding-top:26px}.nlx-faq-heading{padding:0}.nlx-faq-heading h2{font-size:29px}.nlx-faq-heading p{margin-top:7px}.nlx-faq-context{margin-top:10px;font-size:11px}.nlx-faq-item>summary,.nlx-faq-item.accordion>summary{min-height:74px;font-size:15px;gap:12px;padding:16px 0}.nlx-faq-icon{flex-basis:32px;width:32px;height:32px;font-size:23px}.nlx-faq-answer,.nlx-faq-item>.accordion-body{font-size:13px;padding:0 4px 19px 0}.top nav .nlx-faq-jump{font-size:12px}.top nav{gap:12px}}

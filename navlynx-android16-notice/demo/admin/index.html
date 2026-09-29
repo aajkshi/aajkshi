@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="noindex,nofollow" name="robots"/><title>NAVLYNX｜公告後台互動展示</title><link href="assets/admin.css" rel="stylesheet"/><link rel="stylesheet" href="../demo.css"><script src="../shared.js" defer></script></head>
+<body><div class="demo-banner">同事展示版 · 免登入 · 所有修改僅限此瀏覽器，不會發布至正式官網。請勿輸入個人或機密資料。</div>
+
+<div class="dashboard" id="dashboard"><aside class="sidebar"><div class="admin-brand">NAVLYNX<span>Android 16 公告管理</span></div><nav aria-label="後台導覽"><button class="active" data-view="editor">公告編輯</button><button data-view="history">版本與紀錄</button><button data-view="security">安全設定</button></nav><div class="sidebar-bottom"><span id="account-name">同事展示模式（免登入）</span><button class="logout" id="logout">重設本機展示</button></div></aside>
+<div class="admin-main"><header class="admin-top"><span>升級專區 / 公告管理</span><a class="outline" href="../frontend/index.html" rel="noopener" target="_blank">查看前台 ↗</a></header><div class="toast" hidden="" id="status" role="status"></div>
+<section class="view" id="view-editor"><div class="page-heading"><div><p class="eyebrow">ANNOUNCEMENT</p><h1>讓車友先看到重要提醒</h1><p class="sub">先儲存草稿，確認預覽後再發布。修改草稿不影響前台。</p></div><span class="live-badge" id="live-status">讀取中</span></div>
+<div class="editor-grid"><form class="edit-card" id="editor-form"><div class="card-heading"><h2>公告內容</h2><span class="muted" id="draft-version"></span></div><div class="toggle-row"><div><strong>在前台顯示公告</strong><p>關閉後不顯示公告，也不啟用下載確認。</p></div><label class="switch"><input id="enabled" type="checkbox"/><span class="switch-label">顯示</span></label></div>
+<label>公告類型<select id="severity"><option value="warning">相容性提醒：下載前需確認車款</option><option value="info">一般公告：不限制下載</option></select></label>
+<label>公告標題<input id="notice-title" maxlength="90" required=""/></label>
+<label>公告說明<textarea id="intro" maxlength="800" required="" rows="4"></textarea></label>
+<label>暫緩升級的品牌<span class="field-help">每行一個品牌。支援恢復後，可移除該品牌再發布。</span><textarea id="brands" placeholder="MG
+Peugeot
+Citroen" rows="4"></textarea></label>
+<label>結尾說明<textarea id="closing" maxlength="600" required="" rows="3"></textarea></label><p class="field-help">只接受純文字，不支援 HTML、腳本或自訂連結，客服連結固定為官方 LINE。</p>
+<div class="editor-actions"><button class="outline" id="save-draft" type="submit">儲存草稿</button><button class="primary" id="publish" type="button">確認並發布</button></div></form>
+<aside class="preview-column"><div class="preview-heading"><h2>前台顯示預覽</h2><span>此處為尚未發布的編輯內容</span></div><section class="notice-preview" id="notice-preview"><p class="notice-kicker">升級前請先確認</p><h3 id="pv-title"></h3><p id="pv-intro"></p><ul id="pv-brands"></ul><p id="pv-closing"></p><span class="preview-line">聯繫 LINE 客服 ↗</span></section><div class="off-card" hidden="" id="preview-off">目前草稿設定為「隱藏公告」。發布後，前台不顯示此提醒。</div>
+<div class="placement-card"><h3>公告會顯示在哪裡？</h3><p><b>01</b> 主標題下方，升級方式選項之前。</p><p><b>02</b> 點擊韌體下載時，再確認一次車款。</p><p class="muted">一般公告不啟用下載確認。LINE 客服連結不受限制。</p></div><div class="publication-card"><h3>目前已發布</h3><p id="published-info"></p><button class="text-btn" id="reload" type="button">重新載入目前版本</button></div></aside></div></section>
+<section class="view" hidden="" id="view-history"><div class="page-heading"><div><p class="eyebrow">HISTORY</p><h1>版本與操作紀錄</h1><p class="sub">還原會建立草稿，不會直接改變前台；確認後仍須發布。</p></div></div><div class="edit-card"><h2>發布歷程</h2><div class="version-list" id="versions"></div></div><div class="edit-card audit-card"><h2>最近操作</h2><div class="table-scroll"><table><thead><tr><th>時間</th><th>帳號</th><th>操作</th><th>版本／備註</th></tr></thead><tbody id="audit"></tbody></table></div></div></section>
+<section class="view" hidden="" id="view-security"><div class="page-heading"><div><p class="eyebrow">DEMO ONLY</p><h1>正式登入與手機驗證</h1><p class="sub">這個展示頁不連接正式後台，不收集任何密碼或驗證碼。</p></div></div><div class="edit-card"><h2>正式版採密碼＋驗證器</h2><p>部署者需先建立管理帳號、設定獨立密碼並綁定驗證器 App。每次登入須輸入六位數動態碼，不是簡訊。</p><p>展示模式的儲存與發布只在目前瀏覽器內模擬；不代表正式主機已上線。</p></div></section>
+</div></div>
+<dialog id="publish-dialog"><form method="dialog"><h2>發布這份公告？</h2><p id="publish-summary"></p><p class="sub">發布後新開頁面會取得新版；已開啟頁面約 60 秒內更新，點下載時也會再次確認公告。</p><div class="dialog-actions"><button class="outline" value="cancel">返回編輯</button><button class="primary" id="confirm-publish" type="button">確定發布</button></div></form></dialog>
+<script src="assets/demo.js" defer></script></body></html>

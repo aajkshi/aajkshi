@@ -1,0 +1,35 @@
+(() => {
+  'use strict';
+  const $=id=>document.getElementById(id);
+  let csrf='',state=null,dirty=false,busy=false;
+  const fieldIds=['enabled','severity','notice-title','intro','brands','closing'];
+  function toast(text,error=false){$('status').textContent=text;$('status').dataset.error=String(error);$('status').hidden=false}
+  async function api(path,data){
+    const r=await fetch('/api/admin/'+path,{method:data===undefined?'GET':'POST',credentials:'same-origin',cache:'no-store',headers:data===undefined?{}:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:data===undefined?undefined:JSON.stringify(data)});
+    const result=await r.json();
+    if(!r.ok){let message=typeof result.detail==='string'?result.detail:'資料格式不正確，請檢查欄位。';if(r.status===401&&path!=='login'&&path!=='password'){showLogin();message='登入已逾時，請重新登入。'}throw Error(message)}
+    return result;
+  }
+  function showLogin(){ $('dashboard').hidden=true;$('login-screen').hidden=false;$('app-loading').hidden=true;$('password').value='';$('otp').value=''; }
+  function collect(){return {enabled:$('enabled').checked,severity:$('severity').value,title:$('notice-title').value.trim(),intro:$('intro').value.trim(),brands:$('brands').value.split('\n').map(s=>s.trim()).filter(Boolean),closing:$('closing').value.trim()}}
+  function preview(){const n=collect();$('notice-preview').hidden=!n.enabled;$('preview-off').hidden=n.enabled;$('notice-preview').dataset.severity=n.severity;$('pv-title').textContent=n.title;$('pv-intro').textContent=n.intro;$('pv-closing').textContent=n.closing;$('pv-brands').replaceChildren(...n.brands.map(s=>{const li=document.createElement('li');li.textContent=s;return li}))}
+  function loadForm(s){state=s;const n=s.draft;$('enabled').checked=n.enabled;$('severity').value=n.severity;$('notice-title').value=n.title;$('intro').value=n.intro;$('brands').value=n.brands.join('\n');$('closing').value=n.closing;$('draft-version').textContent='草稿版本 '+s.draftRevision;$('live-status').textContent=s.published.enabled?'前台公告顯示中':'前台公告已隱藏';$('published-info').textContent='版本 '+s.revision+' · '+new Date(s.publishedAt).toLocaleString('zh-TW',{timeZone:'Asia/Taipei'})+'\n'+s.published.title;dirty=false;preview()}
+  async function loadState(){loadForm(await api('state'))}
+  async function authenticated(info){csrf=info.csrf;$('account-name').textContent=info.username;$('login-screen').hidden=true;$('dashboard').hidden=false;$('app-loading').hidden=true;await loadState()}
+  async function run(fn){if(busy)return;busy=true;document.querySelectorAll('#save-draft,#publish,#confirm-publish,#login-submit').forEach(x=>x.disabled=true);try{await fn()}catch(e){toast(e.message,true);if(!$('login-screen').hidden)$('login-error').textContent=e.message}finally{busy=false;document.querySelectorAll('#save-draft,#publish,#confirm-publish,#login-submit').forEach(x=>x.disabled=false)}}
+  async function save(){if(!$('editor-form').reportValidity())throw Error('請檢查必填欄位。');const res=await api('draft',{notice:collect(),expectedDraftRevision:state.draftRevision});loadForm(res);return res}
+  fieldIds.forEach(id=>$(id).addEventListener('input',()=>{dirty=true;preview()}));
+  $('login-form').addEventListener('submit',e=>{e.preventDefault();run(async()=>{const session=await api('session');csrf=session.csrf;const info=await api('login',{username:$('username').value.trim(),password:$('password').value,code:$('otp').value});$('password').value='';$('otp').value='';$('login-error').textContent='';await authenticated(info)})});
+  $('editor-form').onsubmit=e=>{e.preventDefault();run(async()=>{await save();toast('草稿已儲存，前台尚未變更。')})};
+  $('publish').onclick=()=>run(async()=>{if(dirty)await save();const n=state.draft;$('publish-summary').textContent=n.enabled?'將發布「'+n.title+'」'+(n.severity==='warning'&&n.brands.length?'，並提醒 '+n.brands.join('、')+' 車款暫緩升級。':'。'):'將隱藏前台公告，並停用下載前車款確認。';$('publish-dialog').showModal()});
+  $('confirm-publish').onclick=()=>run(async()=>{const res=await api('publish',{expectedDraftRevision:state.draftRevision,expectedRevision:state.revision});loadForm(res);$('publish-dialog').close();toast('公告已發布為版本 '+res.revision+'。前台會取得最新公告。')});
+  $('reload').onclick=()=>{if(dirty&&!confirm('尚有未儲存內容，確定重新載入？'))return;run(async()=>{await loadState();toast('已重新載入。')})};
+  $('logout').onclick=()=>run(async()=>{if(dirty&&!confirm('尚有未儲存內容，確定登出？'))return;await api('logout',{});state=null;dirty=false;showLogin();const s=await api('session');csrf=s.csrf});
+  const actionLabels={'account-created':'建立帳號','login-success':'登入成功','login-failed':'登入失敗','logout':'登出','draft-saved':'儲存草稿','published':'發布公告','restored-to-draft':'還原為草稿','password-changed':'變更密碼','sessions-revoked':'撤銷登入','account-disabled':'停用帳號','mfa-reset':'重設驗證器'};
+  async function history(){const h=await api('history');$('versions').replaceChildren(...h.versions.map(v=>{const row=document.createElement('div');row.className='version-row';const text=document.createElement('div'),small=document.createElement('small'),title=document.createElement('strong'),desc=document.createElement('small'),b=document.createElement('button');small.textContent='版本 '+v.revision+' · '+new Date(v.at).toLocaleString('zh-TW',{timeZone:'Asia/Taipei'});title.textContent=v.notice.title;desc.textContent='發布者：'+v.actor+' · '+(v.notice.enabled?'顯示':'隱藏');text.append(small,title,desc);b.className='outline';b.textContent='還原到草稿';b.onclick=()=>run(async()=>{if(!confirm('還原版本 '+v.revision+' 到草稿？不會直接發布。'))return;loadForm(await api('restore',{revision:v.revision,expectedDraftRevision:state.draftRevision}));view('editor');toast('已還原到草稿，確認後請再發布。')});row.append(text,b);return row}));$('audit').replaceChildren(...h.audit.map(v=>{const tr=document.createElement('tr');[new Date(v.at).toLocaleString('zh-TW',{timeZone:'Asia/Taipei'}),v.actor,actionLabels[v.action]||v.action,v.detail].forEach(t=>{const td=document.createElement('td');td.textContent=t;tr.append(td)});return tr}))}
+  function view(name){document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));['editor','history','security'].forEach(n=>$('view-'+n).hidden=n!==name);if(name==='history')run(history)}
+  document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>view(b.dataset.view));
+  $('password-form').onsubmit=e=>{e.preventDefault();run(async()=>{if($('new-password').value!==$('confirm-password').value)throw Error('兩次新密碼不一致。');await api('password',{currentPassword:$('current-password').value,newPassword:$('new-password').value,code:$('password-otp').value});$('password-form').reset();dirty=false;showLogin();$('login-error').textContent='密碼已更新，請使用新的驗證碼重新登入。';const s=await api('session');csrf=s.csrf})};
+  window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
+  api('session').then(async s=>{csrf=s.csrf;if(s.authenticated)await authenticated(s);else showLogin()}).catch(e=>{$('app-loading').textContent='無法連接公告服務，請確認後端已啟動並重新整理。';console.error('Admin initialization failed')});
+})();
