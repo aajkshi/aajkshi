@@ -1,0 +1,14 @@
+{
+  "parts": [
+    "part-00.b64",
+    "part-01.b64",
+    "part-02.b64",
+    "part-03.b64",
+    "part-04.b64",
+    "part-05.b64"
+  ],
+  "xzSha256": "49754e77a35a238549d4a25a7b6a1e3766079e9c9ee8d10eecf7bd71d08e7d59",
+  "jsonSha256": "9501500f9ea57248ca0c6db67337cba54f3045d5423cfa7623d3f0eaade49bcb",
+  "fileCount": 55,
+  "prefix": "navlynx-android16-notice/"
+}
