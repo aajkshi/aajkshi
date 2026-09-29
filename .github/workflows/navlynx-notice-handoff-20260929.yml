@@ -1,0 +1,62 @@
+name: Import NAVLYNX notice handoff
+on:
+  push:
+    branches: [android16-preview]
+    paths: ['.handoff/navlynx-notice-20260929/READY.json']
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      IMPORT_SHA: ${{ github.sha }}
+    steps:
+      - name: Verify and import reviewed UTF-8 files only
+        shell: python
+        run: |
+          import os,json,urllib.request,base64,hashlib,lzma,re
+          repo=os.environ['REPO']; sha=os.environ['IMPORT_SHA']; branch='android16-preview'
+          root='https://api.github.com/repos/'+repo
+          headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}
+          def api(path,data=None,method=None):
+              req=urllib.request.Request(root+path,data=None if data is None else json.dumps(data,ensure_ascii=False).encode(),headers=headers,method=method or ('POST' if data is not None else 'GET'))
+              with urllib.request.urlopen(req,timeout=40) as response:return json.load(response)
+          def read(path):
+              result=api('/contents/'+path+'?ref='+sha)
+              return base64.b64decode(result['content'])
+          directory='.handoff/navlynx-notice-20260929/'
+          manifest=json.loads(read(directory+'READY.json'))
+          assert manifest['prefix']=='navlynx-android16-notice/'
+          assert 1<=len(manifest['parts'])<=20
+          assert all(re.fullmatch(r'part-[0-9]{2}\.b64',x) for x in manifest['parts'])
+          encoded=b''.join(read(directory+name).strip() for name in manifest['parts'])
+          assert len(encoded)<1000000
+          packed=base64.b64decode(encoded,validate=True)
+          assert hashlib.sha256(packed).hexdigest()==manifest['xzSha256']
+          raw=lzma.decompress(packed,memlimit=256*1024*1024)
+          assert len(raw)<5000000 and hashlib.sha256(raw).hexdigest()==manifest['jsonSha256']
+          payload=json.loads(raw);pool=payload['pool'];paths=payload['paths'];blobs=payload['blobs']
+          assert len(paths)+len(blobs)==manifest['fileCount']
+          for key,text in pool.items():
+              assert isinstance(text,str) and '\x00' not in text and hashlib.sha256(text.encode()).hexdigest()==key
+          entries=[]
+          for path in list(paths)+list(blobs):
+              parts=path.split('/')
+              assert path and not path.startswith('/') and '..' not in parts and '.git' not in parts and '.github' not in parts
+              assert all(x not in parts for x in ['data','__pycache__','.venv','.pytest_cache'])
+              assert parts[-1]!='.env' and not path.endswith(('.sqlite3','.db','.pyc'))
+              e={'path':manifest['prefix']+path,'mode':'100644','type':'blob'}
+              if path in paths:e['content']=pool[paths[path]]
+              else:
+                  assert re.fullmatch(r'[0-9a-f]{40}',blobs[path]);e['sha']=blobs[path]
+              entries.append(e)
+          current=api('/git/ref/heads/'+branch)['object']['sha']
+          assert current==sha,'Branch changed; refusing to overwrite newer work'
+          tree=api('/git/commits/'+sha)['tree']['sha']
+          new_tree=api('/git/trees',{'base_tree':tree,'tree':entries})['sha']
+          new_commit=api('/git/commits',{'message':'Import reviewed NAVLYNX notice frontend, backend and isolated colleague demo','tree':new_tree,'parents':[sha]})['sha']
+          api('/git/refs/heads/'+branch,{'sha':new_commit,'force':False},'PATCH')
+          print('Imported',len(entries),'files at commit',new_commit)
