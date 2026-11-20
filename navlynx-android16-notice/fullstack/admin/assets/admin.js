@@ -21,7 +21,7 @@
   fieldIds.forEach(id=>$(id).addEventListener('input',()=>{dirty=true;preview()}));
   $('login-form').addEventListener('submit',e=>{e.preventDefault();run(async()=>{const session=await api('session');csrf=session.csrf;const info=await api('login',{username:$('username').value.trim(),password:$('password').value,code:$('otp').value});$('password').value='';$('otp').value='';$('login-error').textContent='';await authenticated(info)})});
   $('editor-form').onsubmit=e=>{e.preventDefault();run(async()=>{await save();toast('草稿已儲存，前台尚未變更。')})};
-  $('publish').onclick=()=>run(async()=>{if(dirty)await save();const n=state.draft;$('publish-summary').textContent=n.enabled?'將發布「'+n.title+'」'+(n.severity==='warning'&&n.brands.length?'，並提醒 '+n.brands.join('、')+' 車款暫緩升級。':'。'):'將隱藏前台公告，並停用下載前車款確認。';$('publish-dialog').showModal()});
+  $('publish').onclick=()=>run(async()=>{if(dirty)await save();const n=state.draft;$('publish-summary').textContent=n.enabled?'將發布「'+n.title+'」'+(n.severity==='warning'&&n.brands.length?'，並提醒 '+n.brands.join('、')+' 車款暫緩升級。':'。'):'將隱藏前台公告。韌體下載連結不受公告設定阻擋。';$('publish-dialog').showModal()});
   $('confirm-publish').onclick=()=>run(async()=>{const res=await api('publish',{expectedDraftRevision:state.draftRevision,expectedRevision:state.revision});loadForm(res);$('publish-dialog').close();toast('公告已發布為版本 '+res.revision+'。前台會取得最新公告。')});
   $('reload').onclick=()=>{if(dirty&&!confirm('尚有未儲存內容，確定重新載入？'))return;run(async()=>{await loadState();toast('已重新載入。')})};
   $('logout').onclick=()=>run(async()=>{if(dirty&&!confirm('尚有未儲存內容，確定登出？'))return;await api('logout',{});state=null;dirty=false;showLogin();const s=await api('session');csrf=s.csrf});
