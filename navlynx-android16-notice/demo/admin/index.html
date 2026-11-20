@@ -9,13 +9,11 @@
 <label>公告類型<select id="severity"><option value="warning">相容性提醒：僅顯示公告，不阻擋下載</option><option value="info">一般公告：不限制下載</option></select></label>
 <label>公告標題<input id="notice-title" maxlength="90" required=""/></label>
 <label>公告說明<textarea id="intro" maxlength="800" required="" rows="4"></textarea></label>
-<label>暫緩升級的品牌<span class="field-help">每行一個品牌。支援恢復後，可移除該品牌再發布。</span><textarea id="brands" placeholder="MG
-Peugeot
-Citroen" rows="4"></textarea></label>
+<label>暫緩升級的品牌<span class="field-help">每行一個品牌。支援恢復後，可移除該品牌再發布。</span><textarea id="brands" placeholder="MG" rows="4"></textarea></label>
 <label>結尾說明<textarea id="closing" maxlength="600" required="" rows="3"></textarea></label><p class="field-help">只接受純文字，不支援 HTML、腳本或自訂連結，客服連結固定為官方 LINE。</p>
 <div class="editor-actions"><button class="outline" id="save-draft" type="submit">儲存草稿</button><button class="primary" id="publish" type="button">確認並發布</button></div></form>
 <aside class="preview-column"><div class="preview-heading"><h2>前台顯示預覽</h2><span>此處為尚未發布的編輯內容</span></div><section class="notice-preview" id="notice-preview"><p class="notice-kicker">升級前請先確認</p><h3 id="pv-title"></h3><p id="pv-intro"></p><ul id="pv-brands"></ul><p id="pv-closing"></p><span class="preview-line">聯繫 LINE 客服 ↗</span></section><div class="off-card" hidden="" id="preview-off">目前草稿設定為「隱藏公告」。發布後，前台不顯示此提醒。</div>
-<div class="placement-card"><h3>公告會顯示在哪裡？</h3><p><b>01</b> 主標題下方，升級方式選項之前。</p><p><b>02</b> 韌體下載按鈕會直接開啟，不再顯示下載前確認選單。</p><p class="muted">一般公告不啟用下載確認。LINE 客服連結不受限制。</p></div><div class="publication-card"><h3>目前已發布</h3><p id="published-info"></p><button class="text-btn" id="reload" type="button">重新載入目前版本</button></div></aside></div></section>
+<div class="placement-card"><h3>公告會顯示在哪裡？</h3><p><b>01</b> 主標題下方，升級方式選項之前。</p><p><b>02</b> 韌體下載按鈕會直接開啟，不再顯示下載前確認選單。</p><p class="muted">公告內容只作提醒，韌體下載按鈕會直接開啟。LINE 客服連結不受限制。</p></div><div class="publication-card"><h3>目前已發布</h3><p id="published-info"></p><button class="text-btn" id="reload" type="button">重新載入目前版本</button></div></aside></div></section>
 <section class="view" hidden="" id="view-history"><div class="page-heading"><div><p class="eyebrow">HISTORY</p><h1>版本與操作紀錄</h1><p class="sub">還原會建立草稿，不會直接改變前台；確認後仍須發布。</p></div></div><div class="edit-card"><h2>發布歷程</h2><div class="version-list" id="versions"></div></div><div class="edit-card audit-card"><h2>最近操作</h2><div class="table-scroll"><table><thead><tr><th>時間</th><th>帳號</th><th>操作</th><th>版本／備註</th></tr></thead><tbody id="audit"></tbody></table></div></div></section>
 <section class="view" hidden="" id="view-security"><div class="page-heading"><div><p class="eyebrow">DEMO ONLY</p><h1>正式登入與手機驗證</h1><p class="sub">這個展示頁不連接正式後台，不收集任何密碼或驗證碼。</p></div></div><div class="edit-card"><h2>正式版採密碼＋驗證器</h2><p>部署者需先建立管理帳號、設定獨立密碼並綁定驗證器 App。每次登入須輸入六位數動態碼，不是簡訊。</p><p>展示模式的儲存與發布只在目前瀏覽器內模擬；不代表正式主機已上線。</p></div></section>
 </div></div>
