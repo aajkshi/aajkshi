@@ -187,9 +187,11 @@ function render(){
  }else{$('transition-download').removeAttribute('href');$('status').textContent=mode==='mail'?'目前顯示寄回升級方案。':'請選擇您的 ApplePie 機型。'}
  if(hash==='remote'){$('remote-guide').open=true}
  if(!initial){
-  const target=hash==='remote'?$('remote-guide'):model?$('remote-guide'):$('workspace');
+  const faqJump=hash==='upgrade-faq';
+  const target=faqJump?$('upgrade-faq'):hash==='remote'?$('remote-guide'):model?$('remote-guide'):$('workspace');
   target.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
-  if(model)$('guide-focus').focus({preventScroll:true});
+  if(faqJump)$('faq-heading')?.focus({preventScroll:true});
+  else if(model)$('guide-focus').focus({preventScroll:true});
   else if(mode==='self'&&lastModel){document.querySelector('[data-model="'+lastModel+'"]')?.focus({preventScroll:true})}
  }
  lastModel=key;initial=false;
