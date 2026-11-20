@@ -1,7 +1,7 @@
 /* Demonstration data only. No accounts, authentication or production APIs. */
 (() => {
   'use strict';
-  const key='navlynx.android16.notice.demo.v1';
+  const key='navlynx.android16.notice.demo.v2';
   const clone=v=>JSON.parse(JSON.stringify(v));
   const seed={enabled:true,severity:'warning',title:'MG 車款相容性提醒｜請暫緩升級',intro:'目前 MG 部分車款與 Android 16 仍有相容性狀況，為維持使用穩定，MG 車款請先暫緩升級。',brands:['MG'],closing:'待完成相容性確認並開放支援後，我們會立即於官網發布公告。感謝您的理解與耐心等候。'};
   function valid(n){return n&&typeof n.enabled==='boolean'&&['warning','info'].includes(n.severity)&&['title','intro','closing'].every(k=>typeof n[k]==='string'&&n[k].trim()&&n[k].length<=({title:90,intro:800,closing:600}[k])&&!/[<>\x00-\x1f\x7f]/.test(n[k]))&&Array.isArray(n.brands)&&n.brands.length<=30&&n.brands.every(b=>typeof b==='string'&&b.trim()&&b.length<=60&&!/[<>\x00-\x1f\x7f]/.test(b))}
