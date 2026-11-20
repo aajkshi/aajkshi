@@ -22,6 +22,15 @@ main{padding:27px 0 40px}.mode-label{font-size:12px;font-weight:700;color:#61758
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 .downloads.single-stage{grid-template-columns:1fr}.downloads.single-stage .download{border-color:#adc9ed;background:#f7fbff}
 
+
+/* Pre-upgrade Chinese language password reminder, matching official help */
+.password-reminder{display:flex;align-items:flex-start;gap:14px;margin:18px auto 2px;background:#fff8ec;border:1px solid #f0dbb4;border-radius:14px;padding:17px 20px;color:var(--ink)}
+.password-reminder-icon{flex:0 0 26px;height:26px;border-radius:50%;background:#ffe3a6;color:#815818;display:grid;place-items:center;font-weight:800}
+.password-reminder h2{font-size:17px;line-height:1.5}
+.password-reminder p{font-size:13px;margin-top:5px;line-height:1.8;color:#5f5545}
+.password-reminder strong{color:#5c451c}
+.password-help{border:0;padding:0 2px;background:transparent;color:var(--blue);font:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:650px){.password-reminder{padding:14px 15px;gap:10px}.password-reminder h2{font-size:15px}.password-reminder p{font-size:12px}}
 </style>
 <link rel="stylesheet" href="assets/faq.css">
 </head>
