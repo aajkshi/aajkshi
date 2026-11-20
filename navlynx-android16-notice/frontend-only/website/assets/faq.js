@@ -51,8 +51,15 @@
     }
     add('faq-data', '升級 Android 16 會清除資料嗎？',
       '<p>會。首次升級 Android 16 會將主機重置，原有 APP、登入帳號、下載檔案及個人設定將被清除。</p>', 'all');
+
+    add('faq-password', '升級後切換繁體中文，需要密碼嗎？',
+      '<p>需要。首次升級 Android 16 會重置主機，重新切換繁體中文時請使用<strong>保固卡上的中文密碼</strong>。</p><p>若保固卡遺失或中文密碼無法辨識，請聯繫 NAVLYNX 官方 LINE 客服，提供機型與購買資訊協助核對。也可以參考 <a href="https://www.navlynx.com.tw/FAQ.asp" target="_blank" rel="noopener">官網常見問題中的繁體中文密碼說明 ↗</a>。</p><p>' + customerLink + '</p>', 'all');
+    add('faq-model-check', '如何確認 ApplePie 機型與目前系統版本？',
+      '<p>不同機型使用的升級檔案不可混用。請在主機的「設定」頁查看 Android 系統版本與以 APM 開頭的韌體機型代碼；部分機型需進入「更多設定 → ApplePie Settings」查詢版本。</p><p>若無法辨識，請拍下版本資訊與主機標籤，先由客服協助核對，不要只憑機身外觀選擇升級檔案。</p><p>' + customerLink + '</p>', 'all');
     add('faq-warranty', '已過保也可以自行升級嗎？',
       '<p>可以。符合本次升級機型的產品，不分保固內或保固外，皆可依官網教學自行下載並升級。<strong>自行升級不需完成社群任務，也不用寄送主機。</strong></p>', 'self');
+    add('faq-sdcard', '插入記憶卡後，沒有出現韌體更新提示怎麼辦？',
+      '<p>請依序檢查：</p><ol><li>檢查檔名是否與本機型的官方檔名完全一致。若下載時被加上「-001」等額外編號，請移除多餘編號，但不要修改機型代碼。</li><li>記憶卡應使用 FAT32 或 exFAT 格式，韌體 ZIP 檔案直接放在記憶卡根目錄，<strong>不要解壓縮</strong>。</li><li>在主機的「設定 → 更多設定 → 儲存空間」確認能否讀取記憶卡，必要時換卡測試。</li><li>若仍無法更新，請重新從 NAVLYNX 官方連結下載，並聯繫客服提供機型、檔名及目前畫面。</li></ol><p><a href="https://www.navlynx.com.tw/FAQ.asp" target="_blank" rel="noopener">參考官網「為什麼無法更新韌體？」說明 ↗</a></p>', 'self');
     const phases = add('faq-phases', '需要先安裝指定升級韌體嗎？', '', 'self');
     add('faq-remote', '有使用飛鼠，應該先更新哪一個？',
       '<p><strong>請先升級飛鼠韌體，再升級 Android 16。</strong>未更新韌體的飛鼠，升級 Android 16 後將無法正常使用。沒有使用飛鼠者可略過。</p><p><button type="button" class="nlx-faq-link" data-open-remote>查看飛鼠下載與教學 ↑</button></p>', 'self');
@@ -64,10 +71,12 @@
       '<p><strong>先加入官方 LINE，告知「我要升級 Android 16」。</strong>由客服回覆並提供線上申請表，完成填表與審核後，再依通知寄送主機。尚未取得客服確認前，請勿自行寄出。</p><p>' + customerLink + '</p>', 'mail');
     add('faq-mail-accessories', '寄回升級需要附線材或飛鼠嗎？',
       '<p><strong>線材不用附；有 NAVLYNX 飛鼠，請與 ApplePie 主機一併寄回。</strong>總公司會一併處理飛鼠韌體及配對。寄出前請移除 SIM 卡、Micro SD 記憶卡及其他非必要配件。</p>', 'mail');
-    add('faq-mail-time', '寄回後多久可以完成？',
-      '<p>主機送達並完成資料核對後，預計 <strong>3 至 7 個工作天</strong>完成升級與基本功能測試，再由順豐寄回。此時間不含來回物流、等待補件及異常檢測。</p><p>本次服務是系統升級，不包含硬體維修；主機若已有異常，請先告知客服。</p>', 'mail');
+    add('faq-mail-time', '主機送達後，多久能完成升級？',
+      '<p>收到主機後，我們會依收件順序處理，通常於 <strong>3 至 7 個工作天</strong>內完成 Android 16 升級及基本功能測試。</p><p>上述時間不含物流、補件及異常檢測。</p>', 'mail');
     const mailDetails = [...mailPanel.querySelectorAll(':scope > details.accordion')];
     mailDetails.forEach(detail => decorate(detail, 'mail'));
+    list.appendChild(byId('faq-mail-time'));
+
     support.before(section);
 
     // A scroll button avoids changing the hash that controls mode/model selection.
@@ -88,6 +97,11 @@
     section.querySelector('[data-open-remote]').addEventListener('click', () => {
       const remote = byId('remote-guide');
       if (remote) { remote.open = true; jump(remote.querySelector('summary')); }
+    });
+    const passwordButton = document.querySelector('[data-open-password-faq]');
+    if (passwordButton) passwordButton.addEventListener('click', () => {
+      const answer = byId('faq-password');
+      if (answer) { answer.open = true; jump(answer.querySelector('summary')); }
     });
     let previousContext = '';
     function refreshFaq() {
