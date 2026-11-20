@@ -43,10 +43,10 @@ function render(){
  if(model){
   applyUpgradeMode(model);
   const versionDate=model.firmwareDate||model.transitionDate;
-  $('latest-file').textContent=model.latestFile;$('second-stage-file').textContent=model.latestFile;
-  $('latest-change').textContent=model.latestChange;
-  ['latest-date','second-stage-date'].forEach(id=>{const time=$(id);time.textContent=model.latestDate;time.dateTime=model.latestDate});
-  ['latest-download','second-stage-download'].forEach(id=>{const link=$(id);link.href=model.latestPage;link.setAttribute('aria-label','開啟 '+model.name+' 專用官網韌體頁（最近公告 '+model.latestDate+'）')});
+  $('second-stage-file').textContent=model.latestFile;
+  const stageDate=$('second-stage-date');stageDate.textContent=model.latestDate;stageDate.dateTime=model.latestDate;
+  const stageLink=$('second-stage-download');stageLink.href=model.latestPage;
+  stageLink.setAttribute('aria-label','開啟 '+model.name+' 專用官網韌體頁（最近公告 '+model.latestDate+'）');
   $('model-title').textContent=model.name;$('model-file').textContent=model.file;$('guide-file').textContent=model.file;$('guide-product').textContent=model.name;
   ['model-date','guide-date'].forEach(id=>{$(id).textContent=versionDate;$(id).dateTime=versionDate});
   $('transition-download').href=model.drive;$('transition-download').setAttribute('aria-label','下載 '+model.name+' '+versionDate+(model.upgradeMode==='direct'?' Android 16 韌體':' 的指定升級韌體'));
