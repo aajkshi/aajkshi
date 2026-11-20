@@ -4,8 +4,8 @@
 
 ## 同事預覽
 
-- [前台展示](https://rawcdn.githack.com/aajkshi/aajkshi/67d41ee47461c672055e91ecf7098634e9458746/navlynx-android16-notice/demo/frontend/index.html)：MG 車款相容性公告；韌體下載不再跳出下載前確認選單。
-- [公告後台互動展示](https://rawcdn.githack.com/aajkshi/aajkshi/67d41ee47461c672055e91ecf7098634e9458746/navlynx-android16-notice/demo/admin/index.html)：免登入，可編輯、儲存草稿、模擬發布與還原。
+- [前台展示](https://rawcdn.githack.com/aajkshi/aajkshi/android16-preview/navlynx-android16-notice/demo/frontend/index.html)：MG 車款相容性公告；韌體下載不再跳出下載前確認選單。
+- [公告後台互動展示](https://rawcdn.githack.com/aajkshi/aajkshi/android16-preview/navlynx-android16-notice/demo/admin/index.html)：免登入，可編輯、儲存草稿、模擬發布與還原。
 - 展示資料只保留於目前瀏覽器。從同一個網域、同一個瀏覽器開啟前後台才能共用本機展示資料；不同同事或裝置不會同步。
 - 展示頁不收集密碼、驗證碼，也不連接正式寫入 API。請勿輸入機密或個人資料。
 - 這兩個是靜態展示網址，不是已部署的正式後台。原始碼已核對上傳；交付環境無法連線驗證 githack 網址，故未宣稱公開預覽已實機驗收。
