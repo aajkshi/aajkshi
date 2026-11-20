@@ -16,15 +16,15 @@ function applyUpgradeMode(model){
  $('download-cards').classList.toggle('single-stage',direct);
  $('second-stage').hidden=direct;$('second-update-step').hidden=direct;
  $('upgrade-message').textContent=direct
-  ?'直接安裝 '+model.firmwareDate+' 韌體即可完成 Android 16 升級，無須過渡版本或第二次更新。'
-  :'先安裝過渡版本，再更新最新韌體。兩個階段都必須完成。';
+  ?'直接安裝 '+model.firmwareDate+' 韌體即可完成 Android 16 升級，無須指定升級韌體或第二次更新。'
+  :'先安裝指定升級韌體，再更新最新韌體。兩個階段都必須完成。';
  $('upgrade-label').innerHTML=direct?'<b>✓</b> 一次更新完成':'<b>1</b> 第一階段';
- $('upgrade-heading').textContent=direct?'直接升級 Android 16':'安裝指定過渡版本';
- $('version-label').textContent=direct?'韌體版本日期：':'過渡版本日期：';
- $('transition-download').textContent=direct?'下載 Touch Android 16 韌體 ↗':'下載指定過渡版本 ↗';
- $('step-download-title').textContent=direct?'下載並複製韌體':'下載並複製過渡版本';
- $('guide-version-label').textContent=direct?'Android 16 韌體':'過渡版本';
- $('step-complete-title').textContent=direct?'等待升級完成':'等待過渡版本完成';
+ $('upgrade-heading').textContent=direct?'直接升級 Android 16':'安裝指定升級韌體';
+ $('version-label').textContent=direct?'韌體版本日期：':'指定升級韌體日期：';
+ $('transition-download').textContent=direct?'下載 Touch Android 16 韌體 ↗':'下載指定升級韌體 ↗';
+ $('step-download-title').textContent=direct?'下載並複製韌體':'下載並複製指定升級韌體';
+ $('guide-version-label').textContent=direct?'Android 16 韌體':'指定升級韌體';
+ $('step-complete-title').textContent=direct?'等待升級完成':'等待指定升級韌體完成';
  $('step-complete-text').textContent=direct
   ?'更新時間約 10 至 15 分鐘。完成後主機會自動重新啟動，進入 Touch 主畫面即完成 Android 16 升級，不需再次更新。'
   :'更新時間約 10 至 15 分鐘，完成後主機會自動重新啟動。這時只完成第一階段，請繼續下一步。';
@@ -45,7 +45,7 @@ function render(){
   const versionDate=model.firmwareDate||model.transitionDate;
   $('model-title').textContent=model.name;$('model-file').textContent=model.file;$('guide-file').textContent=model.file;$('guide-product').textContent=model.name;
   ['model-date','guide-date'].forEach(id=>{$(id).textContent=versionDate;$(id).dateTime=versionDate});
-  $('transition-download').href=model.drive;$('transition-download').setAttribute('aria-label','下載 '+model.name+' '+versionDate+(model.upgradeMode==='direct'?' Android 16 韌體':' 的指定過渡版本'));
+  $('transition-download').href=model.drive;$('transition-download').setAttribute('aria-label','下載 '+model.name+' '+versionDate+(model.upgradeMode==='direct'?' Android 16 韌體':' 的指定升級韌體'));
   if(lastModel!==key){$('full-guide').open=false;document.querySelectorAll('#model-guide details').forEach(d=>d.open=false)}
   $('status').textContent='目前顯示 '+model.name+' 的升級檔案與教學。';
  }else{$('transition-download').removeAttribute('href');$('status').textContent=mode==='mail'?'目前顯示寄回升級方案。':'請選擇您的 ApplePie 機型。'}
