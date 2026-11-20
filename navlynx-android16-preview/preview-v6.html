@@ -21,6 +21,17 @@ main{padding:27px 0 40px}.mode-label{font-size:12px;font-weight:700;color:#61758
 @media(max-width:650px){.wrap{width:calc(100% - 32px)}.top .wrap{height:58px}.top nav{gap:14px}.top nav a{font-size:12px}.brand{font-size:21px}.preview{display:none}.hero .wrap{padding:31px 0 33px}.hero p{max-width:275px;font-size:13px}.hero-number{font-size:185px;right:4px;top:0;opacity:.5}h1{font-size:35px;max-width:300px}h1 span{display:block}.eyebrow{font-size:9px;letter-spacing:1.5px}main{padding-top:21px}.modes{gap:10px;margin-bottom:25px}.mode{padding:14px 12px;grid-template-columns:1fr 18px;gap:5px}.mode[aria-selected=true]{padding:13px 11px}.mode-icon{display:none}.mode strong{font-size:15px;line-height:1.4}.mode small{font-size:11px;line-height:1.5;margin-top:6px;min-height:32px}.mode-check{width:16px;height:16px;font-size:9px}.remote{margin-bottom:23px}.remote summary{padding:13px;gap:8px;align-items:flex-start}.remote summary strong{font-size:13px}.remote summary strong:before{display:none}.remote summary span{font-size:11px;padding-top:2px}.remote-body{grid-template-columns:1fr;padding:15px;gap:15px}.remote-extra{grid-column:auto}.remote-actions .btn{width:100%}h2,.guide-head h2{font-size:23px}.section-head{margin-bottom:16px}.section-head p{font-size:13px}.models{grid-template-columns:1fr 1fr;gap:12px}.model{padding:12px}.model-photo{height:136px;margin-bottom:12px}.model img{max-height:126px}.model strong{font-size:14px}.model small{font-size:11px}.guide-head{align-items:flex-start;gap:12px}.guide-head .text-button{flex-shrink:0;font-size:12px}.guide-note{gap:6px;font-size:11px}.phase-line{font-size:13px}.downloads,.fees{grid-template-columns:1fr;gap:12px}.download{padding:20px}.download .btn{width:100%}.download h3{font-size:19px}.file-line{margin-bottom:15px}.fee{padding:19px;display:grid;grid-template-columns:1fr auto;gap:0 10px}.fee small{grid-column:1}.fee h3{grid-column:1;margin:3px 0 0;font-size:16px}.fee .price{grid-column:2;grid-row:1/3;align-self:center;font-size:27px}.fee p{grid-column:1/-1;margin-top:9px}.fee .freight{grid-column:1/-1;justify-self:start;margin-top:10px}.mail-actions .btn{width:100%}.mail-actions{gap:8px}.flow{grid-template-columns:1fr 1fr;gap:6px 16px}.support,footer .wrap{flex-direction:column;gap:10px}.accordion>summary{font-size:14px;padding:14px 16px}.accordion-body{padding:16px}.critical{font-size:12px}.mail-note{font-size:13px}.chooser-note,.latest-link{font-size:12px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 .downloads.single-stage{grid-template-columns:1fr}.downloads.single-stage .download{border-color:#adc9ed;background:#f7fbff}
+
+/* Distinguish first Android 16 upgrade from maintenance firmware */
+.firmware-status-guide{padding:14px 17px;margin:16px 0;background:#edf6ff;border:1px solid #d2e4f5;border-radius:12px;font-size:13px;line-height:1.75}
+.firmware-status-guide strong{display:block;color:var(--ink);font-size:14px}
+.firmware-status-guide p{margin-top:5px;color:#405b74}
+.latest-firmware{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:22px 0 18px;padding:21px 23px;border:1px solid #cdddec;background:#fff;border-radius:16px}
+.latest-firmware h3{font-size:19px;margin:3px 0 9px}
+.latest-firmware p{font-size:13px;color:var(--muted);margin:6px 0;line-height:1.8}
+.latest-firmware .btn{min-width:235px;flex-shrink:0}
+@media(max-width:650px){.latest-firmware{display:block;padding:17px}.latest-firmware .btn{min-width:0;width:100%;margin-top:13px}.firmware-status-guide{padding:12px 14px}}
+
 </style>
 <link rel="stylesheet" href="assets/faq.css">
 </head>
@@ -55,11 +66,13 @@ main{padding:27px 0 40px}.mode-label{font-size:12px;font-weight:700;color:#61758
 <article id="model-guide" hidden aria-labelledby="model-title">
 <div class="guide-head" id="guide-focus" tabindex="-1"><div><span class="eyelabel">自行升級 · 下載與教學</span><h2 id="model-title"></h2><p>首次升級 Android 16</p></div><a href="#self" class="text-button">← 更換機型</a></div>
 <div class="guide-note"><span>準備電腦＋Micro SD</span><span>建議 32GB 至 64GB</span><span>FAT32／exFAT</span></div>
+<div class="firmware-status-guide" role="note"><strong>先確認主機目前的 Android 系統版本</strong><p>尚未升級 Android 16：依下方「首次升級」步驟操作。<br>已是 Android 16：請使用下方「官方最新 Android 16 韌體」入口，不要重新安裝指定升級韌體。</p></div>
 <p class="phase-line"><strong id="upgrade-message">先安裝指定升級韌體，再更新最新韌體。兩個階段都必須完成。</strong></p>
 <div class="downloads" id="download-cards">
 <section class="download"><div class="download-label" id="upgrade-label"><b>1</b> 第一階段</div><h3 id="upgrade-heading">安裝指定升級韌體</h3><p><strong><span id="version-label">指定升級韌體日期：</span><time id="model-date"></time></strong></p><p>請下載所選機型的專用檔案。</p><div class="file-line"><code class="file" id="model-file"></code>　請勿解壓縮</div><a id="transition-download" class="btn" target="_blank" rel="noopener">下載指定升級韌體 ↗</a></section>
-<section class="download" id="second-stage"><div class="download-label"><b>2</b> 第二階段</div><h3>更新 Android 16 最新韌體</h3><p>完成指定升級韌體後，再下載對應機型的最新韌體並更新。請勿停留在指定升級韌體。</p><a class="btn light" href="https://www.navlynx.com.tw/download.asp" target="_blank" rel="noopener">前往最新韌體下載 ↗</a></section>
+<section class="download" id="second-stage"><div class="download-label"><b>2</b> 第二階段</div><h3>更新 Android 16 最新韌體</h3><p>完成指定升級韌體後，依此機型官網所列的 Android 16 韌體完成第二次更新。請勿停留在指定升級韌體。</p><p class="file-line">Android 16 韌體：<code id="second-stage-file" class="file"></code>　官方公告：<time id="second-stage-date"></time></p><a id="second-stage-download" class="btn light" href="https://www.navlynx.com.tw/download.asp" target="_blank" rel="noopener">查看此機型最新韌體 ↗</a></section>
 </div>
+<section class="latest-firmware" aria-label="已是 Android 16 的後續韌體更新"><div><span class="eyelabel">已是 Android 16 · 後續更新</span><h3>官方最新 Android 16 韌體</h3><p>最近公告：<time id="latest-date"></time>　<span id="latest-change"></span></p><p>對應檔名：<code id="latest-file" class="file"></code></p><p>只適用已是 Android 16 的主機。若正常使用，無須特別更新；請以官網公布的版本為準，檔案不可跨機型或系統混用。</p><p>資料核對：2026-11-20</p></div><a id="latest-download" class="btn light" href="https://www.navlynx.com.tw/download.asp" target="_blank" rel="noopener">查看此機型官網最新韌體 ↗</a></section>
 <p class="critical">升級會重置主機，請先備份重要資料。更新期間請維持穩定供電；即使檔名相同，不同機型的檔案也不可互用。</p>
 <details class="accordion" id="full-guide"><summary>查看完整升級步驟</summary><div class="accordion-body"><p style="margin-bottom:17px">記憶卡最高支援 256GB，建議使用 32GB 至 64GB，格式為 FAT32 或 exFAT；如需格式化，請先備份記憶卡內容。</p><ol class="instructions">
 <li><strong id="step-download-title">下載並複製指定升級韌體</strong>使用電腦下載 <time id="guide-date"></time> <span id="guide-version-label">指定升級韌體</span> <code class="file" id="guide-file"></code>，直接放入 Micro SD 卡根目錄，請勿解壓縮，也不要放在其他資料夾內。</li>
@@ -95,10 +108,10 @@ main{padding:27px 0 40px}.mode-label{font-size:12px;font-weight:700;color:#61758
 'use strict';
 // Same model files and destinations as v5. Never infer interchangeability from equal filenames.
 const models={
-one:{name:'ApplePie ONE',file:'APM1288BM.zip',transitionDate:'2026-04-28',drive:'https://drive.google.com/drive/folders/11abZ4MpHONdx1gK_z1eEfdAWEHTy2_mi?usp=drive_link'},
-touch:{name:'ApplePie Touch',file:'APM1288TOUCH.zip',upgradeMode:'direct',firmwareDate:'2026-05-27',drive:'https://drive.google.com/drive/folders/1T5LIQH-WMlWCCyztKkGnt5S6KiH51MHk?usp=drive_link'},
-ultra:{name:'ApplePie mini Ultra II',file:'APM1688S.zip',transitionDate:'2026-05-07',drive:'https://drive.google.com/drive/folders/10ftWBlYjTytoOWk_ZxGz11CMXJql8pRk?usp=drive_link'},
-melling:{name:'ApplePie Melling／Melling-G',file:'APM1288BM.zip',transitionDate:'2026-04-28',drive:'https://drive.google.com/drive/folders/1kBohVCC0wrtqiwx3Nq8we56KSWQpG9KI?usp=drive_link'}
+one:{name:'ApplePie ONE',file:'APM1288BM.zip',transitionDate:'2026-04-28',drive:'https://drive.google.com/drive/folders/11abZ4MpHONdx1gK_z1eEfdAWEHTy2_mi?usp=drive_link',latestFile:'APM1288_A16.zip',latestDate:'2026-11-06',latestChange:'優化無線 CarPlay 藍牙',latestPage:'https://www.navlynx.com.tw/download_in_a12.asp'},
+touch:{name:'ApplePie Touch',file:'APM1288TOUCH.zip',upgradeMode:'direct',firmwareDate:'2026-05-27',drive:'https://drive.google.com/drive/folders/1T5LIQH-WMlWCCyztKkGnt5S6KiH51MHk?usp=drive_link',latestFile:'APM1288TOUCH_A16.zip',latestDate:'2026-11-04',latestChange:'更新內建軟體版本',latestPage:'https://www.navlynx.com.tw/download_in_a11.asp'},
+ultra:{name:'ApplePie mini Ultra II',file:'APM1688S.zip',transitionDate:'2026-05-07',drive:'https://drive.google.com/drive/folders/10ftWBlYjTytoOWk_ZxGz11CMXJql8pRk?usp=drive_link',latestFile:'APM1688S_A16.zip',latestDate:'2026-08-17',latestChange:'更新內建軟體版本',latestPage:'https://www.navlynx.com.tw/download_in_a8.asp'},
+melling:{name:'ApplePie Melling／Melling-G',file:'APM1288BM.zip',transitionDate:'2026-04-28',drive:'https://drive.google.com/drive/folders/1kBohVCC0wrtqiwx3Nq8we56KSWQpG9KI?usp=drive_link',latestFile:'APM1288_A16.zip',latestDate:'2026-11-06',latestChange:'優化無線 CarPlay 藍牙',latestPage:'https://www.navlynx.com.tw/download_in_a9.asp'}
 };
 const $=id=>document.getElementById(id), tabs=[...document.querySelectorAll('[data-mode]')];
 // Preserve the two-stage help for the other models when switching back from Touch.
@@ -135,6 +148,10 @@ function render(){
  if(model){
   applyUpgradeMode(model);
   const versionDate=model.firmwareDate||model.transitionDate;
+  $('latest-file').textContent=model.latestFile;$('second-stage-file').textContent=model.latestFile;
+  $('latest-change').textContent=model.latestChange;
+  ['latest-date','second-stage-date'].forEach(id=>{const time=$(id);time.textContent=model.latestDate;time.dateTime=model.latestDate});
+  ['latest-download','second-stage-download'].forEach(id=>{const link=$(id);link.href=model.latestPage;link.setAttribute('aria-label','開啟 '+model.name+' 專用官網韌體頁（最近公告 '+model.latestDate+'）')});
   $('model-title').textContent=model.name;$('model-file').textContent=model.file;$('guide-file').textContent=model.file;$('guide-product').textContent=model.name;
   ['model-date','guide-date'].forEach(id=>{$(id).textContent=versionDate;$(id).dateTime=versionDate});
   $('transition-download').href=model.drive;$('transition-download').setAttribute('aria-label','下載 '+model.name+' '+versionDate+(model.upgradeMode==='direct'?' Android 16 韌體':' 的指定升級韌體'));
