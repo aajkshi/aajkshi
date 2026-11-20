@@ -20,6 +20,14 @@
 
 詳細檔名、初次升級日期與官網來源請參見 [韌體對照與維護說明](FIRMWARE_REFERENCE_20261120.md)。前台日期屬人工核對資料，**並非自動同步官網**，日後發布新版本仍需更新前台。公告後台的公告編輯功能不會修改韌體對照表。
 
+## 常見問題改為固定 HTML（2026-11-20 修正）
+
+先前 FAQ 只由 `assets/faq.js` 動態產生，一旦 JavaScript 載入或執行失敗，整個區塊就會消失。現在改為**前台 HTML 直接包含 14 題常見問題**，依「升級前必看／自行升級／寄送回總公司處理」分組；不依賴 JavaScript 才能顯示。頂部「常見問題」連結也可直接跳至該區塊。
+
+題目與答覆以目前 [官網 Android 16 升級頁](https://www.navlynx.com.tw/Android16/index.html)可查內容為主要基礎，另以[官網產品 FAQ](https://www.navlynx.com.tw/FAQ.asp)補充密碼、版本辨識與記憶卡問題；原本已確定的 LINE 先申請、30 分鐘未完成的客服話術及機型差異保留。完整範圍請參閱 [FAQ 核對紀錄](FAQ_CHECK_20261120.md)。
+
+**為避免誤解：** 官網若另有 JavaScript 動態載入但無法直接檢視的題目，這份交付不能宣稱逐字與官網完全相同。已完成程式碼與 HTML 位置／題數核對；部署後仍應以瀏覽器驗收 FAQ 題目及展開互動。
+
 ## 正式原始碼
 
 `fullstack/` 是 Python/FastAPI 公告前後台，包含 Docker、部署說明、帳號管理 CLI、測試、前台與管理介面。`frontend-only/website/` 是純前台版本，由網頁公司更新 `assets/notice-config.js`。
