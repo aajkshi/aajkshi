@@ -23,3 +23,13 @@
 .top nav .nlx-faq-jump:hover{color:#fff}
 @media(max-width:900px){.nlx-faq{gap:30px;grid-template-columns:minmax(170px,.6fr) minmax(0,1.5fr)}.nlx-faq-item>summary,.nlx-faq-item.accordion>summary{font-size:16px;min-height:78px}.nlx-faq-answer,.nlx-faq-item>.accordion-body{padding-right:30px}}
 @media(max-width:650px){.nlx-faq{grid-template-columns:1fr;gap:15px;margin-top:30px;padding-top:26px}.nlx-faq-heading{padding:0}.nlx-faq-heading h2{font-size:29px}.nlx-faq-heading p{margin-top:7px}.nlx-faq-context{margin-top:10px;font-size:11px}.nlx-faq-item>summary,.nlx-faq-item.accordion>summary{min-height:74px;font-size:15px;gap:12px;padding:16px 0}.nlx-faq-icon{flex-basis:32px;width:32px;height:32px;font-size:23px}.nlx-faq-answer,.nlx-faq-item>.accordion-body{font-size:13px;padding:0 4px 19px 0}.top nav .nlx-faq-jump{font-size:12px}.top nav{gap:12px}}
+
+/* FAQ group headings remain visible and usable before JavaScript runs. */
+.nlx-faq-group{margin:28px 0 2px;padding:0 0 8px;border-bottom:2px solid #c6d9ed;color:#255a8b;font-size:15px;font-weight:800;letter-spacing:.02em}
+.nlx-faq-list>.nlx-faq-group:first-child{margin-top:1px}
+.nlx-faq-answer ol{padding-left:22px;margin:10px 0}
+.nlx-faq-answer li{margin:7px 0}
+.nlx-faq-answer code{padding:1px 5px;border-radius:5px;background:#e9f0f7;color:#1c517b}
+.nlx-faq-heading a{font-weight:700}
+.nlx-faq-item>summary:focus-visible{outline:3px solid #1689ff;outline-offset:3px;border-radius:3px}
+@media(max-width:650px){.nlx-faq-group{margin-top:22px;font-size:14px}.nlx-faq-answer ol{padding-left:18px}}
