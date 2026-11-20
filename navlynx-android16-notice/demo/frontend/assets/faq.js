@@ -53,7 +53,7 @@
       '<p>會。首次升級 Android 16 會將主機重置，原有 APP、登入帳號、下載檔案及個人設定將被清除。</p>', 'all');
     add('faq-warranty', '已過保也可以自行升級嗎？',
       '<p>可以。符合本次升級機型的產品，不分保固內或保固外，皆可依官網教學自行下載並升級。<strong>自行升級不需完成社群任務，也不用寄送主機。</strong></p>', 'self');
-    const phases = add('faq-phases', '需要先安裝過渡版本嗎？', '', 'self');
+    const phases = add('faq-phases', '需要先安裝指定升級韌體嗎？', '', 'self');
     add('faq-remote', '有使用飛鼠，應該先更新哪一個？',
       '<p><strong>請先升級飛鼠韌體，再升級 Android 16。</strong>未更新韌體的飛鼠，升級 Android 16 後將無法正常使用。沒有使用飛鼠者可略過。</p><p><button type="button" class="nlx-faq-link" data-open-remote>查看飛鼠下載與教學 ↑</button></p>', 'self');
     const connection = byId('connection-help');
@@ -109,11 +109,11 @@
         answer.replaceChildren(p);
         if (!byId('second-stage').hidden) {
           const note = document.createElement('p');
-          note.textContent = name + ' 的指定過渡版本日期為 ' + byId('model-date').textContent + '。請依上方下載區的順序完成兩次更新，勿停留在過渡版本。';
+          note.textContent = name + ' 的指定升級韌體日期為 ' + byId('model-date').textContent + '。請依上方下載區的順序完成兩次更新，勿停留在指定升級韌體。';
           answer.appendChild(note);
         }
       } else {
-        answer.innerHTML = '<p>依機型而定。<strong>Touch 可直接升級；ONE、mini Ultra II 與 Melling／Melling-G 須先安裝指定過渡版本，再更新最新韌體。</strong></p><p>選擇您的機型後，上方會顯示正確的版本日期與操作方式。</p>';
+        answer.innerHTML = '<p>依機型而定。<strong>Touch 可直接升級；ONE、mini Ultra II 與 Melling／Melling-G 須先安裝指定升級韌體，再更新最新韌體。</strong></p><p>選擇您的機型後，上方會顯示正確的版本日期與操作方式。</p>';
       }
       previousContext = contextKey;
     }
