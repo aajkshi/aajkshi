@@ -53,6 +53,7 @@
       else if (remote) jump(remote.querySelector('summary'));
     });
 
+    const defaultPhaseHtml = byId('faq-phases-answer') ? byId('faq-phases-answer').innerHTML : '';
     function refreshFaq() {
       const mail = byId('panel-mail') && !byId('panel-mail').hidden;
       const selected = !mail && byId('model-guide') && !byId('model-guide').hidden;
@@ -63,7 +64,7 @@
       const phase = byId('faq-phases-answer');
       if (!phase) return;
       if (!selected) {
-        phase.innerHTML = '依機型而定。<strong>ApplePie Touch 可以直接升級；ONE、mini Ultra II 及 Melling／Melling-G 須先安裝指定升級韌體，再更新 Android 16 韌體。</strong>選擇機型後，頁面會顯示對應檔案與操作順序。';
+        phase.innerHTML = defaultPhaseHtml;
         return;
       }
       const stageMessage = byId('upgrade-message');
