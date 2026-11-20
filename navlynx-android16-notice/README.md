@@ -12,6 +12,12 @@
 
 對應原始碼入口：`demo/frontend/index.html`、`demo/admin/index.html`。網頁公司也可將整個 `demo/` 放入同一網站空間預覽。
 
+## 2026-11-20 韌體資料更新
+
+已將各機型的首次升級指定檔案與「已是 Android 16」的官方最新更新檔分開顯示。ONE／Melling 以 2026-11-06、Touch 以 2026-11-04、mini Ultra II 以 2026-08-17 的官方最新公告核對，並連結至各機型專屬韌體頁。
+
+詳細檔名、初次升級日期與官網來源請參見 [韌體對照與維護說明](FIRMWARE_REFERENCE_20261120.md)。前台日期屬人工核對資料，**並非自動同步官網**，日後發布新版本仍需更新前台。公告後台的公告編輯功能不會修改韌體對照表。
+
 ## 正式原始碼
 
 `fullstack/` 是 Python/FastAPI 公告前後台，包含 Docker、部署說明、帳號管理 CLI、測試、前台與管理介面。`frontend-only/website/` 是純前台版本，由網頁公司更新 `assets/notice-config.js`。
