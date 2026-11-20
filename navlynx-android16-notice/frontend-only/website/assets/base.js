@@ -3,10 +3,10 @@
 'use strict';
 // Same model files and destinations as v5. Never infer interchangeability from equal filenames.
 const models={
-one:{name:'ApplePie ONE',file:'APM1288BM.zip',transitionDate:'2026-04-28',drive:'https://drive.google.com/drive/folders/11abZ4MpHONdx1gK_z1eEfdAWEHTy2_mi?usp=drive_link'},
-touch:{name:'ApplePie Touch',file:'APM1288TOUCH.zip',upgradeMode:'direct',firmwareDate:'2026-05-27',drive:'https://drive.google.com/drive/folders/1T5LIQH-WMlWCCyztKkGnt5S6KiH51MHk?usp=drive_link'},
-ultra:{name:'ApplePie mini Ultra II',file:'APM1688S.zip',transitionDate:'2026-05-07',drive:'https://drive.google.com/drive/folders/10ftWBlYjTytoOWk_ZxGz11CMXJql8pRk?usp=drive_link'},
-melling:{name:'ApplePie Melling／Melling-G',file:'APM1288BM.zip',transitionDate:'2026-04-28',drive:'https://drive.google.com/drive/folders/1kBohVCC0wrtqiwx3Nq8we56KSWQpG9KI?usp=drive_link'}
+one:{name:'ApplePie ONE',file:'APM1288BM.zip',transitionDate:'2026-04-28',drive:'https://drive.google.com/drive/folders/11abZ4MpHONdx1gK_z1eEfdAWEHTy2_mi?usp=drive_link',latestFile:'APM1288_A16.zip',latestDate:'2026-11-06',latestChange:'優化無線 CarPlay 藍牙',latestPage:'https://www.navlynx.com.tw/download_in_a12.asp'},
+touch:{name:'ApplePie Touch',file:'APM1288TOUCH.zip',upgradeMode:'direct',firmwareDate:'2026-05-27',drive:'https://drive.google.com/drive/folders/1T5LIQH-WMlWCCyztKkGnt5S6KiH51MHk?usp=drive_link',latestFile:'APM1288TOUCH_A16.zip',latestDate:'2026-11-04',latestChange:'更新內建軟體版本',latestPage:'https://www.navlynx.com.tw/download_in_a11.asp'},
+ultra:{name:'ApplePie mini Ultra II',file:'APM1688S.zip',transitionDate:'2026-05-07',drive:'https://drive.google.com/drive/folders/10ftWBlYjTytoOWk_ZxGz11CMXJql8pRk?usp=drive_link',latestFile:'APM1688S_A16.zip',latestDate:'2026-08-17',latestChange:'更新內建軟體版本',latestPage:'https://www.navlynx.com.tw/download_in_a8.asp'},
+melling:{name:'ApplePie Melling／Melling-G',file:'APM1288BM.zip',transitionDate:'2026-04-28',drive:'https://drive.google.com/drive/folders/1kBohVCC0wrtqiwx3Nq8we56KSWQpG9KI?usp=drive_link',latestFile:'APM1288_A16.zip',latestDate:'2026-11-06',latestChange:'優化無線 CarPlay 藍牙',latestPage:'https://www.navlynx.com.tw/download_in_a9.asp'}
 };
 const $=id=>document.getElementById(id), tabs=[...document.querySelectorAll('[data-mode]')];
 // Preserve the two-stage help for the other models when switching back from Touch.
@@ -43,6 +43,10 @@ function render(){
  if(model){
   applyUpgradeMode(model);
   const versionDate=model.firmwareDate||model.transitionDate;
+  $('latest-file').textContent=model.latestFile;$('second-stage-file').textContent=model.latestFile;
+  $('latest-change').textContent=model.latestChange;
+  ['latest-date','second-stage-date'].forEach(id=>{const time=$(id);time.textContent=model.latestDate;time.dateTime=model.latestDate});
+  ['latest-download','second-stage-download'].forEach(id=>{const link=$(id);link.href=model.latestPage;link.setAttribute('aria-label','開啟 '+model.name+' 專用官網韌體頁（最近公告 '+model.latestDate+'）')});
   $('model-title').textContent=model.name;$('model-file').textContent=model.file;$('guide-file').textContent=model.file;$('guide-product').textContent=model.name;
   ['model-date','guide-date'].forEach(id=>{$(id).textContent=versionDate;$(id).dateTime=versionDate});
   $('transition-download').href=model.drive;$('transition-download').setAttribute('aria-label','下載 '+model.name+' '+versionDate+(model.upgradeMode==='direct'?' Android 16 韌體':' 的指定升級韌體'));
