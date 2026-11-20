@@ -16,7 +16,7 @@ function applyUpgradeMode(model){
  $('download-cards').classList.toggle('single-stage',direct);
  $('second-stage').hidden=direct;$('second-update-step').hidden=direct;
  $('upgrade-message').textContent=direct
-  ?'直接安裝 '+model.firmwareDate+' 韌體即可完成 Android 16 升級，直接安裝此版本即可完成 Android 16 升級，不需要再做第二次更新。'
+  ?'直接安裝 '+model.firmwareDate+' 韌體即可完成 Android 16 升級，不需要再進行第二次更新。'
   :'先安裝指定升級韌體，再更新最新韌體。兩個階段都必須完成。';
  $('upgrade-label').innerHTML=direct?'<b>✓</b> 一次更新完成':'<b>1</b> 第一階段';
  $('upgrade-heading').textContent=direct?'直接升級 Android 16':'安裝指定升級韌體';
