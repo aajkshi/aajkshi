@@ -12,7 +12,7 @@
     section.id = 'upgrade-faq';
     section.className = 'nlx-faq';
     section.setAttribute('aria-labelledby', 'faq-heading');
-    section.innerHTML = '<div class="nlx-faq-heading"><h2 id="faq-heading" tabindex="-1">常見問題</h2><p>點選問題查看答案。<br>內容依您選擇的升級方式與機型顯示。</p><span id="faq-context" class="nlx-faq-context"></span></div><div class="nlx-faq-list"></div>';
+    section.innerHTML = '<div class="nlx-faq-heading"><h2 id="faq-heading" tabindex="-1">常見問題</h2><p>點選問題查看答案。<br>內容依您選擇的升級方式與機型顯示。<br><a href="https://www.navlynx.com.tw/FAQ.asp" target="_blank" rel="noopener">查看官網完整常見問題 ↗</a></p><span id="faq-context" class="nlx-faq-context"></span></div><div class="nlx-faq-list"></div>';
     const list = section.querySelector('.nlx-faq-list');
     const items = [];
     const customerLink = '<a href="' + lineUrl + '" target="_blank" rel="noopener">聯繫 LINE 客服 ↗</a>';
