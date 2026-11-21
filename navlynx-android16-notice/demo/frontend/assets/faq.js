@@ -48,16 +48,18 @@
     const remoteButton = section.querySelector('[data-open-remote]');
     if (remoteButton) remoteButton.addEventListener('click', () => {
       const remote = byId('remote-guide');
-      if (remote) remote.open = true;
-      if (location.hash !== '#remote') location.hash = 'remote';
-      else if (remote) jump(remote.querySelector('summary'));
+      if (remote) { remote.open = true; jump(remote.querySelector('summary')); }
     });
 
     const defaultPhaseHtml = byId('faq-phases-answer') ? byId('faq-phases-answer').innerHTML : '';
+    let previousContext = '';
     function refreshFaq() {
       const mail = byId('panel-mail') && !byId('panel-mail').hidden;
       const selected = !mail && byId('model-guide') && !byId('model-guide').hidden;
       const name = selected ? byId('model-title').textContent.trim() : '';
+      const contextKey = (mail ? 'mail' : 'self') + ':' + name;
+      if (previousContext !== contextKey) items.forEach(item => { item.open = false; });
+      previousContext = contextKey;
       const context = byId('faq-context');
       if (context) context.textContent = mail ? '寄送回總公司處理' : (name || '自行升級');
 
