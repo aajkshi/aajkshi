@@ -4,6 +4,7 @@
   const cfg = window.NLX_NOTICE_CONFIG;
   if (!cfg) return;
   const banner = document.getElementById('compat-notice');
+  const wrapper = document.getElementById('upgrade-notice');
   const $ = id => document.getElementById(id);
   let current = cfg.seed;
   function valid(n) {
@@ -27,6 +28,7 @@
     if (!banner || !valid(n)) return;
     banner.hidden = !n.enabled;
     banner.dataset.severity = n.severity;
+    if (wrapper) wrapper.dataset.severity = n.severity;
     $('compat-title').textContent = n.title;
     $('compat-intro').textContent = n.intro;
     $('compat-closing').textContent = n.closing;
@@ -61,6 +63,7 @@
     } catch (error) {
       // Keep the last known announcement visible; never block a firmware link.
       if (banner) banner.dataset.stale = 'true';
+      if (wrapper) wrapper.dataset.stale = 'true';
     }
   }
   render(current);
