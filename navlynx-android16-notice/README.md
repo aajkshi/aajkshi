@@ -2,6 +2,14 @@
 
 同事预覽與網頁公司交接。既有 `navlynx-android16-preview/` 保留，不覆蓋。
 
+## 2026-11-21 現行官網逐頁／逐功能核對
+
+已使用能實際執行 JavaScript 的瀏覽器檢查目前 [正式 Android 16 升級頁](https://www.navlynx.com.tw/Android16/index.html)，逐一切換四款機型、寄回面板與手機版，並對照官網 HTML、CSS 和 FAQ 行為。已將首頁共用提醒區、飛鼠位置、回官網導覽、機型捲動及寄回文案修正為官網現行樣式；保留先前明確核准的 MG-only、Touch 單階段、指定升級韌體用語，以及不使用下載確認彈窗等差異。
+
+GitHub 同事展示版已通過隔離 Firefox 瀏覽器測試：六題 FAQ、四機型、寄回模式、手機 390px、後台模擬草稿／發布／隱藏公告，未發現 JavaScript 執行錯誤。正式後台主機、憑證與真實車機韌體更新仍未實測。
+
+**完整比對差異與測試紀錄：** [OFFICIAL_AUDIT_20261121.md](OFFICIAL_AUDIT_20261121.md)（應優先參考此份；`FAQ_CHECK_20261120.md` 為此前的核對紀錄。）
+
 ## 同事預覽
 
 - [前台展示](https://rawcdn.githack.com/aajkshi/aajkshi/android16-preview/navlynx-android16-notice/demo/frontend/index.html)：MG 車款相容性公告；韌體下載不再跳出下載前確認選單。
