@@ -7,6 +7,7 @@
   const wrapper = document.getElementById('upgrade-notice');
   const $ = id => document.getElementById(id);
   let current = cfg.seed;
+
   function valid(n) {
     return n && typeof n.enabled === 'boolean' &&
       ['warning', 'info'].includes(n.severity) &&
