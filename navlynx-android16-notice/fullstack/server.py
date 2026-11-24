@@ -274,7 +274,7 @@ def create_app(settings: Settings|None=None) -> FastAPI:
         response.headers['X-Robots-Tag']='noindex, nofollow'
         if s.secure:response.headers['Strict-Transport-Security']='max-age=31536000'
         response.headers['Cache-Control']='no-store' if is_admin or request.url.path in ('/','/index.html','/api/notice') else 'public, max-age=300'
-        response.headers['Content-Security-Policy']=("default-src 'none'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self'"+("; img-src 'self' data:;" if is_admin else " 'unsafe-inline'; img-src 'self' data: https://www.navlynx.com.tw;")+" connect-src 'self'; font-src 'self';")
+        response.headers['Content-Security-Policy']=("default-src 'none'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self'"+("; img-src 'self' data:;" if is_admin else " 'unsafe-inline'; img-src 'self' data: https://www.navlynx.com.tw;")+" connect-src 'self'; font-src 'self';"+(" frame-src 'none';" if is_admin else " frame-src https://www.youtube-nocookie.com;"))
         return response
 
     @app.get('/')
