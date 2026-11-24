@@ -4,33 +4,27 @@
 // Same model files and destinations as v5. Never infer interchangeability from equal filenames.
 const models={
 one:{name:'ApplePie ONE',file:'APM1288BM.zip',transitionDate:'2026-04-28',drive:'https://drive.google.com/drive/folders/11abZ4MpHONdx1gK_z1eEfdAWEHTy2_mi?usp=drive_link',latestFile:'APM1288_A16.zip',latestDate:'2026-11-06',latestChange:'優化無線 CarPlay 藍牙',latestPage:'https://www.navlynx.com.tw/download_in_a12.asp'},
-touch:{name:'ApplePie Touch',file:'APM1288TOUCH.zip',upgradeMode:'direct',firmwareDate:'2026-05-27',drive:'https://drive.google.com/drive/folders/1T5LIQH-WMlWCCyztKkGnt5S6KiH51MHk?usp=drive_link',latestFile:'APM1288TOUCH_A16.zip',latestDate:'2026-11-04',latestChange:'更新內建軟體版本',latestPage:'https://www.navlynx.com.tw/download_in_a11.asp'},
+touch:{name:'ApplePie Touch',file:'APM1288TOUCH.zip',transitionDate:'2026-05-27',drive:'https://drive.google.com/drive/folders/1T5LIQH-WMlWCCyztKkGnt5S6KiH51MHk?usp=drive_link',latestFile:'APM1288TOUCH_A16.zip',latestDate:'2026-11-04',latestChange:'更新內建軟體版本',latestPage:'https://www.navlynx.com.tw/download.asp'},
 ultra:{name:'ApplePie mini Ultra II',file:'APM1688S.zip',transitionDate:'2026-05-07',drive:'https://drive.google.com/drive/folders/10ftWBlYjTytoOWk_ZxGz11CMXJql8pRk?usp=drive_link',latestFile:'APM1688S_A16.zip',latestDate:'2026-08-17',latestChange:'更新內建軟體版本',latestPage:'https://www.navlynx.com.tw/download_in_a8.asp'},
 melling:{name:'ApplePie Melling／Melling-G',file:'APM1288BM.zip',transitionDate:'2026-04-28',drive:'https://drive.google.com/drive/folders/1kBohVCC0wrtqiwx3Nq8we56KSWQpG9KI?usp=drive_link',latestFile:'APM1288_A16.zip',latestDate:'2026-11-06',latestChange:'優化無線 CarPlay 藍牙',latestPage:'https://www.navlynx.com.tw/download_in_a9.asp'}
 };
 const $=id=>document.getElementById(id), tabs=[...document.querySelectorAll('[data-mode]')];
-// Preserve the two-stage help for the other models when switching back from Touch.
+// Preserve the original two-stage guidance for all four supported models.
 const transitionNoPictureHTML=$('no-picture-note').innerHTML;
-function applyUpgradeMode(model){
- const direct=model.upgradeMode==='direct';
- $('download-cards').classList.toggle('single-stage',direct);
- $('second-stage').hidden=direct;$('second-update-step').hidden=direct;
- $('upgrade-message').textContent=direct
-  ?'直接安裝 '+model.firmwareDate+' 韌體即可完成 Android 16 升級，不需要再進行第二次更新。'
-  :'先安裝指定升級韌體，再更新最新韌體。兩個階段都必須完成。';
- $('upgrade-label').innerHTML=direct?'<b>✓</b> 一次更新完成':'<b>1</b> 第一階段';
- $('upgrade-heading').textContent=direct?'直接升級 Android 16':'安裝指定升級韌體';
- $('version-label').textContent=direct?'韌體版本日期：':'指定升級韌體日期：';
- $('transition-download').textContent=direct?'下載 Touch Android 16 韌體 ↗':'下載指定升級韌體 ↗';
- $('step-download-title').textContent=direct?'下載並複製韌體':'下載並複製指定升級韌體';
- $('guide-version-label').textContent=direct?'Android 16 韌體':'指定升級韌體';
- $('step-complete-title').textContent=direct?'等待升級完成':'等待指定升級韌體完成';
- $('step-complete-text').textContent=direct
-  ?'更新時間約 10 至 15 分鐘。完成後主機會自動重新啟動，進入 Touch 主畫面即完成 Android 16 升級，不需再次更新。'
-  :'更新時間約 10 至 15 分鐘，完成後主機會自動重新啟動。這時只完成第一階段，請繼續下一步。';
- if(direct){
-  $('no-picture-note').textContent='若更新後無法顯示畫面，請拍攝目前畫面及主機燈號，聯繫 LINE 客服協助確認。更新進行中請勿任意斷電，也不要反覆刷寫或使用其他機型的檔案。';
- }else{$('no-picture-note').innerHTML=transitionNoPictureHTML}
+function applyUpgradeMode(){
+ $('download-cards').classList.remove('single-stage');
+ $('second-stage').hidden=false;
+ $('second-update-step').hidden=false;
+ $('upgrade-message').textContent='先安裝指定升級韌體，再更新最新韌體。兩個階段都必須完成。';
+ $('upgrade-label').innerHTML='<b>1</b> 第一階段';
+ $('upgrade-heading').textContent='安裝指定升級韌體';
+ $('version-label').textContent='指定升級韌體日期：';
+ $('transition-download').textContent='下載指定升級韌體 ↗';
+ $('step-download-title').textContent='下載並複製指定升級韌體';
+ $('guide-version-label').textContent='指定升級韌體';
+ $('step-complete-title').textContent='等待指定升級韌體完成';
+ $('step-complete-text').textContent='更新時間約 10 至 15 分鐘，完成後主機會自動重新啟動。這時只完成第一階段，請繼續下一步。';
+ $('no-picture-note').innerHTML=transitionNoPictureHTML;
 }
 let lastModel='', initial=true;
 function render(){
@@ -41,15 +35,18 @@ function render(){
  $('connection-help-title').textContent=showBmwHelp?'更新後無畫面，或 BMW 連線不順？':'更新後無畫面？';
  $('bmw-help').hidden=!showBmwHelp;$('bmw-help-link').hidden=!showBmwHelp;
  if(model){
-  applyUpgradeMode(model);
-  const versionDate=model.firmwareDate||model.transitionDate;
+  applyUpgradeMode();
+  const versionDate=model.transitionDate;
   $('second-stage-file').textContent=model.latestFile;
   const stageDate=$('second-stage-date');stageDate.textContent=model.latestDate;stageDate.dateTime=model.latestDate;
   const stageLink=$('second-stage-download');stageLink.href=model.latestPage;
-  stageLink.setAttribute('aria-label','開啟 '+model.name+' 專用官網韌體頁（最近公告 '+model.latestDate+'）');
+  const isTouch=key==='touch';
+  $('second-stage-meta').hidden=isTouch;
+  stageLink.textContent=isTouch?'前往最新韌體下載 ↗':'查看此機型最新韌體 ↗';
+  stageLink.setAttribute('aria-label',isTouch?'前往 NAVLYNX 官網最新韌體下載頁':'開啟 '+model.name+' 專用官網韌體頁（最近公告 '+model.latestDate+'）');
   $('model-title').textContent=model.name;$('model-file').textContent=model.file;$('guide-file').textContent=model.file;$('guide-product').textContent=model.name;
   ['model-date','guide-date'].forEach(id=>{$(id).textContent=versionDate;$(id).dateTime=versionDate});
-  $('transition-download').href=model.drive;$('transition-download').setAttribute('aria-label','下載 '+model.name+' '+versionDate+(model.upgradeMode==='direct'?' Android 16 韌體':' 的指定升級韌體'));
+  $('transition-download').href=model.drive;$('transition-download').setAttribute('aria-label','下載 '+model.name+' '+versionDate+' 的指定升級韌體');
   if(lastModel!==key){$('full-guide').open=false;document.querySelectorAll('#model-guide details').forEach(d=>d.open=false)}
   $('status').textContent='目前顯示 '+model.name+' 的升級檔案與教學。';
  }else{$('transition-download').removeAttribute('href');$('status').textContent=mode==='mail'?'目前顯示寄回升級方案。':'請選擇您的 ApplePie 機型。'}
