@@ -1,0 +1,59 @@
+name: Export NAVLYNX Android16 web company handoff
+on:
+  push:
+    branches: [android16-preview]
+    paths:
+      - .github/workflows/navlynx-web-handoff-20261124.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build-zip:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out exact release source
+        uses: actions/checkout@v4
+      - name: Stage frontend, admin, documentation and preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="NAVLYNX_Android16_Web_Company_20261124"
+          mkdir -p "package/$ROOT"
+          cp -a navlynx-android16-notice "package/$ROOT/"
+          cp -a navlynx-android16-preview "package/$ROOT/"
+          cp navlynx-android16-notice/WEB_COMPANY_HANDOFF_20261124.txt "package/$ROOT/00_網頁公司請先閱讀.txt"
+          printf 'GitHub source branch: android16-preview\nCommit: %s\nGenerated from: https://github.com/%s\n' "$GITHUB_SHA" "$GITHUB_REPOSITORY" > "package/$ROOT/VERSION.txt"
+          python - <<'PY'
+          import pathlib
+          root=pathlib.Path("package/NAVLYNX_Android16_Web_Company_20261124")
+          forbidden={".env","initial-admin.private.json"}
+          bad=[]
+          for f in root.rglob("*"):
+              if f.is_file() and (f.name in forbidden or f.suffix in (".sqlite3",".db",".pyc",".p12",".pfx") or "__pycache__" in f.parts or ".git" in f.parts):
+                  bad.append(str(f))
+          if bad:
+              raise RuntimeError("Unexpected private/build files in handoff source")
+          expected=[
+              root/"00_網頁公司請先閱讀.txt",
+              root/"navlynx-android16-notice/fullstack/server.py",
+              root/"navlynx-android16-notice/fullstack/web/index.html",
+              root/"navlynx-android16-notice/fullstack/admin/index.html",
+              root/"navlynx-android16-notice/frontend-only/website/index.html",
+              root/"navlynx-android16-notice/demo/frontend/index.html",
+              root/"navlynx-android16-notice/demo/admin/index.html",
+              root/"navlynx-android16-notice/CHANGELOG_20261124.md",
+              root/"navlynx-android16-preview/preview-v6.html"
+          ]
+          for f in expected:
+              if not f.exists():
+                  raise RuntimeError("Missing release source: "+str(f))
+          print("Verified files:",sum(f.is_file() for f in root.rglob("*")))
+          PY
+      - name: Upload complete web company ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: NAVLYNX_Android16_WebCompany_20261124
+          path: package/NAVLYNX_Android16_Web_Company_20261124/
+          if-no-files-found: error
+          retention-days: 30
