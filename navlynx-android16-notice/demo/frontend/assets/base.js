@@ -38,7 +38,6 @@ function render(){
   applyUpgradeMode();
   const versionDate=model.transitionDate;
   $('second-stage-file').textContent=model.latestFile;
-  const stageDate=$('second-stage-date');stageDate.textContent=model.latestDate;stageDate.dateTime=model.latestDate;
   const stageLink=$('second-stage-download');stageLink.href=model.latestPage;
   const isTouch=key==='touch';
   $('second-stage-meta').hidden=isTouch;
