@@ -187,7 +187,7 @@ main{padding:27px 0 40px}.mode-label{font-size:12px;font-weight:700;color:#61758
 // Same model files and destinations as v5. Never infer interchangeability from equal filenames.
 const models={
 one:{name:'ApplePie ONE',file:'APM1288BM.zip',transitionDate:'2026-04-28',drive:'https://drive.google.com/drive/folders/11abZ4MpHONdx1gK_z1eEfdAWEHTy2_mi?usp=drive_link',latestFile:'APM1288_A16.zip',latestDate:'2026-11-06',latestChange:'優化無線 CarPlay 藍牙',latestPage:'https://www.navlynx.com.tw/download_in_a12.asp'},
-touch:{name:'ApplePie Touch',file:'APM1288TOUCH.zip',transitionDate:'2026-05-27',drive:'https://drive.google.com/drive/folders/1T5LIQH-WMlWCCyztKkGnt5S6KiH51MHk?usp=drive_link',latestFile:'APM1288TOUCH_A16.zip',latestDate:'2026-11-04',latestChange:'更新內建軟體版本',latestPage:'https://www.navlynx.com.tw/download.asp'},
+touch:{name:'ApplePie Touch',file:'APM1288TOUCH.zip',transitionDate:'2026-05-27',drive:'https://drive.google.com/drive/folders/1T5LIQH-WMlWCCyztKkGnt5S6KiH51MHk?usp=drive_link',latestFile:'APM1288TOUCH_A16.zip',latestDate:'2026-11-04',latestChange:'更新內建軟體版本',latestPage:'https://www.navlynx.com.tw/download_in_a11.asp'},
 ultra:{name:'ApplePie mini Ultra II',file:'APM1688S.zip',transitionDate:'2026-05-07',drive:'https://drive.google.com/drive/folders/10ftWBlYjTytoOWk_ZxGz11CMXJql8pRk?usp=drive_link',latestFile:'APM1688S_A16.zip',latestDate:'2026-08-17',latestChange:'更新內建軟體版本',latestPage:'https://www.navlynx.com.tw/download_in_a8.asp'},
 melling:{name:'ApplePie Melling／Melling-G',file:'APM1288BM.zip',transitionDate:'2026-04-28',drive:'https://drive.google.com/drive/folders/1kBohVCC0wrtqiwx3Nq8we56KSWQpG9KI?usp=drive_link',latestFile:'APM1288_A16.zip',latestDate:'2026-11-06',latestChange:'優化無線 CarPlay 藍牙',latestPage:'https://www.navlynx.com.tw/download_in_a9.asp'}
 };
@@ -223,9 +223,9 @@ function render(){
   $('second-stage-file').textContent=model.latestFile;
   const stageLink=$('second-stage-download');stageLink.href=model.latestPage;
   const isTouch=key==='touch';
-  $('second-stage-meta').hidden=isTouch;
+  $('second-stage-meta').hidden=false;
   stageLink.textContent=isTouch?'前往最新韌體下載 ↗':'查看此機型最新韌體 ↗';
-  stageLink.setAttribute('aria-label',isTouch?'前往 NAVLYNX 官網最新韌體下載頁':'開啟 '+model.name+' 專用官網韌體頁（最近公告 '+model.latestDate+'）');
+  stageLink.setAttribute('aria-label','開啟 '+model.name+' 專用官網韌體頁');
   $('model-title').textContent=model.name;$('model-file').textContent=model.file;$('guide-file').textContent=model.file;$('guide-product').textContent=model.name;
   ['model-date','guide-date'].forEach(id=>{$(id).textContent=versionDate;$(id).dateTime=versionDate});
   $('transition-download').href=model.drive;$('transition-download').setAttribute('aria-label','下載 '+model.name+' '+versionDate+' 的指定升級韌體');
