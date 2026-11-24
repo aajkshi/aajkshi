@@ -4,7 +4,7 @@
 
 ## 2026-11-24 最新調整：Touch 兩階段及影片教學
 
-依使用者提供的 [官網 Touch 畫面](https://www.navlynx.com.tw/Android16/index.html#self-touch)，**Touch 已改成兩階段升級**：第一階段 `APM1288TOUCH.zip`（2026-05-27），第二階段導向官網最新韌體下載總覽。先前文件的「Touch 單階段」規格已被此新版要求取代。仍沿用「指定升級韌體」一詞。
+依使用者提供的 [官網 Touch 畫面](https://www.navlynx.com.tw/Android16/index.html#self-touch)，**Touch 已改成兩階段升級**：第一階段 `APM1288TOUCH.zip`（2026-05-27），第二階段顯示 `APM1288TOUCH_A16.zip` 並導向 Touch 專屬韌體下載頁。先前文件的「Touch 單階段」規格已被此新版要求取代。仍沿用「指定升級韌體」一詞。
 
 ONE、Touch、mini Ultra II、Melling／Melling-G 四個自行升級頁面均新增 [官方 YouTube 升級教學](https://youtu.be/bxnIG22PdPw?si=-Cn2XySG2o04wmVK)，使用 16:9 響應式嵌入與外部連結備援。正式前台 CSP 允許隱私加強的 `youtube-nocookie.com` 播放 iframe，管理後台不開放。
 
@@ -30,7 +30,7 @@ GitHub 同事展示版已通過隔離 Firefox 瀏覽器測試：六題 FAQ、四
 
 ## 2026-11-20 韌體資料更新
 
-保留各機型「首次升級」的指定檔案與四款機型第二階段的官網下載入口；依要求已移除額外的「已是 Android 16 · 後續更新」展示區塊。ONE／Melling 以 2026-11-06、Touch 以 2026-11-04、mini Ultra II 以 2026-08-17 的官方最新公告核對，並連結至相關官網韌體頁（Touch 第二階段連至最新韌體下載總覽）。
+保留各機型「首次升級」的指定檔案與四款機型第二階段的官網下載入口；依要求已移除額外的「已是 Android 16 · 後續更新」展示區塊。ONE／Melling 以 2026-11-06、Touch 以 2026-11-04、mini Ultra II 以 2026-08-17 的官方最新公告核對，並連結至相關官網韌體頁（Touch 第二階段連至 `download_in_a11.asp`，並顯示 `APM1288TOUCH_A16.zip`）。
 
 2026-11-20 再次透過實際執行官網 JavaScript 的方式，取得升級專區現行 6 題 FAQ，撤回先前自行增補的非官方升級頁 FAQ，並對齊寄回流程與中文密碼說明。核對範圍請見 [FAQ 核對紀錄](FAQ_CHECK_20261120.md)。
 
