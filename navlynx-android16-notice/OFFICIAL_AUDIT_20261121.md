@@ -1,5 +1,8 @@
 # NAVLYNX Android 16 升級頁逐頁、逐功能比對
 
+> **2026-11-24 更新：** 本報告是 11/21 當時的歷史檢查紀錄。使用者後續提供最新官網 Touch 截圖，已明確要求將 Touch **改為兩階段**，且四款自行升級機型新增 [YouTube 影片教學](https://youtu.be/bxnIG22PdPw?si=-Cn2XySG2o04wmVK)。下方舊文若出現「Touch 單階段」或「Touch 不顯示第二階段」，均已由 [2026-11-24 最新變更](CHANGELOG_20261124.md) 覆蓋，不可再當成現行上線規格。
+
+
 核對日期：**2026-11-21**（台灣時間）  
 官網基準：https://www.navlynx.com.tw/Android16/index.html  
 GitHub 分支：`android16-preview`  
