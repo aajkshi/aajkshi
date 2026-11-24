@@ -1,0 +1,95 @@
+NAVLYNX ApplePie Android 16 升級專區
+網頁公司交接與上線驗收說明
+版本日期：2026-11-24（台灣時間）
+
+【交接範圍】
+本次是 NAVLYNX Android 16 升級專區的完整原始碼交接，包含前台、公告管理後台、純前台替代方案及同事互動展示版。
+GitHub 分支： https://github.com/aajkshi/aajkshi/tree/android16-preview
+來源目錄： navlynx-android16-notice/
+舊版 navlynx-android16-preview/preview-v6.html 僅作獨立預覽比對，不是正式部署入口。
+
+【資料夾用途】
+navlynx-android16-notice/fullstack/
+  Python 3.13 / FastAPI 公告前後台、Docker / Caddy、SQLite、登入及 TOTP 驗證器、測試。
+  真正的公告後台須有 Python 執行環境、HTTPS 及持久化資料庫。
+  重要部署說明：fullstack/DEPLOYMENT.md、fullstack/ACCOUNT_SETUP.md
+
+navlynx-android16-notice/frontend-only/website/
+  純靜態前台方案，適合先部署在現有網站空間；沒有真正的資料庫公告後台。
+  靜態公告資料在 assets/notice-config.js 修改。
+
+navlynx-android16-notice/demo/
+  同事展示版前台與公告後台，使用瀏覽器 localStorage 模擬草稿、發布及隱藏。
+  不是真正的帳號登入、多人同步或正式公告發布系統，請勿直接當正式後台上線。
+
+navlynx-android16-preview/
+  舊版獨立預覽的最新修訂，包含 preview-v6.html；供差異核對。
+
+【2026-11-24 最終功能與文字】
+一、首頁「升級前請先確認」集中顯示：MG 相容性提醒、保固卡中文密碼、飛鼠先行更新教學。相容性公告只保留 MG，不再列 Peugeot 或 Citroen。相容性公告不阻擋韌體下載，也不跳出「下載前確認車款」視窗。
+二、四款自行升級機型都維持兩階段升級，首次下載使用「指定升級韌體」，再更新 Android 16 最新韌體。
+三、每款自行升級頁面均嵌入同一段 16:9 響應式 YouTube 教學影片：
+    https://youtu.be/bxnIG22PdPw?si=-Cn2XySG2o04wmVK
+    iframe 使用 https://www.youtube-nocookie.com/embed/bxnIG22PdPw
+    另設 YouTube 外部連結備援，切到寄回升級頁時不顯示。
+四、四款第二階段顯示 Android 16 韌體檔名，不顯示「官方公告：日期」。
+五、升級提醒文案須原樣顯示：
+    升級會重置主機，請先備份重要資料。更新期間請維持穩定供電；即使檔名相同，不同機型的檔案也不可互用；若升級後未重製，請手動重置您的ApplePie。
+六、FAQ 以現行官網 Android 16 升級專區六題為底，直接存在 HTML；保留依機型變更的韌體流程說明。寄回升級的費用、準備資料、3～7 工作天說明獨立放在寄回面板。
+七、寄回升級須先聯絡官方 LINE，由客服提供申請表與寄送資訊，保留官網方案及費用。
+八、BMW 特定機型提醒、飛鼠教學及產品照片等既有功能保持。
+
+【四款韌體資料，請逐項核對】
+ApplePie ONE：
+  第一步 APM1288BM.zip，指定日期 2026-04-28。
+  第二步 APM1288_A16.zip，官網 https://www.navlynx.com.tw/download_in_a12.asp
+
+ApplePie Touch：
+  第一步 APM1288TOUCH.zip，指定日期 2026-05-27。
+  第二步 APM1288TOUCH_A16.zip，官網 https://www.navlynx.com.tw/download_in_a11.asp
+  注意：已依 11/24 截圖改回兩階段，且第二階段必須顯示檔名，直接連到 Touch 專用頁。
+
+ApplePie mini Ultra II：
+  第一步 APM1688S.zip，指定日期 2026-05-07。
+  第二步 APM1688S_A16.zip，官網 https://www.navlynx.com.tw/download_in_a8.asp
+
+ApplePie Melling／Melling-G：
+  第一步 APM1288BM.zip，指定日期 2026-04-28。
+  第二步 APM1288_A16.zip，官網 https://www.navlynx.com.tw/download_in_a9.asp
+
+以上第一階段 Google Drive 連結已在前台 assets/base.js 中保留。即使不同機型檔名相同，實際下載檔案也不可混用。網站版的官網韌體資料不是即時同步；日後更新需再檢查。
+
+【公告後台及帳號】
+指定管理帳號：navlynx.applepie@gmail.com
+後台路徑：正式部署後的 /admin
+登入採密碼加手機驗證器 TOTP 六位數動態碼，不是 SMS 簡訊驗證。
+正式帳號、密碼、TOTP 金鑰和資料庫均須在受信任的主機上完成建置。
+本公開程式原始碼交付包不含明文初始密碼、私密初始化檔、.env 或資料庫。
+先前的「私密帳號初始化」須透過另一個安全管道交給受授權的部署工程師，絕不可上傳到 GitHub／公開網站根目錄。
+
+【部署要點】
+現有 NAVLYNX .asp 網站空間不能直接執行 Python/FastAPI。網頁公司須先決定：
+A. 只上線 frontend-only/website 靜態版本，公告以檔案維護，無正式後台；
+B. 使用獨立支援 Python/Docker 的 HTTPS 站台部署 fullstack/，原 ASP 網站提供連結或反向代理，完成登入及資料庫驗收。
+部署時不要混合 demo 與正式檔案；不要直接將 demo/admin 公開成正式後台。
+正式網站目前沒有因為 GitHub 更新而自動變更。
+
+【網頁公司驗收清單】
+1. 前台首頁及手機版：「升級前請先確認」區塊、MG、中文密碼、飛鼠教學、產品圖與四機型選擇。
+2. ONE、Touch、mini Ultra II、Melling／Melling-G：兩階段檔名、日期、第二階段專屬下載連結。
+3. 第二階段：四機型都顯示 Android 16 韌體檔名，均不顯示官方公告日期。
+4. 所有自行升級頁：16:9 YouTube 嵌入、外部連結、實際可播放；手機無橫向捲動。
+5. FAQ 六題與寄回三題可展開；中文密碼查詢能跳至正確問題。
+6. 公告管理（若選 B）：密碼及 TOTP 登入、草稿／發布／停用／回復、審計、HTTPS Cookie/CSRF/CSP。
+7. 停用 MG 公告時，不能連帶隱藏中文密碼提醒或飛鼠教學。
+8. 需實測正式環境與真實使用者操作；目前程式碼的隔離瀏覽器測試不等同正式部署驗收。
+
+【優先參考文件】
+- navlynx-android16-notice/CHANGELOG_20261124.md
+- navlynx-android16-notice/OFFICIAL_AUDIT_20261121.md（11/21歷史紀錄，Touch單階段項目已被11/24新規格取代）
+- navlynx-android16-notice/README.md
+- navlynx-android16-notice/fullstack/DEPLOYMENT.md
+- navlynx-android16-notice/fullstack/ACCOUNT_SETUP.md
+
+【交付注意】
+本包僅含可供工程師審查及部署的非私密原始碼，正式上線需經網頁公司環境檢查、權限測試與驗收。對未修改的舊功能請保持原樣；任何不同於本次確認的變更應先回覆差異。
